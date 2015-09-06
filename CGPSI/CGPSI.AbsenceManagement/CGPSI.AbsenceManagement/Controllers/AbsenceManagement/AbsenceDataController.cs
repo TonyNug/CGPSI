@@ -18,7 +18,7 @@ namespace CGPSI.AbsenceManagement.Controllers.AbsenceManagement
         public ActionResult Get()//(DateTime start,DateTime end)//(string take, string page, string skip, string pageSize, List<GridSort> sort, GridFilter filter)
         {
             //string filters = KendoHelper.GenerateFilters(take, page, skip, pageSize, sort, filter);
-            var result=new CGPSI_AbsenceDBEntities().SP_GetDataAbsenceByDate().ToList();
+            var result=new CGPSI_AbsenceDBEntities().SP_GetDataAbsenceOfCurrentMonth().ToList();
             var data = new
             {
                 Result = result
