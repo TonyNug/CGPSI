@@ -16,6 +16,11 @@ namespace CGPSI.AbsenceManagement.Controllers.MasterData
             return PartialView();
         }
 
+        public ActionResult LeaveRequest()
+        {
+            return View();
+        }
+
         /// <summary>
         /// Get Data for View
         /// </summary>
