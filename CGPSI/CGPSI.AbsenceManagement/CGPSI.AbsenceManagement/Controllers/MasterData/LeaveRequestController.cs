@@ -13,12 +13,12 @@ namespace CGPSI.AbsenceManagement.Controllers.MasterData
         // GET: /LeaveRequest/
         public ActionResult Index()
         {
-            return View();
+            return PartialView();
         }
 
 
         /// <summary>
-        /// Get Data Employees for Master Data View
+        /// Get Data for View
         /// </summary>
         public ActionResult Get(string take, string page, string skip, string pageSize, List<GridSort> sort, GridFilter filter)
         {
@@ -58,9 +58,9 @@ namespace CGPSI.AbsenceManagement.Controllers.MasterData
             }
             else
             {
-                var temp =new CGPSI_AbsenceDBEntities();
-                temp
-                if(temp.)
+                CGPSI_AbsenceDBEntities temp =new CGPSI_AbsenceDBEntities();
+                temp.Entry(lr).CurrentValues.SetValues(lr);
+                temp.SaveChanges();                
             }
             return Json(true);
         }
