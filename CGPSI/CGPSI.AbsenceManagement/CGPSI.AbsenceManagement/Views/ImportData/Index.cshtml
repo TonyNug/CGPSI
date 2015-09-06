@@ -1,0 +1,99 @@
+﻿<div class="k-header upload-container" style="border:1px solid #bdbdbd;width:90%">
+    <span class="k-label-top">Select files to upload</span>
+    <div style="padding:10px;margin:10px;">
+        <input name="files" id="files" type="file" />
+    </div>
+    <div style="text-align:right;margin:10px;">
+        <div class="process-data k-button">Process Data</div>
+    </div>
+
+</div>
+@*<div class="grid-data grid-container" style="margin-bottom:10px;margin-top:10px">
+    <div id="GridMaster"></div>
+</div>*@
+
+<script>
+    $(document).ready(function () {
+        $(".grid-data").hide();
+        $("#files").kendoUpload({
+            async: {
+                saveUrl: "@Url.Content("~/ImportData/Upload")",
+                autoUpload: true
+            }
+        });
+
+        $(".process-data").bind("click", function () {
+            kendo.ui.progress($(".upload-container"), true);
+            $.ajax({
+                type: "post",
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                url: '@Url.Content("~/ImportData/ImportData")',
+                success: function (data) {
+                    kendo.ui.progress($(".upload-container"), false);
+                    //CreateGrid(data.DataImport);
+                    //$(".grid-data").show();
+                },
+                error: function () {
+                }
+            });            
+        });
+
+        //function CreateGrid(input) {           
+        //    var grid = $('#GridMaster').kendoGrid({ //begin of DataGrid area                
+        //        height: 350,
+        //        dataSource: {
+        //            data: input,
+        //            schema: {
+        //                model: {
+        //                    fields: {
+        //                        NIK: { type: "string" },
+        //                        DisplayName: { type: "string" },
+        //                        AbsenceDate: { type: "date" },
+        //                        TimeIn: { type: "string" },
+        //                        TimeOut: { type: "string" },
+        //                        actualDayname: { type: "string" },
+        //                        ShiftName: { type: "string" },
+        //                        StartTime: { type: "string" },
+        //                        EndTime: { type: "string" },
+        //                        AbsenceStatus: { type: "string" }
+        //                    }
+        //                }
+        //            }
+        //        },
+        //        resizable: true,
+        //        filterable: true,
+        //        filterable: {
+        //            extra: false,
+        //            operators: {
+        //                string: {
+        //                    contains: "Contains", s_eq: "Equal to", s_neq: "Not Equal", doesnotcontain: "Does Not Contain", startswith: "Starts with", endswith: "Ends With"
+        //                },
+        //                number: {
+        //                    n_eq: "Equal to", n_gt: "Greater Than", n_gte: "Greater Than Equal", n_lt: "Less Than", n_lte: "Less Than Equal", n_neq: "Not Equal"
+        //                },
+        //                date: {
+        //                    d_eq: "Equal to", d_gt: "Greater Than", d_gte: "Greater Than Equal", d_lt: "Less Than", d_lte: "Less Than Equal", d_neq: "Not Equal"
+        //                }
+        //            }
+        //        },
+        //        sortable: true,
+        //        scrollable:true,
+        //        pageable: false,
+        //        columns:
+        //                [
+        //                 { field: "NIK", title: "NIK", width: 125, type: "string", filterable: true },
+        //                 { field: "DisplayName", title: "Name", width: 125, type: "string", filterable: true },                         
+        //                 { field: "AbsenceDate", title: "Date", format: "{0:MMM dd, yyyy}", width: 125, type: "date", filterable: true },
+        //                 { field: "TimeIn", title: "Check In Time", width: 125, type: "string", filterable: true },
+        //                 { field: "TimeOut", title: "Check Out Time", width: 125, type: "string", filterable: true },
+        //                 { field: "actualDayname", title: "Day", width: 125, type: "string", filterable: true },
+        //                 { field: "ShiftName", title: "Shift Name", width: 125, type: "boolean", filterable: true },
+        //                 { field: "StartTime", title: "Shift Start", width: 125, type: "string", filterable: true },
+        //                 { field: "EndTime", title: "Shift End", width: 125, type: "string", filterable: true }
+        //                ],
+        //        editable: "popup"
+        //    }).data("kendoGrid");
+        //}
+    });
+</script>

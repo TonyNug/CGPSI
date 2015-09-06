@@ -1,0 +1,122 @@
+C:\Users\hnugroho\Documents\Visual Studio 2013\Projects\CGPSI.AbsenceManagement\CGPSI.AbsenceManagement\bin\CGPSI.AbsenceManagement.dll.config
+C:\Users\hnugroho\Documents\Visual Studio 2013\Projects\CGPSI.AbsenceManagement\CGPSI.AbsenceManagement\bin\CGPSI.AbsenceManagement.dll
+C:\Users\hnugroho\Documents\Visual Studio 2013\Projects\CGPSI.AbsenceManagement\CGPSI.AbsenceManagement\bin\CGPSI.AbsenceManagement.pdb
+C:\Users\hnugroho\Documents\Visual Studio 2013\Projects\CGPSI.AbsenceManagement\CGPSI.AbsenceManagement\bin\Antlr3.Runtime.dll
+C:\Users\hnugroho\Documents\Visual Studio 2013\Projects\CGPSI.AbsenceManagement\CGPSI.AbsenceManagement\bin\EntityFramework.dll
+C:\Users\hnugroho\Documents\Visual Studio 2013\Projects\CGPSI.AbsenceManagement\CGPSI.AbsenceManagement\bin\EntityFramework.SqlServer.dll
+C:\Users\hnugroho\Documents\Visual Studio 2013\Projects\CGPSI.AbsenceManagement\CGPSI.AbsenceManagement\bin\Microsoft.AspNet.Identity.Core.dll
+C:\Users\hnugroho\Documents\Visual Studio 2013\Projects\CGPSI.AbsenceManagement\CGPSI.AbsenceManagement\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+C:\Users\hnugroho\Documents\Visual Studio 2013\Projects\CGPSI.AbsenceManagement\CGPSI.AbsenceManagement\bin\Microsoft.AspNet.Identity.Owin.dll
+C:\Users\hnugroho\Documents\Visual Studio 2013\Projects\CGPSI.AbsenceManagement\CGPSI.AbsenceManagement\bin\Microsoft.Owin.dll
+C:\Users\hnugroho\Documents\Visual Studio 2013\Projects\CGPSI.AbsenceManagement\CGPSI.AbsenceManagement\bin\Microsoft.Owin.Host.SystemWeb.dll
+C:\Users\hnugroho\Documents\Visual Studio 2013\Projects\CGPSI.AbsenceManagement\CGPSI.AbsenceManagement\bin\Microsoft.Owin.Security.Cookies.dll
+C:\Users\hnugroho\Documents\Visual Studio 2013\Projects\CGPSI.AbsenceManagement\CGPSI.AbsenceManagement\bin\Microsoft.Owin.Security.dll
+C:\Users\hnugroho\Documents\Visual Studio 2013\Projects\CGPSI.AbsenceManagement\CGPSI.AbsenceManagement\bin\Microsoft.Owin.Security.Facebook.dll
+C:\Users\hnugroho\Documents\Visual Studio 2013\Projects\CGPSI.AbsenceManagement\CGPSI.AbsenceManagement\bin\Microsoft.Owin.Security.Google.dll
+C:\Users\hnugroho\Documents\Visual Studio 2013\Projects\CGPSI.AbsenceManagement\CGPSI.AbsenceManagement\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
+C:\Users\hnugroho\Documents\Visual Studio 2013\Projects\CGPSI.AbsenceManagement\CGPSI.AbsenceManagement\bin\Microsoft.Owin.Security.OAuth.dll
+C:\Users\hnugroho\Documents\Visual Studio 2013\Projects\CGPSI.AbsenceManagement\CGPSI.AbsenceManagement\bin\Microsoft.Owin.Security.Twitter.dll
+C:\Users\hnugroho\Documents\Visual Studio 2013\Projects\CGPSI.AbsenceManagement\CGPSI.AbsenceManagement\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\hnugroho\Documents\Visual Studio 2013\Projects\CGPSI.AbsenceManagement\CGPSI.AbsenceManagement\bin\Newtonsoft.Json.dll
+C:\Users\hnugroho\Documents\Visual Studio 2013\Projects\CGPSI.AbsenceManagement\CGPSI.AbsenceManagement\bin\Owin.dll
+C:\Users\hnugroho\Documents\Visual Studio 2013\Projects\CGPSI.AbsenceManagement\CGPSI.AbsenceManagement\bin\System.Net.Http.Formatting.dll
+C:\Users\hnugroho\Documents\Visual Studio 2013\Projects\CGPSI.AbsenceManagement\CGPSI.AbsenceManagement\bin\System.Web.Helpers.dll
+C:\Users\hnugroho\Documents\Visual Studio 2013\Projects\CGPSI.AbsenceManagement\CGPSI.AbsenceManagement\bin\System.Web.Http.dll
+C:\Users\hnugroho\Documents\Visual Studio 2013\Projects\CGPSI.AbsenceManagement\CGPSI.AbsenceManagement\bin\System.Web.Http.WebHost.dll
+C:\Users\hnugroho\Documents\Visual Studio 2013\Projects\CGPSI.AbsenceManagement\CGPSI.AbsenceManagement\bin\System.Web.Mvc.dll
+C:\Users\hnugroho\Documents\Visual Studio 2013\Projects\CGPSI.AbsenceManagement\CGPSI.AbsenceManagement\bin\System.Web.Optimization.dll
+C:\Users\hnugroho\Documents\Visual Studio 2013\Projects\CGPSI.AbsenceManagement\CGPSI.AbsenceManagement\bin\System.Web.Razor.dll
+C:\Users\hnugroho\Documents\Visual Studio 2013\Projects\CGPSI.AbsenceManagement\CGPSI.AbsenceManagement\bin\System.Web.WebPages.Deployment.dll
+C:\Users\hnugroho\Documents\Visual Studio 2013\Projects\CGPSI.AbsenceManagement\CGPSI.AbsenceManagement\bin\System.Web.WebPages.dll
+C:\Users\hnugroho\Documents\Visual Studio 2013\Projects\CGPSI.AbsenceManagement\CGPSI.AbsenceManagement\bin\System.Web.WebPages.Razor.dll
+C:\Users\hnugroho\Documents\Visual Studio 2013\Projects\CGPSI.AbsenceManagement\CGPSI.AbsenceManagement\bin\WebGrease.dll
+C:\Users\hnugroho\Documents\Visual Studio 2013\Projects\CGPSI.AbsenceManagement\CGPSI.AbsenceManagement\bin\System.Web.Helpers.xml
+C:\Users\hnugroho\Documents\Visual Studio 2013\Projects\CGPSI.AbsenceManagement\CGPSI.AbsenceManagement\bin\System.Web.Mvc.xml
+C:\Users\hnugroho\Documents\Visual Studio 2013\Projects\CGPSI.AbsenceManagement\CGPSI.AbsenceManagement\bin\System.Web.Optimization.xml
+C:\Users\hnugroho\Documents\Visual Studio 2013\Projects\CGPSI.AbsenceManagement\CGPSI.AbsenceManagement\bin\System.Web.Razor.xml
+C:\Users\hnugroho\Documents\Visual Studio 2013\Projects\CGPSI.AbsenceManagement\CGPSI.AbsenceManagement\bin\System.Web.WebPages.xml
+C:\Users\hnugroho\Documents\Visual Studio 2013\Projects\CGPSI.AbsenceManagement\CGPSI.AbsenceManagement\bin\System.Web.WebPages.Deployment.xml
+C:\Users\hnugroho\Documents\Visual Studio 2013\Projects\CGPSI.AbsenceManagement\CGPSI.AbsenceManagement\bin\System.Web.WebPages.Razor.xml
+C:\Users\hnugroho\Documents\Visual Studio 2013\Projects\CGPSI.AbsenceManagement\CGPSI.AbsenceManagement\bin\Antlr3.Runtime.pdb
+C:\Users\hnugroho\Documents\Visual Studio 2013\Projects\CGPSI.AbsenceManagement\CGPSI.AbsenceManagement\bin\Newtonsoft.Json.xml
+C:\Users\hnugroho\Documents\Visual Studio 2013\Projects\CGPSI.AbsenceManagement\CGPSI.AbsenceManagement\bin\System.Net.Http.Formatting.xml
+C:\Users\hnugroho\Documents\Visual Studio 2013\Projects\CGPSI.AbsenceManagement\CGPSI.AbsenceManagement\bin\System.Web.Http.xml
+C:\Users\hnugroho\Documents\Visual Studio 2013\Projects\CGPSI.AbsenceManagement\CGPSI.AbsenceManagement\bin\System.Web.Http.WebHost.xml
+C:\Users\hnugroho\Documents\Visual Studio 2013\Projects\CGPSI.AbsenceManagement\CGPSI.AbsenceManagement\bin\EntityFramework.xml
+C:\Users\hnugroho\Documents\Visual Studio 2013\Projects\CGPSI.AbsenceManagement\CGPSI.AbsenceManagement\bin\EntityFramework.SqlServer.xml
+C:\Users\hnugroho\Documents\Visual Studio 2013\Projects\CGPSI.AbsenceManagement\CGPSI.AbsenceManagement\bin\Microsoft.AspNet.Identity.Core.xml
+C:\Users\hnugroho\Documents\Visual Studio 2013\Projects\CGPSI.AbsenceManagement\CGPSI.AbsenceManagement\bin\Microsoft.AspNet.Identity.Owin.xml
+C:\Users\hnugroho\Documents\Visual Studio 2013\Projects\CGPSI.AbsenceManagement\CGPSI.AbsenceManagement\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+C:\Users\hnugroho\Documents\Visual Studio 2013\Projects\CGPSI.AbsenceManagement\CGPSI.AbsenceManagement\bin\Microsoft.Owin.xml
+C:\Users\hnugroho\Documents\Visual Studio 2013\Projects\CGPSI.AbsenceManagement\CGPSI.AbsenceManagement\bin\Microsoft.Owin.Host.SystemWeb.xml
+C:\Users\hnugroho\Documents\Visual Studio 2013\Projects\CGPSI.AbsenceManagement\CGPSI.AbsenceManagement\bin\Microsoft.Owin.Security.xml
+C:\Users\hnugroho\Documents\Visual Studio 2013\Projects\CGPSI.AbsenceManagement\CGPSI.AbsenceManagement\bin\Microsoft.Owin.Security.Facebook.xml
+C:\Users\hnugroho\Documents\Visual Studio 2013\Projects\CGPSI.AbsenceManagement\CGPSI.AbsenceManagement\bin\Microsoft.Owin.Security.Cookies.xml
+C:\Users\hnugroho\Documents\Visual Studio 2013\Projects\CGPSI.AbsenceManagement\CGPSI.AbsenceManagement\bin\Microsoft.Owin.Security.OAuth.xml
+C:\Users\hnugroho\Documents\Visual Studio 2013\Projects\CGPSI.AbsenceManagement\CGPSI.AbsenceManagement\bin\Microsoft.Owin.Security.Google.xml
+C:\Users\hnugroho\Documents\Visual Studio 2013\Projects\CGPSI.AbsenceManagement\CGPSI.AbsenceManagement\bin\Microsoft.Owin.Security.Twitter.xml
+C:\Users\hnugroho\Documents\Visual Studio 2013\Projects\CGPSI.AbsenceManagement\CGPSI.AbsenceManagement\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+C:\Users\hnugroho\Documents\Visual Studio 2013\Projects\CGPSI.AbsenceManagement\CGPSI.AbsenceManagement\obj\Debug\CGPSI.AbsenceManagement.csprojResolveAssemblyReference.cache
+C:\Users\hnugroho\Documents\Visual Studio 2013\Projects\CGPSI.AbsenceManagement\CGPSI.AbsenceManagement\obj\Debug\CGPSI.AbsenceManagement.dll
+C:\Users\hnugroho\Documents\Visual Studio 2013\Projects\CGPSI.AbsenceManagement\CGPSI.AbsenceManagement\obj\Debug\CGPSI.AbsenceManagement.pdb
+D:\MY PROJECTS\Ref\CGPSI\CGPSI.AbsenceManagement\CGPSI.AbsenceManagement\bin\CGPSI.AbsenceManagement.dll.config
+D:\MY PROJECTS\Ref\CGPSI\CGPSI.AbsenceManagement\CGPSI.AbsenceManagement\bin\CGPSI.AbsenceManagement.dll
+D:\MY PROJECTS\Ref\CGPSI\CGPSI.AbsenceManagement\CGPSI.AbsenceManagement\bin\CGPSI.AbsenceManagement.pdb
+D:\MY PROJECTS\Ref\CGPSI\CGPSI.AbsenceManagement\CGPSI.AbsenceManagement\bin\Antlr3.Runtime.dll
+D:\MY PROJECTS\Ref\CGPSI\CGPSI.AbsenceManagement\CGPSI.AbsenceManagement\bin\EntityFramework.dll
+D:\MY PROJECTS\Ref\CGPSI\CGPSI.AbsenceManagement\CGPSI.AbsenceManagement\bin\EntityFramework.SqlServer.dll
+D:\MY PROJECTS\Ref\CGPSI\CGPSI.AbsenceManagement\CGPSI.AbsenceManagement\bin\Microsoft.AspNet.Identity.Core.dll
+D:\MY PROJECTS\Ref\CGPSI\CGPSI.AbsenceManagement\CGPSI.AbsenceManagement\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+D:\MY PROJECTS\Ref\CGPSI\CGPSI.AbsenceManagement\CGPSI.AbsenceManagement\bin\Microsoft.AspNet.Identity.Owin.dll
+D:\MY PROJECTS\Ref\CGPSI\CGPSI.AbsenceManagement\CGPSI.AbsenceManagement\bin\Microsoft.Owin.dll
+D:\MY PROJECTS\Ref\CGPSI\CGPSI.AbsenceManagement\CGPSI.AbsenceManagement\bin\Microsoft.Owin.Host.SystemWeb.dll
+D:\MY PROJECTS\Ref\CGPSI\CGPSI.AbsenceManagement\CGPSI.AbsenceManagement\bin\Microsoft.Owin.Security.Cookies.dll
+D:\MY PROJECTS\Ref\CGPSI\CGPSI.AbsenceManagement\CGPSI.AbsenceManagement\bin\Microsoft.Owin.Security.dll
+D:\MY PROJECTS\Ref\CGPSI\CGPSI.AbsenceManagement\CGPSI.AbsenceManagement\bin\Microsoft.Owin.Security.Facebook.dll
+D:\MY PROJECTS\Ref\CGPSI\CGPSI.AbsenceManagement\CGPSI.AbsenceManagement\bin\Microsoft.Owin.Security.Google.dll
+D:\MY PROJECTS\Ref\CGPSI\CGPSI.AbsenceManagement\CGPSI.AbsenceManagement\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
+D:\MY PROJECTS\Ref\CGPSI\CGPSI.AbsenceManagement\CGPSI.AbsenceManagement\bin\Microsoft.Owin.Security.OAuth.dll
+D:\MY PROJECTS\Ref\CGPSI\CGPSI.AbsenceManagement\CGPSI.AbsenceManagement\bin\Microsoft.Owin.Security.Twitter.dll
+D:\MY PROJECTS\Ref\CGPSI\CGPSI.AbsenceManagement\CGPSI.AbsenceManagement\bin\Microsoft.Web.Infrastructure.dll
+D:\MY PROJECTS\Ref\CGPSI\CGPSI.AbsenceManagement\CGPSI.AbsenceManagement\bin\Newtonsoft.Json.dll
+D:\MY PROJECTS\Ref\CGPSI\CGPSI.AbsenceManagement\CGPSI.AbsenceManagement\bin\Owin.dll
+D:\MY PROJECTS\Ref\CGPSI\CGPSI.AbsenceManagement\CGPSI.AbsenceManagement\bin\System.Net.Http.Formatting.dll
+D:\MY PROJECTS\Ref\CGPSI\CGPSI.AbsenceManagement\CGPSI.AbsenceManagement\bin\System.Web.Helpers.dll
+D:\MY PROJECTS\Ref\CGPSI\CGPSI.AbsenceManagement\CGPSI.AbsenceManagement\bin\System.Web.Http.dll
+D:\MY PROJECTS\Ref\CGPSI\CGPSI.AbsenceManagement\CGPSI.AbsenceManagement\bin\System.Web.Http.WebHost.dll
+D:\MY PROJECTS\Ref\CGPSI\CGPSI.AbsenceManagement\CGPSI.AbsenceManagement\bin\System.Web.Mvc.dll
+D:\MY PROJECTS\Ref\CGPSI\CGPSI.AbsenceManagement\CGPSI.AbsenceManagement\bin\System.Web.Optimization.dll
+D:\MY PROJECTS\Ref\CGPSI\CGPSI.AbsenceManagement\CGPSI.AbsenceManagement\bin\System.Web.Razor.dll
+D:\MY PROJECTS\Ref\CGPSI\CGPSI.AbsenceManagement\CGPSI.AbsenceManagement\bin\System.Web.WebPages.Deployment.dll
+D:\MY PROJECTS\Ref\CGPSI\CGPSI.AbsenceManagement\CGPSI.AbsenceManagement\bin\System.Web.WebPages.dll
+D:\MY PROJECTS\Ref\CGPSI\CGPSI.AbsenceManagement\CGPSI.AbsenceManagement\bin\System.Web.WebPages.Razor.dll
+D:\MY PROJECTS\Ref\CGPSI\CGPSI.AbsenceManagement\CGPSI.AbsenceManagement\bin\WebGrease.dll
+D:\MY PROJECTS\Ref\CGPSI\CGPSI.AbsenceManagement\CGPSI.AbsenceManagement\bin\System.Web.Helpers.xml
+D:\MY PROJECTS\Ref\CGPSI\CGPSI.AbsenceManagement\CGPSI.AbsenceManagement\bin\System.Web.Mvc.xml
+D:\MY PROJECTS\Ref\CGPSI\CGPSI.AbsenceManagement\CGPSI.AbsenceManagement\bin\System.Web.Optimization.xml
+D:\MY PROJECTS\Ref\CGPSI\CGPSI.AbsenceManagement\CGPSI.AbsenceManagement\bin\System.Web.Razor.xml
+D:\MY PROJECTS\Ref\CGPSI\CGPSI.AbsenceManagement\CGPSI.AbsenceManagement\bin\System.Web.WebPages.xml
+D:\MY PROJECTS\Ref\CGPSI\CGPSI.AbsenceManagement\CGPSI.AbsenceManagement\bin\System.Web.WebPages.Deployment.xml
+D:\MY PROJECTS\Ref\CGPSI\CGPSI.AbsenceManagement\CGPSI.AbsenceManagement\bin\System.Web.WebPages.Razor.xml
+D:\MY PROJECTS\Ref\CGPSI\CGPSI.AbsenceManagement\CGPSI.AbsenceManagement\bin\Antlr3.Runtime.pdb
+D:\MY PROJECTS\Ref\CGPSI\CGPSI.AbsenceManagement\CGPSI.AbsenceManagement\bin\Newtonsoft.Json.xml
+D:\MY PROJECTS\Ref\CGPSI\CGPSI.AbsenceManagement\CGPSI.AbsenceManagement\bin\System.Net.Http.Formatting.xml
+D:\MY PROJECTS\Ref\CGPSI\CGPSI.AbsenceManagement\CGPSI.AbsenceManagement\bin\System.Web.Http.xml
+D:\MY PROJECTS\Ref\CGPSI\CGPSI.AbsenceManagement\CGPSI.AbsenceManagement\bin\System.Web.Http.WebHost.xml
+D:\MY PROJECTS\Ref\CGPSI\CGPSI.AbsenceManagement\CGPSI.AbsenceManagement\bin\EntityFramework.xml
+D:\MY PROJECTS\Ref\CGPSI\CGPSI.AbsenceManagement\CGPSI.AbsenceManagement\bin\EntityFramework.SqlServer.xml
+D:\MY PROJECTS\Ref\CGPSI\CGPSI.AbsenceManagement\CGPSI.AbsenceManagement\bin\Microsoft.AspNet.Identity.Core.xml
+D:\MY PROJECTS\Ref\CGPSI\CGPSI.AbsenceManagement\CGPSI.AbsenceManagement\bin\Microsoft.AspNet.Identity.Owin.xml
+D:\MY PROJECTS\Ref\CGPSI\CGPSI.AbsenceManagement\CGPSI.AbsenceManagement\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+D:\MY PROJECTS\Ref\CGPSI\CGPSI.AbsenceManagement\CGPSI.AbsenceManagement\bin\Microsoft.Owin.xml
+D:\MY PROJECTS\Ref\CGPSI\CGPSI.AbsenceManagement\CGPSI.AbsenceManagement\bin\Microsoft.Owin.Host.SystemWeb.xml
+D:\MY PROJECTS\Ref\CGPSI\CGPSI.AbsenceManagement\CGPSI.AbsenceManagement\bin\Microsoft.Owin.Security.xml
+D:\MY PROJECTS\Ref\CGPSI\CGPSI.AbsenceManagement\CGPSI.AbsenceManagement\bin\Microsoft.Owin.Security.Facebook.xml
+D:\MY PROJECTS\Ref\CGPSI\CGPSI.AbsenceManagement\CGPSI.AbsenceManagement\bin\Microsoft.Owin.Security.Cookies.xml
+D:\MY PROJECTS\Ref\CGPSI\CGPSI.AbsenceManagement\CGPSI.AbsenceManagement\bin\Microsoft.Owin.Security.OAuth.xml
+D:\MY PROJECTS\Ref\CGPSI\CGPSI.AbsenceManagement\CGPSI.AbsenceManagement\bin\Microsoft.Owin.Security.Google.xml
+D:\MY PROJECTS\Ref\CGPSI\CGPSI.AbsenceManagement\CGPSI.AbsenceManagement\bin\Microsoft.Owin.Security.Twitter.xml
+D:\MY PROJECTS\Ref\CGPSI\CGPSI.AbsenceManagement\CGPSI.AbsenceManagement\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+D:\MY PROJECTS\Ref\CGPSI\CGPSI.AbsenceManagement\CGPSI.AbsenceManagement\obj\Debug\CGPSI.AbsenceManagement.csprojResolveAssemblyReference.cache
+D:\MY PROJECTS\Ref\CGPSI\CGPSI.AbsenceManagement\CGPSI.AbsenceManagement\obj\Debug\CGPSI.AbsenceManagement.dll
+D:\MY PROJECTS\Ref\CGPSI\CGPSI.AbsenceManagement\CGPSI.AbsenceManagement\obj\Debug\CGPSI.AbsenceManagement.pdb

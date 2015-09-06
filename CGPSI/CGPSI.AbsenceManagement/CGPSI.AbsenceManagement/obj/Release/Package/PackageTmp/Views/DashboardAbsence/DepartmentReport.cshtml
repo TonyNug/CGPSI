@@ -1,0 +1,289 @@
+﻿<div class="full-width-block">
+    <div id="grid"></div>
+</div>
+<script>
+    function getColor(stat){
+            var output=""
+            if(stat=="On Leave"){
+                output="#5017ec";
+            }
+             if(stat=="Half Day"){
+                output="#12fa08";
+            }
+             if(stat=="Late"){
+                output="#ec1717"
+            }
+             if(stat=="Sick Leave"){
+                output="#ec9717";
+            }
+
+            return output;
+        }
+
+    $(document).ready(function(){
+        var initData=[
+        {NIK:"0029",
+            EmployeeName:"Sugeng",
+                Dept:"PTID-After Sales",
+                _01:{
+                    absence:{masuk:"08:01:24",keluar:"0"},
+                    status:"Late"
+                },
+                _02:{
+                    absence:{masuk:"08:01:24",keluar:"17:01:24"},
+                    status:"Late"
+                },
+                _03:{
+                    absence:{masuk:"07:48:24",keluar:"17:38:36"},
+                    status:"OnTime"
+                },
+                _04:{
+                    absence:{masuk:"07:45:24",keluar:"17:35:36"},
+                    status:"OnTime"
+                },
+                _05:{
+                    absence:{masuk:"07:50:24",keluar:"0"},
+                    status:"Half Day"
+                }},
+
+        {NIK:"0092",
+            EmployeeName:"Suprihno",
+                Dept:"PTID-After Sales",
+                _01:{
+                    absence:{masuk:"08:11:24",keluar:"17:05:24"},
+                    status:"Late"
+                },
+                _02:{
+                    absence:{masuk:"07:41:24",keluar:"17:01:24"},
+                    status:"Ontime"
+                },
+                _03:{
+                    absence:{masuk:"07:48:24",keluar:"17:38:36"},
+                    status:"OnTime"
+                },
+                _04:{
+                    absence:{masuk:"07:45:24",keluar:"17:05:36"},
+                    status:"OnTime"
+                },
+                _05:{
+                    absence:{masuk:"07:50:24",keluar:"0"},
+                    status:"Half Day"
+                }},
+
+        {NIK:"0105",
+            EmployeeName:"Eddy Permadi",
+                Dept:"PTID-After Sales",
+                _01:{
+                    absence:{masuk:"07:31:24",keluar:"17:05:24"},
+                    status:"OnTime"
+                },
+                _02:{
+                    absence:{masuk:"08:31:24",keluar:"17:01:24"},
+                    status:"Late"
+                },
+                _03:{
+                    absence:{masuk:"07:48:24",keluar:"17:38:36"},
+                    status:"OnTime"
+                },
+                _04:{
+                    absence:{masuk:"07:35:24",keluar:"17:25:36"},
+                    status:"OnTime"
+                },
+                _05:{
+                    absence:{masuk:"07:55:24",keluar:"0"},
+                    status:"Half Day"
+                }},
+
+        {NIK:"0225",
+            EmployeeName:"Bambang Hermanto",
+                Dept:"PTID-After Sales",
+                _01:{
+                    absence:{masuk:"07:41:24",keluar:"17:15:24"},
+                    status:"OnTime"
+                },
+                _02:{
+                    absence:{masuk:"07:31:24",keluar:"17:01:24"},
+                    status:"OnTime"
+                },
+                _03:{
+                    absence:{masuk:"07:48:24",keluar:"18:08:36"},
+                    status:"OnTime"
+                },
+                _04:{
+                    absence:{masuk:"07:35:24",keluar:"17:55:36"},
+                    status:"OnTime"
+                },
+                _05:{
+                    absence:{masuk:"07:25:24",keluar:"0"},
+                    status:"Half Day"
+                }},
+
+        {NIK:"0231",
+            EmployeeName:"Ayravedi",
+                Dept:"PTID-After Sales",
+                _01:{
+                    absence:{masuk:"07:45:24",keluar:"17:05:24"},
+                    status:"OnTime"
+                },
+                _02:{
+                    absence:{masuk:"07:21:23",keluar:"17:31:24"},
+                    status:"OnTime"
+                },
+                _03:{
+                    absence:{masuk:"08:38:24",keluar:"18:08:36"},
+                    status:"Late"
+                },
+                _04:{
+                    absence:{masuk:"07:30:24",keluar:"17:25:36"},
+                    status:"OnTime"
+                },
+                _05:{
+                    absence:{masuk:"07:45:25",keluar:"0"},
+                    status:"Half Day"
+                }},
+
+        {NIK:"0416",
+            EmployeeName:"SOFYAN ALKAUTSAR",
+                Dept:"PTID-After Sales",
+                _01:{
+                    absence:{masuk:"07:45:24",keluar:"17:38:36"},
+                    status:"OnTime"
+                },
+                _02:{
+                    absence:{masuk:"07:21:23",keluar:"17:31:24"},
+                    status:"OnTime"
+                },
+                _03:{
+                    absence:{masuk:"07:38:24",keluar:"18:08:36"},
+                    status:"OnTime"
+                },
+                _04:{
+                    absence:{masuk:"07:30:24",keluar:"17:35:36"},
+                    status:"OnTime"
+                },
+                _05:{
+                    absence:{masuk:"07:33:25",keluar:"0"},
+                    status:"Half Day"
+                }},
+
+        {NIK:"0437",
+            EmployeeName:"SUHARDI",
+                Dept:"PTID-After Sales",
+                _01:{
+                    absence:{masuk:"07:45:24",keluar:"17:38:36"},
+                    status:"OnTime"
+                },
+                _02:{
+                    absence:{masuk:"07:31:23",keluar:"17:11:24"},
+                    status:"OnTime"
+                },
+                _03:{
+                    absence:{masuk:"07:38:24",keluar:"18:08:36"},
+                    status:"OnTime"
+                },
+                _04:{
+                    absence:{masuk:"07:40:24",keluar:"17:35:36"},
+                    status:"OnTime"
+                },
+                _05:{
+                    absence:{masuk:"07:33:25",keluar:"0"},
+                    status:"Half Day"
+                }},
+
+        {NIK:"0452",
+            EmployeeName:"AGUS SETYAWAN",
+                Dept:"PTID-After Sales",
+                _01:{
+                    absence:{masuk:"07:55:24",keluar:"16:48:36"},
+                    status:"OnTime"
+                },
+                _02:{
+                    absence:{masuk:"07:41:23",keluar:"17:11:24"},
+                    status:"OnTime"
+                },
+                _03:{
+                    absence:{masuk:"07:58:24",keluar:"18:08:36"},
+                    status:"OnTime"
+                },
+                _04:{
+                    absence:{masuk:"08:20:24",keluar:"17:38:36"},
+                    status:"OnTime"
+                },
+                _05:{
+                    absence:{masuk:"07:33:25",keluar:"0"},
+                    status:"Half Day"
+                }}
+        ]
+
+        $("#grid").kendoGrid({
+            dataSource: {
+                data: initData,
+                schema: {
+                    model: {
+                        fields: {
+                            NIK: { type: "string" },
+                            EmployeeName: { type: "string" },
+                            Dept: { type: "string" },
+                            time: { type: "string" },
+                        }
+                    }
+                },
+                pageSize: 20
+            },
+            height: 750,
+            scrollable: true,
+            sortable: true,
+            filterable:false,
+            pageable: {
+                input: true,
+                numeric: false
+            },
+            columns: [
+                { field: "NIK", title: "NIK", width: "130px" },
+                { field: "EmployeeName", title: "Employee Name", width: "130px" },
+                { field: "Dept", title: "Department", width: "130px" },
+                { title: "_01", columns :[
+                    { field: "_01", title: "Jam Masuk",width:100,template:"<div style='width:100%;display:block;background-color:#= getColor(_01.status) #'>#= _01.absence.masuk # </div>" },
+                    { field: "_01", title: "Jam Keluar",width:100,template:"<div style='width:100%;display:block;background-color:#= getColor(_01.status) #'>#= _01.absence.keluar # </div>" }
+                    ]
+                },
+                { title: "_02", columns :[
+                    { field: "_02", title: "Jam Masuk",width:100,template:"<div style=';width:100%;display:block;background-color:#= getColor(_02.status) #'>#= _02.absence.masuk # </div>" },
+                    { field: "_02", title: "Jam Keluar",width:100,template:"<div style='width:100%;display:block;background-color:#= getColor(_02.status) #'>#= _02.absence.keluar # </div>" }
+                    ]
+                },
+                { title: "_03", columns :[
+                    { field: "_03", title: "Jam Masuk",width:100,template:"<div style='width:100%;display:block;background-color:#= getColor(_03.status) #'>#= _03.absence.masuk # </div>" },
+                    { field: "_03", title: "Jam Keluar",width:100,template:"<div style='width:100%;display:block;background-color:#= getColor(_03.status) #'>#= _03.absence.keluar # </div>" }
+                    ]
+                },
+                { title: "_04", columns :[
+                    { field: "_04", title: "Jam Masuk",width:100,template:"<div style='width:100%;display:block;background-color:#= getColor(_04.status) #'>#= _04.absence.masuk # </div>" },
+                    { field: "_04", title: "Jam Keluar",width:100,template:"<div style='width:100%;display:block;background-color:#= getColor(_04.status) #'>#= _04.absence.keluar # </div>" }
+                    ]
+                },
+                { title: "_05", columns :[
+                    { field: "_05", title: "Jam Masuk",width:100,template:"<div style='width:100%;display:block;background-color:#= getColor(_05.status) #'>#= _05.absence.masuk # </div>" },
+                    { field: "_05", title: "Jam Keluar",width:100,template:"<div style='width:100%;display:block;background-color:#= getColor(_05.status) #'>#= _05.absence.keluar # </div>" }
+                ]
+                }
+                ]
+        });
+
+    })
+</script>
+
+
+
+<script id="my-template" type="text/x-kendo-template">
+    <div>${Status}</div>
+    <div>
+        # if (Status.toUpperCase() == "SINGLE"){#
+        <img src="imgs/black_acs.png" alt="black_acs image" />
+        #}else if (Status.toUpperCase() == "MARRIED"){#
+        <img src="imgs/blue_acs.png" alt="blue_acs image" />
+        #}else if (Status.toUpperCase() == "OTHER"){#
+        <img src="imgs/red_acs.png" alt="red_acs image" />
+        #}#
+    </div>
+</script>

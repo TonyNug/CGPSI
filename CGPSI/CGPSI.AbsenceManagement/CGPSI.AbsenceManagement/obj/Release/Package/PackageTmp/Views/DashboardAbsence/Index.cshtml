@@ -1,0 +1,102 @@
+﻿
+<div id="chart" style="background: center no-repeat"></div>
+<script>
+        function createChart() {
+            $("#chart").kendoChart({
+                theme:"metro",
+                title: {
+                    text: "Absence Summary"
+                },
+                chartArea:{
+                    height:1000
+                },
+                legend: {
+                    position: "top"
+                },
+                seriesDefaults: {
+                    type: "bar"
+                },
+                series: [{
+                    name: "Sick Leave",
+                    data: [3.907, 7.943, 7.848, 9.284, 9.263, 9.801, 3.890, 8.238, 9.552, 6.855]
+                }, {
+                    name: "Half Day",
+                    data: [4.743, 7.295, 7.175, 6.376, 8.153, 8.535, 5.247, 7.832, 4.3, 4.3]
+                }, {
+                    name: "Late",
+                    data: [0.010, 0.375, 1.161, 0.684, 3.7, 3.269, 1.083, 5.127, 3.690, 2.995]
+                },{
+                    name: "On Leave",
+                    data: [1.988, 2.733, 3.994, 3.464, 4.001, 3.939, 1.333, 2.245, 4.339, 2.727]
+                }],
+                valueAxis: {
+                    labels: {
+                        format: "{0}%"
+                    },
+                    line: {
+                        visible: false
+                    },
+                    axisCrossingValue: 0
+                },
+                categoryAxis: {
+                    categories: ["PTID-After Sales", "PTID-Core Stracking", "PTID-Elect. Maintenance", "PTID-Final Assembly", "PTID-General Affairs",
+                                 "PTID-General Production", "PTID-Insulation", "PTID-Mech. Maintenance", "PTID-Quality Assurance", "PTID-Warehouse"],
+                    line: {
+                        visible: false
+                    }
+
+                },
+                tooltip: {
+                    visible: true,
+                    format: "{0}%",
+                    template: "#= series.name #: #= value #"
+                }
+            });
+        }
+
+        $(document).ready(function(){
+            createChart();
+            //WindowPopUp("View/DashboardChartDetail.html","Sick Leave On PTID-After Sales");
+        });
+        $(document).bind("kendo:skinChange", createChart);
+
+        var WindowPopUp = function (targetUrl, WindowTitle, data) {
+            //debugger;
+            var windowId = Math.random().toString().replace(".", "_"),
+
+            windowWidth = $(document).innerWidth() - 50,
+            windowHeight = $(document).innerHeight() - 50;
+
+            $(".main-window-container").append("<div id='" + windowId + "' ></div>");
+            var windowele = $("#" + windowId);
+            windowele.kendoWindow({
+                modal: true,
+                width: windowWidth,
+                height: windowHeight,
+                title: WindowTitle,
+                resizable: false,
+                visible: false,
+                open: function (e) {
+                    $.ajax({
+                        type: "get",
+                        contentType: "application/json; charset=utf-8",
+                        url: targetUrl,
+                        data: JSON.stringify(data),
+                        success: function (data) {
+                            windowele.html(data);
+                        },
+                        error: function (e) {
+                        }
+                    });
+                },
+                close: function () {
+                    this.destroy();
+                },
+                deactivate: function () {
+                    this.destroy();
+                }
+            }).data("kendoWindow");
+            windowele.parent().addClass("office");
+            windowele.data("kendoWindow").center().open();
+        }
+</script>

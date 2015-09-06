@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="2b88b7cb8c774880945712c6efe0da02" Name="Diagram1">
+        <EntityTypeShape EntityType="CGPSI_AbsenceDBModel.sysdiagram" Width="1.5" PointX="7.75" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="CGPSI_AbsenceDBModel.ActivityHistory" Width="1.5" PointX="8.75" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="CGPSI_AbsenceDBModel.ImportHistory" Width="1.5" PointX="10.75" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="CGPSI_AbsenceDBModel.LoginHistory" Width="1.5" PointX="10.75" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="CGPSI_AbsenceDBModel.Employee" Width="1.5" PointX="3" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CGPSI_AbsenceDBModel.Group" Width="1.5" PointX="3" PointY="15.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="CGPSI_AbsenceDBModel.JobTitle" Width="1.5" PointX="0.75" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CGPSI_AbsenceDBModel.User" Width="1.5" PointX="3" PointY="10.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CGPSI_AbsenceDBModel.UserInGroup" Width="1.5" PointX="5.25" PointY="11.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CGPSI_AbsenceDBModel.UserInRole" Width="1.5" PointX="8.25" PointY="10.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CGPSI_AbsenceDBModel.UserRole" Width="1.5" PointX="6" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="CGPSI_AbsenceDBModel.UsersEmployee" Width="1.5" PointX="5.25" PointY="5.25" IsExpanded="true" />
+        <AssociationConnector Association="CGPSI_AbsenceDBModel.FK_Employees_Employees" ManuallyRouted="false" />
+        <AssociationConnector Association="CGPSI_AbsenceDBModel.FK_Employees_JobTitles" ManuallyRouted="false" />
+        <AssociationConnector Association="CGPSI_AbsenceDBModel.FK_UsersEmployees_Employees" ManuallyRouted="false" />
+        <AssociationConnector Association="CGPSI_AbsenceDBModel.FK_UserInGroups_Groups" ManuallyRouted="false" />
+        <AssociationConnector Association="CGPSI_AbsenceDBModel.FK_JobTitles_JobTitles" ManuallyRouted="false" />
+        <AssociationConnector Association="CGPSI_AbsenceDBModel.FK_UserInGroups_User" ManuallyRouted="false" />
+        <AssociationConnector Association="CGPSI_AbsenceDBModel.FK_UserInRoles_User" ManuallyRouted="false" />
+        <AssociationConnector Association="CGPSI_AbsenceDBModel.FK_UsersEmployees_User" ManuallyRouted="false" />
+        <AssociationConnector Association="CGPSI_AbsenceDBModel.FK_UserInRoles_UserRoles" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="CGPSI_AbsenceDBModel.Department" Width="1.5" PointX="0.75" PointY="5" />
+        <AssociationConnector Association="CGPSI_AbsenceDBModel.FK_Employees_Departments" />
+        <EntityTypeShape EntityType="CGPSI_AbsenceDBModel.DataAbsence" Width="1.5" PointX="10.375" PointY="9.75" />
+        <EntityTypeShape EntityType="CGPSI_AbsenceDBModel.EmployeeOnSchedule" Width="1.5" PointX="5.25" PointY="0.875" />
+        <EntityTypeShape EntityType="CGPSI_AbsenceDBModel.ShiftHistory" Width="1.5" PointX="12.375" PointY="9.75" />
+        <EntityTypeShape EntityType="CGPSI_AbsenceDBModel.DayOfWork" Width="1.5" PointX="7.25" PointY="0.875" />
+        <AssociationConnector Association="CGPSI_AbsenceDBModel.FK_EmployeeOnSchedule_Employees" />
+        <EntityTypeShape EntityType="CGPSI_AbsenceDBModel.ShiftDetail" Width="1.5" PointX="5.25" PointY="20.125" />
+        <EntityTypeShape EntityType="CGPSI_AbsenceDBModel.ViewAbsenceSummary" Width="1.5" PointX="10.375" PointY="12.75" />
+        <EntityTypeShape EntityType="CGPSI_AbsenceDBModel.Shift" Width="1.5" PointX="0.75" PointY="10.375" />
+        <AssociationConnector Association="CGPSI_AbsenceDBModel.FK_EmployeeOnSchedule_Shift" />
+        <AssociationConnector Association="CGPSI_AbsenceDBModel.FK_ShiftDetails_Shift" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

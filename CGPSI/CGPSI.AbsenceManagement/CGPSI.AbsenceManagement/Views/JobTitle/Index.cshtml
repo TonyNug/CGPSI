@@ -1,0 +1,125 @@
+﻿@*<div class="grid_container">
+        <span class="grid_name">Master Employees</span>
+        <div id="GridMaster"></div>
+    </div>*@
+
+<div class="grid-container">
+    <div id="GridMaster"></div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        var result = "";
+        var dataSource = new kendo.data.DataSource({
+            type: "json", serverPaging: true, serverSorting: true, serverFiltering: true,
+            pageSize: 20,
+            transport: {
+                read: {
+                    dataType: "json",
+                    type: "post",
+                    url: '@Url.Content("~/JobTitle/Get")',
+                    contentType: "application/json; charset=utf-8",
+                    data: {}
+
+                },
+                update: {
+                    url: '@Url.Content("~/JobTitle/Post")',
+                    dataType: "json",
+                    type: "post",
+                    contentType: "application/json; charset=utf-8",
+                    data: {},
+                    complete: function (e) {
+                        grid.dataSource.read();
+                    }
+                },
+                destroy: {
+                    url: '@Url.Content("~/JobTitle/Delete")',
+                    dataType: "json",
+                    type: "post",
+                    contentType: "application/json; charset=utf-8",
+                    data: {},
+                    complete: function (e) {
+                        grid.dataSource.read();
+                    }
+                },
+                create: {
+                    url: '@Url.Content("~/JobTitle/Put")',
+                    dataType: "json",
+                    type: "post",
+                    contentType: "application/json; charset=utf-8",
+                    data: {},
+                    complete: function (e) {
+                        grid.dataSource.read();
+                    }
+                },
+                parameterMap: function (options, operation) {
+                    if (operation !== "read" && options.models) {
+                        return { models: kendo.stringify(options.models) };
+                    }
+                    else {
+                        return JSON.stringify(options);
+                    }
+                    //else {
+
+                    // }
+                },
+                //parameterMap: function (options) { }
+            },//ends of transport
+            schema: {
+                data: function (data) {
+                    result = data.Result;
+                    return result;
+                },
+                total: function (data) {
+                    return (data.CResult);
+                },
+                model: {
+                    id: "ID_JobTitle",
+                    fields: {
+                        JobTitleName: { type: "string" },
+                        ID_JobTitle: { type: "string" }
+                    }
+                }
+            }//ends of schema
+        });//ends of dataSource
+
+
+        var grid = $('#GridMaster').kendoGrid({ //begin of DataGrid area
+            dataSource: dataSource,
+            height: $("#GridMaster").parent().innerHeight() - 10,
+            //dataBound: onDataBound,
+            //selectable: "multiple",
+            resizable: true,
+            //filterable: true,
+            filterable: {
+                extra: false,
+                operators: {
+                    string: {
+                        contains: "Contains", s_eq: "Equal to", s_neq: "Not Equal", doesnotcontain: "Does Not Contain", startswith: "Starts with", endswith: "Ends With"
+                    },
+                    number: {
+                        n_eq: "Equal to", n_gt: "Greater Than", n_gte: "Greater Than Equal", n_lt: "Less Than", n_lte: "Less Than Equal", n_neq: "Not Equal"
+                    },
+                    date: {
+                        d_eq: "Equal to", d_gt: "Greater Than", d_gte: "Greater Than Equal", d_lt: "Less Than", d_lte: "Less Than Equal", d_neq: "Not Equal"
+                    }
+                }
+            },
+            sortable: true,
+            pageable: {
+                refresh: true,
+                pageSizes: true
+            },
+            toolbar: ["create"],//to generate  button add new record
+            columns:
+                    [
+                     { field: "JobTitleName", title: "Job Title", width: 125, type: "string", filterable: true },
+                     { command: ["edit", "destroy"], title: "&nbsp;", width: "160px" }//to generate edit and delete button in each row
+                    ],
+            editable: "popup"
+        }).data("kendoGrid");
+        // grid.table.on("click", ".checkbox", selectRow);
+
+    });
+</script>
+

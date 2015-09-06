@@ -1,0 +1,275 @@
+﻿@{
+    ViewBag.Title = "Home";
+}
+<div class="office">
+    <div class="main-window-container"></div>
+</div>
+
+<div class="header-bar-container">
+    @* This is header container bar *@
+</div>
+<div class="logo-container"></div>
+<div class="header-bar-container">
+    <span class="float-right cursor-hand" style="margin:15px 35px; font-size:13px; color:fff;">Sign Out</span>
+    <span class="float-right cursor-hand" style="margin:15px 15px; font-size:13px; color:fff;">My Profile</span>
+</div>
+<div class="body-panel">
+    <div class="pane-content menu-container">
+        <div class="menu-action">
+            <div class="btn-menu-hide"><img src="~/Content/Images/L-arrow.png" /></div>
+        </div>
+        <div class="menu-panelbar">
+            <div id="organizer">
+                <ul id="panelbar">
+                    <li class="k-state-active">Home</li>
+                    <li>
+                        Reporting
+                        <ul>
+                            <li class="action-link" data-link="@Url.Content("~/DashboardAbsence")" target-link="body" title="Absence Chart">Absence Chart</li>
+                            <li class="action-link" data-link="@Url.Content("~/DashboardAbsence/DataAbsence")" target-link="window" title="Data Absence">Data Absence</li>
+                            <li class="action-link" data-link="@Url.Content("~/DepartmentReport")" target-link="body" title="Department Report">Department Report</li>
+                        </ul>
+                    </li>
+                    <li>
+                        Absence Management
+                        <ul>
+                            <li class="action-link" data-link="@Url.Content("~/ImportData")" target-link="window" title="Import Data">Import Data</li>
+                        </ul>
+                    </li>
+                    <li>
+                        Master Data
+                        <ul>
+                            <li class="action-link" data-link="@Url.Content("~/Employees")" target-link="window" title="Employees">Employees</li>
+                            <li class="action-link" data-link="@Url.Content("~/Departments")" target-link="window" title="Departments">Departments</li>
+                            <li class="action-link" data-link="@Url.Content("~/JobTitle")" target-link="window" title="Job Title">Job Titles</li>
+                            <li class="action-link" data-link="@Url.Content("~/Groups")" target-link="window" title="Groups">Groups</li>
+                        </ul>
+                    </li>
+                    @*<li>
+        <span class="k-link k-state-selected">Budget</span>
+        <ul>
+            <li>
+                Generate Budget
+            </li>
+            <li>
+                Budget Initialization
+            </li>
+            <li>
+                Budget List
+                <ul>
+                    <li>Transfer from Area Budget</li>
+                    <li>Transfer CI Budget</li>
+                </ul>
+            </li>
+            <li>
+                Transfer List
+            </li>
+            <li>
+                Budget Approval
+            </li>
+            <li>
+                Budget Revision
+            </li>
+            <li>
+                Budget Marketing Revision
+            </li>
+        </ul>
+    </li>
+    <li>
+        CI
+        <ul>
+            <li class="action-link" data-link="@Url.Content("~/CI")" target-link="window">Create CI</li>
+            <li>Propose CI</li>
+            <li>View My CI</li>
+            <li>Search CI</li>
+            <li>Approve CI</li>
+            <li>Approve CI Final Report</li>
+            <li>Reopen CI</li>
+            <li>Approve CI PR Creator</li>
+        </ul>
+    </li>
+                    <li>
+                        Master Data
+                        <ul>
+                            <li>Master Employee</li>
+                            <li>Location</li>
+                            <li>Platform</li>
+                        </ul>
+                    </li>*@
+                    
+
+                </ul>
+                <div id="bottom"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <div class="top-content">
+            <div class="btn-menu-show cursor-hand float-left"><img src="~/Content/Images/menu.png" width="16" /></div>
+        </div>
+        @*Body Content*@
+        <div class="pane-content body-content"></div>
+
+
+    </div>
+
+</div> @*Ends of body-panel*@
+
+@section pageHead{
+    <link href="~/Content/layouts.css" rel="stylesheet" />
+}
+
+<style>
+    .main-window-container div.k-window-content {
+        height: calc(100% - 1px);
+    }
+</style>
+
+<script id="mapTemplate" type="text/x-kendo-template">
+    <tr class="rows">
+        <td style="width: 75px;">${month}</td>
+        <td class="title"><span class="map-bar-budget" style="width: 150px;"></span></td>
+    </tr>
+</script>
+
+
+@section scripts{
+
+
+    <script>
+        $(document).ready(function () {
+
+
+            var targetURL = "@Url.Content("~/Dashboard")";
+
+            $("#panelbar").kendoPanelBar({
+                expandMode: "single"
+            });
+
+            $(".body-panel").kendoSplitter({
+                panes: [
+                    { collapsible: true, size: "275px", max: "275px" },
+                    { collapsible: false },
+                ]
+            });
+
+            $.get(targetURL, function (data) {
+                $(".body-content").html(data);
+            })
+
+            $(".btn-menu-hide").bind("click", function () {
+                var splitter = $(".body-panel").data("kendoSplitter");
+                splitter["collapse"]($(".menu-container"));
+            });
+            $(".btn-menu-show").bind("click", function () {
+                var splitter = $(".body-panel").data("kendoSplitter");
+                splitter["expand"]($(".menu-container"));
+            });
+            $(".action-link").bind("click", function () {
+                var targetLink="window";
+                try {
+                    targetLink = $(this).attr("target-link");
+                } catch (e) {
+                    targetLink = "window";
+                }
+                if (targetLink == "window") {
+                    WindowPopUp($(this).attr("data-link"), ($(this).attr("title") != null ? $(this).attr("title") : ""), null);
+                }
+                else {
+                    $.get($(this).attr("data-link"), function (data) {
+                        $(".body-content").html(data);
+                    })
+                }
+            });
+
+
+
+
+
+        });
+
+        var WindowPopUp = function (targetUrl, WindowTitle, data) {
+            //debugger;
+            var windowId = Math.random().toString().replace(".", "_"),
+
+            windowWidth = $(document).innerWidth() - 50,
+            windowHeight = $(document).innerHeight() - 50;
+
+            $(".main-window-container").append("<div id='" + windowId + "' ></div>");
+            var windowele = $("#" + windowId);
+            windowele.kendoWindow({
+                modal: true,
+                width: windowWidth,
+                height: windowHeight,
+                title: WindowTitle,
+                resizable: false,
+                visible: false,
+                open: function (e) {
+                    $.ajax({
+                        type: "post",
+                        contentType: "application/json; charset=utf-8",
+                        url: targetUrl,
+                        data: JSON.stringify(data),
+                        success: function (data) {
+                            windowele.html(data);
+                        },
+                        error: function (e) {
+                        }
+                    });
+                },
+                close: function () {
+                    this.destroy();
+                },
+                deactivate: function () {
+                    this.destroy();
+                }
+            }).data("kendoWindow");
+            windowele.parent().addClass("office");
+            windowele.data("kendoWindow").center().open();
+        }
+
+        var WindowPopUpSize = function (targetUrl, WindowTitle, widthSize, heightSize, data) {
+            debugger;
+            var windowId = Math.random().toString().replace(".", "_"),
+
+            windowWidth = widthSize,
+            windowHeight = heightSize;
+
+            $(".main-window-container").append("<div id='" + windowId + "' ></div>");
+            var windowele = $("#" + windowId);
+            windowele.kendoWindow({
+                modal: true,
+                width: windowWidth,
+                height: windowHeight,
+                title: WindowTitle,
+                resizable: false,
+                visible: false,
+                open: function (e) {
+                    $.ajax({
+                        type: "post",
+                        contentType: "application/json; charset=utf-8",
+                        url: targetUrl,
+                        data: JSON.stringify(data),
+                        success: function (data) {
+                            windowele.html(data);
+                        },
+                        error: function (e) {
+                        }
+                    });
+                },
+                close: function () {
+                    this.destroy();
+                },
+                deactivate: function () {
+                    this.destroy();
+                }
+            }).data("kendoWindow");
+            windowele.parent().addClass("office");
+            windowele.data("kendoWindow").center().open();
+        }
+    </script>
+}
+
+
+

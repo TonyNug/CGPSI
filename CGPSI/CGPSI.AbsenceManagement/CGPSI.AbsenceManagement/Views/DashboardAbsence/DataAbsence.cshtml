@@ -1,0 +1,88 @@
+﻿@*<div class="grid_container">
+        <span class="grid_name">Master Employees</span>
+        <div id="GridMaster"></div>
+    </div>*@
+
+
+<div class="grid-container">
+    <div id="GridMaster"></div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $.ajax({
+            type: "post",
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            url: '@Url.Content("~/AbsenceData/Get")',
+            //data:JSON.stringify({start:$(".dt-start").data("kendoDatePicker").value(),end:$(".dt-start").data("kendoDatePicker").value()}),
+            success: function (data) {                
+                CreateGrid(data.Result);
+                kendo.ui.progress($(".upload-container"), false);
+                //$(".grid-data").show();
+            },
+            error: function () {
+            }
+        });
+        function CreateGrid(input) {           
+                var grid = $('#GridMaster').kendoGrid({ //begin of DataGrid area                
+                    height: $("#GridMaster").parent().innerHeight() - 10,
+                    dataSource: {
+                        data: input,
+                        schema: {
+                            model: {
+                                fields: {
+                                    NIK: { type: "string" },
+                                    FirstName: { type: "string" },
+                                    Department: { type: "string" },
+                                    Dates: { type: "date" },
+                                    DayName: { type: "string" },
+                                    ShiftName: { type: "string" },
+                                    StartTime: { type: "string" },
+                                    EndTime: { type: "string" },
+                                    TimeIN: { type: "string" },
+                                    TimeOUT: { type: "string" },
+                                    AbsenceStatus: { type: "string" }
+                                }
+                            }
+                        },
+                        group: [{ field: 'Department' }, { field: 'FirstName' }]
+                    },
+                    resizable: true,
+                    filterable: true,
+                    filterable: {
+                        extra: false,
+                        operators: {
+                            string: {
+                                contains: "Contains", s_eq: "Equal to", s_neq: "Not Equal", doesnotcontain: "Does Not Contain", startswith: "Starts with", endswith: "Ends With"
+                            },
+                            number: {
+                                n_eq: "Equal to", n_gt: "Greater Than", n_gte: "Greater Than Equal", n_lt: "Less Than", n_lte: "Less Than Equal", n_neq: "Not Equal"
+                            },
+                            date: {
+                                d_eq: "Equal to", d_gt: "Greater Than", d_gte: "Greater Than Equal", d_lt: "Less Than", d_lte: "Less Than Equal", d_neq: "Not Equal"
+                            }
+                        }
+                    },
+                    sortable: true,
+                    scrollable:true,
+                    pageable: false,
+                    columns:
+                            [
+                             { field: "NIK", title: "NIK", width: 125, type: "string", filterable: true },
+                             //{ field: "FirstName", title: "Name", width: 125, type: "string", filterable: true },
+                             //{ field: "Department", title: "Department", width: 125, type: "string", filterable: true },
+                             { field: "Dates", title: "Date", format: "{0:MMM dd, yyyy}", width: 125, type: "date", filterable: true },
+                             { field: "TimeIN", title: "Check In Time", width: 125, type: "string", filterable: true },
+                             { field: "TimeOUT", title: "Check Out Time", width: 125, type: "string", filterable: true },
+                             { field: "AbsenceStatus", title: "Status", width: 125, type: "string", filterable: true },
+                             { field: "DayName", title: "Day", width: 125, type: "string", filterable: true },
+                             { field: "ShiftName", title: "Shift Name", width: 125, type: "boolean", filterable: true },
+                             { field: "StartTime", title: "Shift Start", width: 125, type: "string", filterable: true },
+                             { field: "EndTime", title: "Shift End", width: 125, type: "string", filterable: true }
+                            ]
+                }).data("kendoGrid");
+            }
+    });
+</script>
+

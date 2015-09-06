@@ -1,0 +1,2080 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="CGPSI_AbsenceDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="DataAbsence">
+          <Key>
+            <PropertyRef Name="ID_DataAbsence" />
+          </Key>
+          <Property Name="ID_DataAbsence" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NIK" Type="varchar" MaxLength="50" />
+          <Property Name="AbsenceDate" Type="date" />
+          <Property Name="AbsenceTime" Type="time" Precision="7" />
+          <Property Name="Flag" Type="int" />
+          <Property Name="ImportSession" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="EmployeeOnSchedule">
+          <Key>
+            <PropertyRef Name="ID_EmployeeOnShift" />
+          </Key>
+          <Property Name="ID_EmployeeOnShift" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_Employee" Type="int" />
+          <Property Name="ID_Shift" Type="int" />
+          <Property Name="Date" Type="nchar" MaxLength="10" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="ModifiedBy" Type="int" />
+          <Property Name="ModifiedDate" Type="int" />
+        </EntityType>
+        <EntityType Name="LeaveCategories">
+          <Key>
+            <PropertyRef Name="ID_LeaveCategory" />
+          </Key>
+          <Property Name="ID_LeaveCategory" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LeaveCategory" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="LeaveRequest">
+          <Key>
+            <PropertyRef Name="ID_LeaveRequest" />
+          </Key>
+          <Property Name="ID_LeaveRequest" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_Requestor" Type="int" />
+          <Property Name="ID_Approver" Type="int" />
+          <Property Name="LeaveReason" Type="varchar(max)" />
+          <Property Name="LeaveCategory" Type="int" />
+          <Property Name="StartDate" Type="datetime" />
+          <Property Name="EndDate" Type="datetime" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="ModifiedBy" Type="int" />
+          <Property Name="ModifiedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Shift">
+          <Key>
+            <PropertyRef Name="ID_Shift" />
+          </Key>
+          <Property Name="ID_Shift" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ShiftName" Type="varchar" MaxLength="250" />
+          <Property Name="IsNormalDay" Type="bit" />
+          <Property Name="BaseStartTime" Type="time" Precision="7" />
+          <Property Name="BaseEndTime" Type="time" Precision="7" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="ModifiedBy" Type="int" />
+          <Property Name="ModifiedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="ShiftDetails">
+          <Key>
+            <PropertyRef Name="ID_ShiftDetail" />
+          </Key>
+          <Property Name="ID_ShiftDetail" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_Shift" Type="int" />
+          <Property Name="DayName" Type="varchar" MaxLength="50" />
+          <Property Name="StartTime" Type="time" Precision="7" />
+          <Property Name="EndTime" Type="time" Precision="7" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="ModifiedBy" Type="int" />
+          <Property Name="ModifiedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="ActivityHistory">
+          <Key>
+            <PropertyRef Name="ID_ActivityHistory" />
+          </Key>
+          <Property Name="ID_ActivityHistory" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LoginSession" Type="varchar" MaxLength="250" />
+          <Property Name="Message" Type="varchar(max)" />
+          <Property Name="ActivityTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="ImportHistory">
+          <Key>
+            <PropertyRef Name="ID_Import" />
+          </Key>
+          <Property Name="ID_Import" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ImportSession" Type="varchar" MaxLength="250" />
+          <Property Name="FileSource" Type="varchar" MaxLength="1024" />
+          <Property Name="ImportStart" Type="datetime" />
+          <Property Name="ImportEnd" Type="datetime" />
+          <Property Name="DataImported" Type="int" />
+          <Property Name="DataError" Type="int" />
+          <Property Name="DataExsist" Type="int" />
+          <Property Name="DataUpdated" Type="int" />
+          <Property Name="ImportDate" Type="date" />
+        </EntityType>
+        <EntityType Name="LoginHistory">
+          <Key>
+            <PropertyRef Name="ID_Log" />
+          </Key>
+          <Property Name="ID_Log" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LoginSession" Type="varchar" MaxLength="250" />
+          <Property Name="UserLogin" Type="int" />
+          <Property Name="LoginTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="ShiftHistory">
+          <Key>
+            <PropertyRef Name="ID_ShiftHistory" />
+          </Key>
+          <Property Name="ID_ShiftHistory" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_Employee" Type="int" />
+          <Property Name="ID_Shift" Type="int" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="CreatedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="DayOfWorks">
+          <Key>
+            <PropertyRef Name="ID_DayOfWork" />
+          </Key>
+          <Property Name="ID_DayOfWork" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DayName" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Departments">
+          <Key>
+            <PropertyRef Name="ID_Department" />
+          </Key>
+          <Property Name="ID_Department" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DepartmentName" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="ModifiedDate" Type="datetime" />
+          <Property Name="ModifiedBy" Type="int" />
+        </EntityType>
+        <EntityType Name="Employees">
+          <Key>
+            <PropertyRef Name="ID_Employee" />
+          </Key>
+          <Property Name="ID_Employee" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NIK" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="250" />
+          <Property Name="LastName" Type="varchar" MaxLength="250" />
+          <Property Name="DisplayName" Type="varchar" MaxLength="500" />
+          <Property Name="Address" Type="varchar" MaxLength="1024" />
+          <Property Name="Telephone" Type="varchar" MaxLength="250" />
+          <Property Name="Email" Type="varchar" MaxLength="250" />
+          <Property Name="BirthDate" Type="date" />
+          <Property Name="BirthPlace" Type="varchar" MaxLength="250" />
+          <Property Name="JoinDate" Type="date" Nullable="false" />
+          <Property Name="CurrentPosition" Type="int" />
+          <Property Name="CurrentDepartment" Type="int" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="LeaveDate" Type="date" />
+          <Property Name="ID_Supervisor" Type="int" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="ModifedDate" Type="datetime" />
+          <Property Name="ModifedBy" Type="int" />
+        </EntityType>
+        <EntityType Name="Groups">
+          <Key>
+            <PropertyRef Name="ID_Group" />
+          </Key>
+          <Property Name="ID_Group" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GroupName" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="JobTitles">
+          <Key>
+            <PropertyRef Name="ID_JobTitle" />
+          </Key>
+          <Property Name="ID_JobTitle" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="JobTitleName" Type="varchar" MaxLength="250" />
+          <Property Name="ParentJobTitle" Type="int" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="ModifiedDate" Type="datetime" />
+          <Property Name="ModifiedBy" Type="int" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="ID_User" />
+          </Key>
+          <Property Name="ID_User" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="50" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="ModifiedDate" Type="datetime" />
+          <Property Name="ModifiedBy" Type="int" />
+        </EntityType>
+        <EntityType Name="UserInGroups">
+          <Key>
+            <PropertyRef Name="ID_UserInGroups" />
+          </Key>
+          <Property Name="ID_UserInGroups" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_User" Type="int" />
+          <Property Name="ID_Group" Type="int" />
+        </EntityType>
+        <EntityType Name="UserInRoles">
+          <Key>
+            <PropertyRef Name="ID_UserInRoles" />
+          </Key>
+          <Property Name="ID_UserInRoles" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_User" Type="int" />
+          <Property Name="ID_Role" Type="int" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="ModifiedDate" Type="datetime" />
+          <Property Name="ModifiedBy" Type="int" />
+        </EntityType>
+        <EntityType Name="UserRoles">
+          <Key>
+            <PropertyRef Name="ID_Role" />
+          </Key>
+          <Property Name="ID_Role" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Role" Type="varchar" MaxLength="50" />
+          <Property Name="RoleDesc" Type="varchar" MaxLength="1024" />
+          <Property Name="ParentRole" Type="int" />
+        </EntityType>
+        <EntityType Name="UsersEmployees">
+          <Key>
+            <PropertyRef Name="ID_UserEmployee" />
+          </Key>
+          <Property Name="ID_UserEmployee" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_User" Type="int" Nullable="false" />
+          <Property Name="ID_Employee" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="WorkingCalendar">
+          <Key>
+            <PropertyRef Name="ID_WorkingCalendar" />
+          </Key>
+          <Property Name="ID_WorkingCalendar" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="WorkingDate" Type="date" />
+          <Property Name="IsHoliday" Type="bit" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="ModifiedBy" Type="int" />
+          <Property Name="ModifiedDate" Type="datetime" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'CGPSI_AbsenceDB.abs.ViewAbsenceSummary' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="ViewAbsenceSummary">
+          <Key>
+            <PropertyRef Name="NIK" />
+          </Key>
+          <Property Name="NIK" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DisplayName" Type="varchar" MaxLength="500" />
+          <Property Name="AbsenceDate" Type="date" />
+          <Property Name="TimeIn" Type="time" Precision="7" />
+          <Property Name="TimeOut" Type="time" Precision="7" />
+          <Property Name="actualDayname" Type="nvarchar" MaxLength="30" />
+          <Property Name="ShiftName" Type="varchar" MaxLength="250" />
+          <Property Name="StartTime" Type="time" Precision="7" />
+          <Property Name="EndTime" Type="time" Precision="7" />
+          <Property Name="AbsenceStatus" Type="varchar" MaxLength="11" />
+          <Property Name="ImportSession" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'CGPSI_AbsenceDB.abs.ViewLeaveRequest' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="ViewLeaveRequest">
+          <Key>
+            <PropertyRef Name="ID_LeaveRequest" />
+          </Key>
+          <Property Name="ID_LeaveRequest" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_Requestor" Type="int" />
+          <Property Name="Requestor" Type="varchar" MaxLength="500" />
+          <Property Name="ID_Approver" Type="int" />
+          <Property Name="Approver" Type="varchar" MaxLength="500" />
+          <Property Name="ID_LeaveCategory" Type="int" />
+          <Property Name="LeaveCategory" Type="varchar" MaxLength="250" />
+          <Property Name="StartDate" Type="datetime" />
+          <Property Name="EndDate" Type="datetime" />
+          <Property Name="LeaveReason" Type="varchar(max)" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="ModifiedBy" Type="int" />
+          <Property Name="ModifiedDate" Type="datetime" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'CGPSI_AbsenceDB.mst.ViewEmployees' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="ViewEmployees">
+          <Key>
+            <PropertyRef Name="ID_Employee" />
+            <PropertyRef Name="NIK" />
+            <PropertyRef Name="JoinDate" />
+            <PropertyRef Name="CurrentPosition" />
+            <PropertyRef Name="CurrentDepartment" />
+            <PropertyRef Name="SPVFirstName" />
+            <PropertyRef Name="SPVLastName" />
+            <PropertyRef Name="SPVDisplayName" />
+          </Key>
+          <Property Name="ID_Employee" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NIK" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="250" />
+          <Property Name="LastName" Type="varchar" MaxLength="250" />
+          <Property Name="DisplayName" Type="varchar" MaxLength="500" />
+          <Property Name="Address" Type="varchar" MaxLength="1024" />
+          <Property Name="Telephone" Type="varchar" MaxLength="250" />
+          <Property Name="Email" Type="varchar" MaxLength="250" />
+          <Property Name="BirthDate" Type="date" />
+          <Property Name="BirthPlace" Type="varchar" MaxLength="250" />
+          <Property Name="JoinDate" Type="date" Nullable="false" />
+          <Property Name="ID_CurrentPosition" Type="int" />
+          <Property Name="CurrentPosition" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="ID_CurrentDepartment" Type="int" />
+          <Property Name="CurrentDepartment" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="ID_Supervisor" Type="int" />
+          <Property Name="SPVFirstName" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="SPVLastName" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="SPVDisplayName" Type="varchar" MaxLength="500" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_EmployeeOnSchedule_Employees">
+          <End Role="Employees" Type="Self.Employees" Multiplicity="0..1" />
+          <End Role="EmployeeOnSchedule" Type="Self.EmployeeOnSchedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="ID_Employee" />
+            </Principal>
+            <Dependent Role="EmployeeOnSchedule">
+              <PropertyRef Name="ID_Employee" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmployeeOnSchedule_Shift">
+          <End Role="Shift" Type="Self.Shift" Multiplicity="0..1" />
+          <End Role="EmployeeOnSchedule" Type="Self.EmployeeOnSchedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Shift">
+              <PropertyRef Name="ID_Shift" />
+            </Principal>
+            <Dependent Role="EmployeeOnSchedule">
+              <PropertyRef Name="ID_Shift" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employees_Departments">
+          <End Role="Departments" Type="Self.Departments" Multiplicity="0..1" />
+          <End Role="Employees" Type="Self.Employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departments">
+              <PropertyRef Name="ID_Department" />
+            </Principal>
+            <Dependent Role="Employees">
+              <PropertyRef Name="CurrentDepartment" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employees_Employees">
+          <End Role="Employees" Type="Self.Employees" Multiplicity="0..1" />
+          <End Role="Employees1" Type="Self.Employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="ID_Employee" />
+            </Principal>
+            <Dependent Role="Employees1">
+              <PropertyRef Name="ID_Supervisor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employees_JobTitles">
+          <End Role="JobTitles" Type="Self.JobTitles" Multiplicity="0..1" />
+          <End Role="Employees" Type="Self.Employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JobTitles">
+              <PropertyRef Name="ID_JobTitle" />
+            </Principal>
+            <Dependent Role="Employees">
+              <PropertyRef Name="CurrentPosition" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JobTitles_JobTitles">
+          <End Role="JobTitles" Type="Self.JobTitles" Multiplicity="0..1" />
+          <End Role="JobTitles1" Type="Self.JobTitles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JobTitles">
+              <PropertyRef Name="ID_JobTitle" />
+            </Principal>
+            <Dependent Role="JobTitles1">
+              <PropertyRef Name="ParentJobTitle" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LeaveRequest_Employees">
+          <End Role="Employees" Type="Self.Employees" Multiplicity="0..1" />
+          <End Role="LeaveRequest" Type="Self.LeaveRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="ID_Employee" />
+            </Principal>
+            <Dependent Role="LeaveRequest">
+              <PropertyRef Name="ID_Requestor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LeaveRequest_Employees1">
+          <End Role="Employees" Type="Self.Employees" Multiplicity="0..1" />
+          <End Role="LeaveRequest" Type="Self.LeaveRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="ID_Employee" />
+            </Principal>
+            <Dependent Role="LeaveRequest">
+              <PropertyRef Name="ID_Approver" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LeaveRequest_LeaveCategories">
+          <End Role="LeaveCategories" Type="Self.LeaveCategories" Multiplicity="0..1" />
+          <End Role="LeaveRequest" Type="Self.LeaveRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LeaveCategories">
+              <PropertyRef Name="ID_LeaveCategory" />
+            </Principal>
+            <Dependent Role="LeaveRequest">
+              <PropertyRef Name="LeaveCategory" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ShiftDetails_Shift">
+          <End Role="Shift" Type="Self.Shift" Multiplicity="0..1" />
+          <End Role="ShiftDetails" Type="Self.ShiftDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Shift">
+              <PropertyRef Name="ID_Shift" />
+            </Principal>
+            <Dependent Role="ShiftDetails">
+              <PropertyRef Name="ID_Shift" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserInGroups_Groups">
+          <End Role="Groups" Type="Self.Groups" Multiplicity="0..1" />
+          <End Role="UserInGroups" Type="Self.UserInGroups" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Groups">
+              <PropertyRef Name="ID_Group" />
+            </Principal>
+            <Dependent Role="UserInGroups">
+              <PropertyRef Name="ID_Group" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserInGroups_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="UserInGroups" Type="Self.UserInGroups" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID_User" />
+            </Principal>
+            <Dependent Role="UserInGroups">
+              <PropertyRef Name="ID_User" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserInRoles_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="UserInRoles" Type="Self.UserInRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID_User" />
+            </Principal>
+            <Dependent Role="UserInRoles">
+              <PropertyRef Name="ID_User" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserInRoles_UserRoles">
+          <End Role="UserRoles" Type="Self.UserRoles" Multiplicity="0..1" />
+          <End Role="UserInRoles" Type="Self.UserInRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserRoles">
+              <PropertyRef Name="ID_Role" />
+            </Principal>
+            <Dependent Role="UserInRoles">
+              <PropertyRef Name="ID_Role" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UsersEmployees_Employees">
+          <End Role="Employees" Type="Self.Employees" Multiplicity="1" />
+          <End Role="UsersEmployees" Type="Self.UsersEmployees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="ID_Employee" />
+            </Principal>
+            <Dependent Role="UsersEmployees">
+              <PropertyRef Name="ID_Employee" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UsersEmployees_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="UsersEmployees" Type="Self.UsersEmployees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID_User" />
+            </Principal>
+            <Dependent Role="UsersEmployees">
+              <PropertyRef Name="ID_User" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="SP_GetDataAbsenceByDate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="abs" />
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="SP_DEPARTMENTS" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="prop">
+          <Parameter Name="ID_Department" Type="int" Mode="In" />
+          <Parameter Name="DepartmentName" Type="varchar" Mode="In" />
+          <Parameter Name="CreatedDate" Type="datetime" Mode="In" />
+          <Parameter Name="CreatedBy" Type="int" Mode="In" />
+          <Parameter Name="ModifiedDate" Type="datetime" Mode="In" />
+          <Parameter Name="ModifiedBy" Type="int" Mode="In" />
+          <Parameter Name="StatementType" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SP_DEPARTMENTS_PagingAndView" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="prop">
+          <Parameter Name="param_paging" Type="text" Mode="In" />
+          <Parameter Name="param_where" Type="text" Mode="In" />
+        </Function>
+        <Function Name="SP_EMPLOYEES" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="prop">
+          <Parameter Name="ID_Employee" Type="int" Mode="In" />
+          <Parameter Name="NIK" Type="varchar" Mode="In" />
+          <Parameter Name="FirstName" Type="varchar" Mode="In" />
+          <Parameter Name="LastName" Type="varchar" Mode="In" />
+          <Parameter Name="DisplayName" Type="varchar" Mode="In" />
+          <Parameter Name="Address" Type="varchar" Mode="In" />
+          <Parameter Name="Telephone" Type="varchar" Mode="In" />
+          <Parameter Name="Email" Type="varchar" Mode="In" />
+          <Parameter Name="BirthDate" Type="date" Mode="In" />
+          <Parameter Name="BirthPlace" Type="varchar" Mode="In" />
+          <Parameter Name="JoinDate" Type="date" Mode="In" />
+          <Parameter Name="CurrentPosition" Type="int" Mode="In" />
+          <Parameter Name="CurrentDepartment" Type="int" Mode="In" />
+          <Parameter Name="IsActive" Type="bit" Mode="In" />
+          <Parameter Name="LeaveDate" Type="date" Mode="In" />
+          <Parameter Name="ID_Supervisor" Type="int" Mode="In" />
+          <Parameter Name="CreatedDate" Type="datetime" Mode="In" />
+          <Parameter Name="CreatedBy" Type="int" Mode="In" />
+          <Parameter Name="ModifedDate" Type="datetime" Mode="In" />
+          <Parameter Name="ModifedBy" Type="int" Mode="In" />
+          <Parameter Name="StatementType" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SP_EMPLOYEES_PagingAndView" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="prop">
+          <Parameter Name="param_paging" Type="text" Mode="In" />
+          <Parameter Name="param_where" Type="text" Mode="In" />
+        </Function>
+        <Function Name="SP_GROUPS" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="prop">
+          <Parameter Name="ID_Group" Type="int" Mode="In" />
+          <Parameter Name="GroupName" Type="varchar" Mode="In" />
+          <Parameter Name="StatementType" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SP_GROUPS_PagingAndView" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="prop">
+          <Parameter Name="param_paging" Type="text" Mode="In" />
+          <Parameter Name="param_where" Type="text" Mode="In" />
+        </Function>
+        <Function Name="SP_JOB_TITLES" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="prop">
+          <Parameter Name="ID_JobTitle" Type="int" Mode="In" />
+          <Parameter Name="JobTitleName" Type="varchar" Mode="In" />
+          <Parameter Name="ParentJobTitle" Type="int" Mode="In" />
+          <Parameter Name="CreatedDate" Type="datetime" Mode="In" />
+          <Parameter Name="CreatedBy" Type="int" Mode="In" />
+          <Parameter Name="ModifiedDate" Type="datetime" Mode="In" />
+          <Parameter Name="ModifiedBy" Type="int" Mode="In" />
+          <Parameter Name="StatementType" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SP_JOB_TITLES_PagingAndView" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="prop">
+          <Parameter Name="param_paging" Type="text" Mode="In" />
+          <Parameter Name="param_where" Type="text" Mode="In" />
+        </Function>
+        <Function Name="SP_USER" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="prop">
+          <Parameter Name="ID_User" Type="int" Mode="In" />
+          <Parameter Name="Username" Type="varchar" Mode="In" />
+          <Parameter Name="Password" Type="varchar" Mode="In" />
+          <Parameter Name="IsActive" Type="bit" Mode="In" />
+          <Parameter Name="CreatedDate" Type="datetime" Mode="In" />
+          <Parameter Name="CreatedBy" Type="int" Mode="In" />
+          <Parameter Name="ModifiedDate" Type="datetime" Mode="In" />
+          <Parameter Name="ModifiedBy" Type="int" Mode="In" />
+          <Parameter Name="StatementType" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SP_USER_EMPLOYEE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="prop">
+          <Parameter Name="ID_UserEmployee" Type="int" Mode="In" />
+          <Parameter Name="ID_User" Type="int" Mode="In" />
+          <Parameter Name="ID_Employee" Type="int" Mode="In" />
+          <Parameter Name="StatementType" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SP_USER_IN_ROLES" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="prop">
+          <Parameter Name="ID_UserInRoles" Type="int" Mode="In" />
+          <Parameter Name="ID_User" Type="int" Mode="In" />
+          <Parameter Name="ID_Role" Type="int" Mode="In" />
+          <Parameter Name="CreatedDate" Type="datetime" Mode="In" />
+          <Parameter Name="CreatedBy" Type="int" Mode="In" />
+          <Parameter Name="ModifiedDate" Type="datetime" Mode="In" />
+          <Parameter Name="ModifiedBy" Type="int" Mode="In" />
+          <Parameter Name="StatementType" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SP_USER_IN_ROLES_PagingAndView" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="prop">
+          <Parameter Name="param_paging" Type="text" Mode="In" />
+          <Parameter Name="param_where" Type="text" Mode="In" />
+        </Function>
+        <Function Name="SP_USER_PagingAndView" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="prop">
+          <Parameter Name="param_paging" Type="text" Mode="In" />
+          <Parameter Name="param_where" Type="text" Mode="In" />
+        </Function>
+        <Function Name="SP_USER_ROLE_PagingAndView" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="prop">
+          <Parameter Name="param_paging" Type="text" Mode="In" />
+          <Parameter Name="param_where" Type="text" Mode="In" />
+        </Function>
+        <Function Name="SP_USER_ROLES" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="prop">
+          <Parameter Name="ID_Role" Type="int" Mode="In" />
+          <Parameter Name="Role" Type="varchar" Mode="In" />
+          <Parameter Name="StatementType" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SP_UserInGroups" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="prop">
+          <Parameter Name="ID_UserInGroups" Type="int" Mode="In" />
+          <Parameter Name="ID_User" Type="int" Mode="In" />
+          <Parameter Name="ID_Group" Type="int" Mode="In" />
+          <Parameter Name="StatementType" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SP_UserInGroups_PagingAndView" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="prop">
+          <Parameter Name="param_paging" Type="text" Mode="In" />
+          <Parameter Name="param_where" Type="text" Mode="In" />
+        </Function>
+        <Function Name="SP_ViewEMPLOYEES" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="prop">
+          <Parameter Name="param_paging" Type="text" Mode="In" />
+          <Parameter Name="param_where" Type="text" Mode="In" />
+        </Function>
+        <Function Name="SP_ViewLeaveRequest" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="prop">
+          <Parameter Name="param_paging" Type="text" Mode="In" />
+          <Parameter Name="param_where" Type="text" Mode="In" />
+        </Function>
+        <Function Name="GenerateCalendar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="ref">
+          <Parameter Name="StartDate" Type="date" Mode="In" />
+          <Parameter Name="EndDate" Type="date" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="numb" Type="int" />
+                <Property Name="dates" Type="date" />
+                <Property Name="count_day" Type="int" />
+                <Property Name="day_text" Type="varchar" MaxLength="50" />
+                <Property Name="month_text" Type="varchar" MaxLength="50" />
+                <Property Name="year_text" Type="varchar" MaxLength="50" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="SplitString" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="ref">
+          <Parameter Name="SplitChar" Type="varchar" Mode="In" />
+          <Parameter Name="stringToSplit" Type="varchar(max)" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="rowNum" Type="int" />
+                <Property Name="Name" Type="nvarchar" MaxLength="500" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <EntityContainer Name="CGPSI_AbsenceDBModelStoreContainer">
+          <EntitySet Name="DataAbsence" EntityType="Self.DataAbsence" Schema="abs" store:Type="Tables" />
+          <EntitySet Name="EmployeeOnSchedule" EntityType="Self.EmployeeOnSchedule" Schema="abs" store:Type="Tables" />
+          <EntitySet Name="LeaveCategories" EntityType="Self.LeaveCategories" Schema="abs" store:Type="Tables" />
+          <EntitySet Name="LeaveRequest" EntityType="Self.LeaveRequest" Schema="abs" store:Type="Tables" />
+          <EntitySet Name="Shift" EntityType="Self.Shift" Schema="abs" store:Type="Tables" />
+          <EntitySet Name="ShiftDetails" EntityType="Self.ShiftDetails" Schema="abs" store:Type="Tables" />
+          <EntitySet Name="ActivityHistory" EntityType="Self.ActivityHistory" Schema="log" store:Type="Tables" />
+          <EntitySet Name="ImportHistory" EntityType="Self.ImportHistory" Schema="log" store:Type="Tables" />
+          <EntitySet Name="LoginHistory" EntityType="Self.LoginHistory" Schema="log" store:Type="Tables" />
+          <EntitySet Name="ShiftHistory" EntityType="Self.ShiftHistory" Schema="log" store:Type="Tables" />
+          <EntitySet Name="DayOfWorks" EntityType="Self.DayOfWorks" Schema="mst" store:Type="Tables" />
+          <EntitySet Name="Departments" EntityType="Self.Departments" Schema="mst" store:Type="Tables" />
+          <EntitySet Name="Employees" EntityType="Self.Employees" Schema="mst" store:Type="Tables" />
+          <EntitySet Name="Groups" EntityType="Self.Groups" Schema="mst" store:Type="Tables" />
+          <EntitySet Name="JobTitles" EntityType="Self.JobTitles" Schema="mst" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="mst" store:Type="Tables" />
+          <EntitySet Name="UserInGroups" EntityType="Self.UserInGroups" Schema="mst" store:Type="Tables" />
+          <EntitySet Name="UserInRoles" EntityType="Self.UserInRoles" Schema="mst" store:Type="Tables" />
+          <EntitySet Name="UserRoles" EntityType="Self.UserRoles" Schema="mst" store:Type="Tables" />
+          <EntitySet Name="UsersEmployees" EntityType="Self.UsersEmployees" Schema="mst" store:Type="Tables" />
+          <EntitySet Name="WorkingCalendar" EntityType="Self.WorkingCalendar" Schema="mst" store:Type="Tables" />
+          <EntitySet Name="ViewAbsenceSummary" EntityType="Self.ViewAbsenceSummary" store:Type="Views" store:Schema="abs">
+            <DefiningQuery>SELECT 
+    [ViewAbsenceSummary].[NIK] AS [NIK], 
+    [ViewAbsenceSummary].[DisplayName] AS [DisplayName], 
+    [ViewAbsenceSummary].[AbsenceDate] AS [AbsenceDate], 
+    [ViewAbsenceSummary].[TimeIn] AS [TimeIn], 
+    [ViewAbsenceSummary].[TimeOut] AS [TimeOut], 
+    [ViewAbsenceSummary].[actualDayname] AS [actualDayname], 
+    [ViewAbsenceSummary].[ShiftName] AS [ShiftName], 
+    [ViewAbsenceSummary].[StartTime] AS [StartTime], 
+    [ViewAbsenceSummary].[EndTime] AS [EndTime], 
+    [ViewAbsenceSummary].[AbsenceStatus] AS [AbsenceStatus], 
+    [ViewAbsenceSummary].[ImportSession] AS [ImportSession]
+    FROM [abs].[ViewAbsenceSummary] AS [ViewAbsenceSummary]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="ViewLeaveRequest" EntityType="Self.ViewLeaveRequest" store:Type="Views" store:Schema="abs">
+            <DefiningQuery>SELECT 
+    [ViewLeaveRequest].[ID_LeaveRequest] AS [ID_LeaveRequest], 
+    [ViewLeaveRequest].[ID_Requestor] AS [ID_Requestor], 
+    [ViewLeaveRequest].[Requestor] AS [Requestor], 
+    [ViewLeaveRequest].[ID_Approver] AS [ID_Approver], 
+    [ViewLeaveRequest].[Approver] AS [Approver], 
+    [ViewLeaveRequest].[ID_LeaveCategory] AS [ID_LeaveCategory], 
+    [ViewLeaveRequest].[LeaveCategory] AS [LeaveCategory], 
+    [ViewLeaveRequest].[StartDate] AS [StartDate], 
+    [ViewLeaveRequest].[EndDate] AS [EndDate], 
+    [ViewLeaveRequest].[LeaveReason] AS [LeaveReason], 
+    [ViewLeaveRequest].[CreatedBy] AS [CreatedBy], 
+    [ViewLeaveRequest].[CreatedDate] AS [CreatedDate], 
+    [ViewLeaveRequest].[ModifiedBy] AS [ModifiedBy], 
+    [ViewLeaveRequest].[ModifiedDate] AS [ModifiedDate]
+    FROM [abs].[ViewLeaveRequest] AS [ViewLeaveRequest]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="ViewEmployees" EntityType="Self.ViewEmployees" store:Type="Views" store:Schema="mst">
+            <DefiningQuery>SELECT 
+    [ViewEmployees].[ID_Employee] AS [ID_Employee], 
+    [ViewEmployees].[NIK] AS [NIK], 
+    [ViewEmployees].[FirstName] AS [FirstName], 
+    [ViewEmployees].[LastName] AS [LastName], 
+    [ViewEmployees].[DisplayName] AS [DisplayName], 
+    [ViewEmployees].[Address] AS [Address], 
+    [ViewEmployees].[Telephone] AS [Telephone], 
+    [ViewEmployees].[Email] AS [Email], 
+    [ViewEmployees].[BirthDate] AS [BirthDate], 
+    [ViewEmployees].[BirthPlace] AS [BirthPlace], 
+    [ViewEmployees].[JoinDate] AS [JoinDate], 
+    [ViewEmployees].[ID_CurrentPosition] AS [ID_CurrentPosition], 
+    [ViewEmployees].[CurrentPosition] AS [CurrentPosition], 
+    [ViewEmployees].[ID_CurrentDepartment] AS [ID_CurrentDepartment], 
+    [ViewEmployees].[CurrentDepartment] AS [CurrentDepartment], 
+    [ViewEmployees].[ID_Supervisor] AS [ID_Supervisor], 
+    [ViewEmployees].[SPVFirstName] AS [SPVFirstName], 
+    [ViewEmployees].[SPVLastName] AS [SPVLastName], 
+    [ViewEmployees].[SPVDisplayName] AS [SPVDisplayName]
+    FROM [mst].[ViewEmployees] AS [ViewEmployees]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_EmployeeOnSchedule_Employees" Association="Self.FK_EmployeeOnSchedule_Employees">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="EmployeeOnSchedule" EntitySet="EmployeeOnSchedule" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmployeeOnSchedule_Shift" Association="Self.FK_EmployeeOnSchedule_Shift">
+            <End Role="Shift" EntitySet="Shift" />
+            <End Role="EmployeeOnSchedule" EntitySet="EmployeeOnSchedule" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employees_Departments" Association="Self.FK_Employees_Departments">
+            <End Role="Departments" EntitySet="Departments" />
+            <End Role="Employees" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employees_Employees" Association="Self.FK_Employees_Employees">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="Employees1" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employees_JobTitles" Association="Self.FK_Employees_JobTitles">
+            <End Role="JobTitles" EntitySet="JobTitles" />
+            <End Role="Employees" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JobTitles_JobTitles" Association="Self.FK_JobTitles_JobTitles">
+            <End Role="JobTitles" EntitySet="JobTitles" />
+            <End Role="JobTitles1" EntitySet="JobTitles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LeaveRequest_Employees" Association="Self.FK_LeaveRequest_Employees">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="LeaveRequest" EntitySet="LeaveRequest" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LeaveRequest_Employees1" Association="Self.FK_LeaveRequest_Employees1">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="LeaveRequest" EntitySet="LeaveRequest" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LeaveRequest_LeaveCategories" Association="Self.FK_LeaveRequest_LeaveCategories">
+            <End Role="LeaveCategories" EntitySet="LeaveCategories" />
+            <End Role="LeaveRequest" EntitySet="LeaveRequest" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ShiftDetails_Shift" Association="Self.FK_ShiftDetails_Shift">
+            <End Role="Shift" EntitySet="Shift" />
+            <End Role="ShiftDetails" EntitySet="ShiftDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserInGroups_Groups" Association="Self.FK_UserInGroups_Groups">
+            <End Role="Groups" EntitySet="Groups" />
+            <End Role="UserInGroups" EntitySet="UserInGroups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserInGroups_User" Association="Self.FK_UserInGroups_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserInGroups" EntitySet="UserInGroups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserInRoles_User" Association="Self.FK_UserInRoles_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserInRoles" EntitySet="UserInRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserInRoles_UserRoles" Association="Self.FK_UserInRoles_UserRoles">
+            <End Role="UserRoles" EntitySet="UserRoles" />
+            <End Role="UserInRoles" EntitySet="UserInRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UsersEmployees_Employees" Association="Self.FK_UsersEmployees_Employees">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="UsersEmployees" EntitySet="UsersEmployees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UsersEmployees_User" Association="Self.FK_UsersEmployees_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="UsersEmployees" EntitySet="UsersEmployees" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CGPSI_AbsenceDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <ComplexType Name="SplitString_Result">
+          <Property Name="rowNum" Type="Int32" />
+          <Property Name="Name" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+        </ComplexType>
+        <EntityType Name="ActivityHistory">
+          <Key>
+            <PropertyRef Name="ID_ActivityHistory" />
+          </Key>
+          <Property Name="ID_ActivityHistory" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LoginSession" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Message" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ActivityTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="ImportHistory">
+          <Key>
+            <PropertyRef Name="ID_Import" />
+          </Key>
+          <Property Name="ID_Import" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ImportSession" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="ImportStart" Type="DateTime" Precision="3" />
+          <Property Name="ImportEnd" Type="DateTime" Precision="3" />
+          <Property Name="DataImported" Type="Int32" />
+          <Property Name="DataError" Type="Int32" />
+          <Property Name="DataExsist" Type="Int32" />
+          <Property Name="DataUpdated" Type="Int32" />
+          <Property Name="ImportDate" Type="DateTime" Precision="0" />
+          <Property Name="FileSource" Type="String" MaxLength="1024" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="LoginHistory">
+          <Key>
+            <PropertyRef Name="ID_Log" />
+          </Key>
+          <Property Name="ID_Log" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LoginSession" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="UserLogin" Type="Int32" />
+          <Property Name="LoginTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="ID_Employee" />
+          </Key>
+          <Property Name="ID_Employee" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NIK" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="LastName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="DisplayName" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="1024" FixedLength="false" Unicode="false" />
+          <Property Name="Telephone" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="BirthDate" Type="DateTime" Precision="0" />
+          <Property Name="BirthPlace" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="JoinDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="CurrentPosition" Type="Int32" />
+          <Property Name="CurrentDepartment" Type="Int32" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="LeaveDate" Type="DateTime" Precision="0" />
+          <Property Name="ID_Supervisor" Type="Int32" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="ModifedDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifedBy" Type="Int32" />
+          <NavigationProperty Name="Employees1" Relationship="Self.FK_Employees_Employees" FromRole="Employees" ToRole="Employees1" />
+          <NavigationProperty Name="Employee1" Relationship="Self.FK_Employees_Employees" FromRole="Employees1" ToRole="Employees" />
+          <NavigationProperty Name="JobTitle" Relationship="Self.FK_Employees_JobTitles" FromRole="Employees" ToRole="JobTitles" />
+          <NavigationProperty Name="UsersEmployees" Relationship="Self.FK_UsersEmployees_Employees" FromRole="Employees" ToRole="UsersEmployees" />
+          <NavigationProperty Name="Department" Relationship="CGPSI_AbsenceDBModel.FK_Employees_Departments" FromRole="Employee" ToRole="Department" />
+          <NavigationProperty Name="EmployeeOnSchedules" Relationship="CGPSI_AbsenceDBModel.FK_EmployeeOnSchedule_Employees" FromRole="Employee" ToRole="EmployeeOnSchedule" />
+          <NavigationProperty Name="LeaveRequests" Relationship="CGPSI_AbsenceDBModel.FK_LeaveRequest_Employees" FromRole="Employee" ToRole="LeaveRequest" />
+          <NavigationProperty Name="LeaveRequests1" Relationship="CGPSI_AbsenceDBModel.FK_LeaveRequest_Employees1" FromRole="Employee" ToRole="LeaveRequest" />
+          </EntityType>
+        <EntityType Name="Group">
+          <Key>
+            <PropertyRef Name="ID_Group" />
+          </Key>
+          <Property Name="ID_Group" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GroupName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="UserInGroups" Relationship="Self.FK_UserInGroups_Groups" FromRole="Groups" ToRole="UserInGroups" />
+        </EntityType>
+        <EntityType Name="JobTitle">
+          <Key>
+            <PropertyRef Name="ID_JobTitle" />
+          </Key>
+          <Property Name="ID_JobTitle" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="JobTitleName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="ParentJobTitle" Type="Int32" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedBy" Type="Int32" />
+          <NavigationProperty Name="Employees" Relationship="Self.FK_Employees_JobTitles" FromRole="JobTitles" ToRole="Employees" />
+          <NavigationProperty Name="JobTitles1" Relationship="Self.FK_JobTitles_JobTitles" FromRole="JobTitles" ToRole="JobTitles1" />
+          <NavigationProperty Name="JobTitle1" Relationship="Self.FK_JobTitles_JobTitles" FromRole="JobTitles1" ToRole="JobTitles" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="ID_User" />
+          </Key>
+          <Property Name="ID_User" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedBy" Type="Int32" />
+          <NavigationProperty Name="UserInGroups" Relationship="Self.FK_UserInGroups_User" FromRole="User" ToRole="UserInGroups" />
+          <NavigationProperty Name="UserInRoles" Relationship="Self.FK_UserInRoles_User" FromRole="User" ToRole="UserInRoles" />
+          <NavigationProperty Name="UsersEmployees" Relationship="Self.FK_UsersEmployees_User" FromRole="User" ToRole="UsersEmployees" />
+        </EntityType>
+        <EntityType Name="UserInGroup">
+          <Key>
+            <PropertyRef Name="ID_UserInGroups" />
+          </Key>
+          <Property Name="ID_UserInGroups" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_User" Type="Int32" />
+          <Property Name="ID_Group" Type="Int32" />
+          <NavigationProperty Name="Group" Relationship="Self.FK_UserInGroups_Groups" FromRole="UserInGroups" ToRole="Groups" />
+          <NavigationProperty Name="User" Relationship="Self.FK_UserInGroups_User" FromRole="UserInGroups" ToRole="User" />
+        </EntityType>
+        <EntityType Name="UserInRole">
+          <Key>
+            <PropertyRef Name="ID_UserInRoles" />
+          </Key>
+          <Property Name="ID_UserInRoles" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_User" Type="Int32" />
+          <Property Name="ID_Role" Type="Int32" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedBy" Type="Int32" />
+          <NavigationProperty Name="User" Relationship="Self.FK_UserInRoles_User" FromRole="UserInRoles" ToRole="User" />
+          <NavigationProperty Name="UserRole" Relationship="Self.FK_UserInRoles_UserRoles" FromRole="UserInRoles" ToRole="UserRoles" />
+        </EntityType>
+        <EntityType Name="UserRole">
+          <Key>
+            <PropertyRef Name="ID_Role" />
+          </Key>
+          <Property Name="ID_Role" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Role" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="UserInRoles" Relationship="Self.FK_UserInRoles_UserRoles" FromRole="UserRoles" ToRole="UserInRoles" />
+          <Property Name="RoleDesc" Type="String" MaxLength="1024" FixedLength="false" Unicode="false" />
+          <Property Name="ParentRole" Type="Int32" />
+        </EntityType>
+        <EntityType Name="UsersEmployee">
+          <Key>
+            <PropertyRef Name="ID_UserEmployee" />
+          </Key>
+          <Property Name="ID_UserEmployee" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_User" Type="Int32" Nullable="false" />
+          <Property Name="ID_Employee" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK_UsersEmployees_Employees" FromRole="UsersEmployees" ToRole="Employees" />
+          <NavigationProperty Name="User" Relationship="Self.FK_UsersEmployees_User" FromRole="UsersEmployees" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_Employees_Employees">
+          <End Role="Employees" Type="Self.Employee" Multiplicity="0..1" />
+          <End Role="Employees1" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="ID_Employee" />
+            </Principal>
+            <Dependent Role="Employees1">
+              <PropertyRef Name="ID_Supervisor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employees_JobTitles">
+          <End Role="JobTitles" Type="Self.JobTitle" Multiplicity="0..1" />
+          <End Role="Employees" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JobTitles">
+              <PropertyRef Name="ID_JobTitle" />
+            </Principal>
+            <Dependent Role="Employees">
+              <PropertyRef Name="CurrentPosition" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UsersEmployees_Employees">
+          <End Role="Employees" Type="Self.Employee" Multiplicity="1" />
+          <End Role="UsersEmployees" Type="Self.UsersEmployee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="ID_Employee" />
+            </Principal>
+            <Dependent Role="UsersEmployees">
+              <PropertyRef Name="ID_Employee" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserInGroups_Groups">
+          <End Role="Groups" Type="Self.Group" Multiplicity="0..1" />
+          <End Role="UserInGroups" Type="Self.UserInGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Groups">
+              <PropertyRef Name="ID_Group" />
+            </Principal>
+            <Dependent Role="UserInGroups">
+              <PropertyRef Name="ID_Group" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JobTitles_JobTitles">
+          <End Role="JobTitles" Type="Self.JobTitle" Multiplicity="0..1" />
+          <End Role="JobTitles1" Type="Self.JobTitle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JobTitles">
+              <PropertyRef Name="ID_JobTitle" />
+            </Principal>
+            <Dependent Role="JobTitles1">
+              <PropertyRef Name="ParentJobTitle" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserInGroups_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="UserInGroups" Type="Self.UserInGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID_User" />
+            </Principal>
+            <Dependent Role="UserInGroups">
+              <PropertyRef Name="ID_User" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserInRoles_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="UserInRoles" Type="Self.UserInRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID_User" />
+            </Principal>
+            <Dependent Role="UserInRoles">
+              <PropertyRef Name="ID_User" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UsersEmployees_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="UsersEmployees" Type="Self.UsersEmployee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID_User" />
+            </Principal>
+            <Dependent Role="UsersEmployees">
+              <PropertyRef Name="ID_User" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserInRoles_UserRoles">
+          <End Role="UserRoles" Type="Self.UserRole" Multiplicity="0..1" />
+          <End Role="UserInRoles" Type="Self.UserInRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserRoles">
+              <PropertyRef Name="ID_Role" />
+            </Principal>
+            <Dependent Role="UserInRoles">
+              <PropertyRef Name="ID_Role" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CGPSI_AbsenceDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ActivityHistories" EntityType="Self.ActivityHistory" />
+          <EntitySet Name="ImportHistories" EntityType="Self.ImportHistory" />
+          <EntitySet Name="LoginHistories" EntityType="Self.LoginHistory" />
+          <EntitySet Name="Employees" EntityType="Self.Employee" />
+          <EntitySet Name="Groups" EntityType="Self.Group" />
+          <EntitySet Name="JobTitles" EntityType="Self.JobTitle" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <EntitySet Name="UserInGroups" EntityType="Self.UserInGroup" />
+          <EntitySet Name="UserInRoles" EntityType="Self.UserInRole" />
+          <EntitySet Name="UserRoles" EntityType="Self.UserRole" />
+          <EntitySet Name="UsersEmployees" EntityType="Self.UsersEmployee" />
+          <AssociationSet Name="FK_Employees_Employees" Association="Self.FK_Employees_Employees">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="Employees1" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employees_JobTitles" Association="Self.FK_Employees_JobTitles">
+            <End Role="JobTitles" EntitySet="JobTitles" />
+            <End Role="Employees" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UsersEmployees_Employees" Association="Self.FK_UsersEmployees_Employees">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="UsersEmployees" EntitySet="UsersEmployees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserInGroups_Groups" Association="Self.FK_UserInGroups_Groups">
+            <End Role="Groups" EntitySet="Groups" />
+            <End Role="UserInGroups" EntitySet="UserInGroups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JobTitles_JobTitles" Association="Self.FK_JobTitles_JobTitles">
+            <End Role="JobTitles" EntitySet="JobTitles" />
+            <End Role="JobTitles1" EntitySet="JobTitles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserInGroups_User" Association="Self.FK_UserInGroups_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="UserInGroups" EntitySet="UserInGroups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserInRoles_User" Association="Self.FK_UserInRoles_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="UserInRoles" EntitySet="UserInRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UsersEmployees_User" Association="Self.FK_UsersEmployees_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="UsersEmployees" EntitySet="UsersEmployees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserInRoles_UserRoles" Association="Self.FK_UserInRoles_UserRoles">
+            <End Role="UserRoles" EntitySet="UserRoles" />
+            <End Role="UserInRoles" EntitySet="UserInRoles" />
+          </AssociationSet>
+          <FunctionImport Name="SplitString" IsComposable="true" ReturnType="Collection(CGPSI_AbsenceDBModel.SplitString_Result)">
+            <Parameter Name="SplitChar" Mode="In" Type="String" />
+            <Parameter Name="stringToSplit" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(CGPSI_AbsenceDBModel.sp_helpdiagramdefinition_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(CGPSI_AbsenceDBModel.sp_helpdiagrams_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_EMPLOYEES" ReturnType="Collection(Int32)">
+            <Parameter Name="ID_Employee" Mode="In" Type="Int32" />
+            <Parameter Name="NIK" Mode="In" Type="String" />
+            <Parameter Name="FirstName" Mode="In" Type="String" />
+            <Parameter Name="LastName" Mode="In" Type="String" />
+            <Parameter Name="DisplayName" Mode="In" Type="String" />
+            <Parameter Name="Address" Mode="In" Type="String" />
+            <Parameter Name="Telephone" Mode="In" Type="String" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+            <Parameter Name="BirthDate" Mode="In" Type="DateTime" />
+            <Parameter Name="BirthPlace" Mode="In" Type="String" />
+            <Parameter Name="JoinDate" Mode="In" Type="DateTime" />
+            <Parameter Name="CurrentPosition" Mode="In" Type="Int32" />
+            <Parameter Name="CurrentDepartment" Mode="In" Type="Int32" />
+            <Parameter Name="IsActive" Mode="In" Type="Boolean" />
+            <Parameter Name="LeaveDate" Mode="In" Type="DateTime" />
+            <Parameter Name="ID_Supervisor" Mode="In" Type="Int32" />
+            <Parameter Name="CreatedDate" Mode="In" Type="DateTime" />
+            <Parameter Name="CreatedBy" Mode="In" Type="Int32" />
+            <Parameter Name="ModifedDate" Mode="In" Type="DateTime" />
+            <Parameter Name="ModifedBy" Mode="In" Type="Int32" />
+            <Parameter Name="StatementType" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_EMPLOYEES_PagingAndView" EntitySet="Employees" ReturnType="Collection(CGPSI_AbsenceDBModel.Employee)">
+            <Parameter Name="param_paging" Mode="In" Type="String" />
+            <Parameter Name="param_where" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_GROUPS" ReturnType="Collection(Int32)">
+            <Parameter Name="ID_Group" Mode="In" Type="Int32" />
+            <Parameter Name="GroupName" Mode="In" Type="String" />
+            <Parameter Name="StatementType" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_GROUPS_PagingAndView" EntitySet="Groups" ReturnType="Collection(CGPSI_AbsenceDBModel.Group)">
+            <Parameter Name="param_paging" Mode="In" Type="String" />
+            <Parameter Name="param_where" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_JOB_TITLES" ReturnType="Collection(Int32)">
+            <Parameter Name="ID_JobTitle" Mode="In" Type="Int32" />
+            <Parameter Name="JobTitleName" Mode="In" Type="String" />
+            <Parameter Name="ParentJobTitle" Mode="In" Type="Int32" />
+            <Parameter Name="CreatedDate" Mode="In" Type="DateTime" />
+            <Parameter Name="CreatedBy" Mode="In" Type="Int32" />
+            <Parameter Name="ModifiedDate" Mode="In" Type="DateTime" />
+            <Parameter Name="ModifiedBy" Mode="In" Type="Int32" />
+            <Parameter Name="StatementType" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_JOB_TITLES_PagingAndView" EntitySet="JobTitles" ReturnType="Collection(CGPSI_AbsenceDBModel.JobTitle)">
+            <Parameter Name="param_paging" Mode="In" Type="String" />
+            <Parameter Name="param_where" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_USER" ReturnType="Collection(Int32)">
+            <Parameter Name="ID_User" Mode="In" Type="Int32" />
+            <Parameter Name="Username" Mode="In" Type="String" />
+            <Parameter Name="Password" Mode="In" Type="String" />
+            <Parameter Name="IsActive" Mode="In" Type="Boolean" />
+            <Parameter Name="CreatedDate" Mode="In" Type="DateTime" />
+            <Parameter Name="CreatedBy" Mode="In" Type="Int32" />
+            <Parameter Name="ModifiedDate" Mode="In" Type="DateTime" />
+            <Parameter Name="ModifiedBy" Mode="In" Type="Int32" />
+            <Parameter Name="StatementType" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_USER_PagingAndView">
+            <Parameter Name="param_paging" Mode="In" Type="String" />
+            <Parameter Name="param_where" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="Departments" EntityType="CGPSI_AbsenceDBModel.Department" />
+          <AssociationSet Name="FK_Employees_Departments" Association="CGPSI_AbsenceDBModel.FK_Employees_Departments">
+            <End Role="Department" EntitySet="Departments" />
+            <End Role="Employee" EntitySet="Employees" />
+          </AssociationSet>
+          <FunctionImport Name="SP_DEPARTMENTS" ReturnType="Collection(Int32)">
+            <Parameter Name="ID_Department" Mode="In" Type="Int32" />
+            <Parameter Name="DepartmentName" Mode="In" Type="String" />
+            <Parameter Name="CreatedDate" Mode="In" Type="DateTime" />
+            <Parameter Name="CreatedBy" Mode="In" Type="Int32" />
+            <Parameter Name="ModifiedDate" Mode="In" Type="DateTime" />
+            <Parameter Name="ModifiedBy" Mode="In" Type="Int32" />
+            <Parameter Name="StatementType" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_DEPARTMENTS_PagingAndView" EntitySet="Departments" ReturnType="Collection(CGPSI_AbsenceDBModel.Department)">
+            <Parameter Name="param_paging" Mode="In" Type="String" />
+            <Parameter Name="param_where" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_USER_IN_GROUPS_PagingAndView">
+            <Parameter Name="param_paging" Mode="In" Type="String" />
+            <Parameter Name="param_where" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_UserInGroups" ReturnType="Collection(Int32)">
+            <Parameter Name="ID_UserInGroups" Mode="In" Type="Int32" />
+            <Parameter Name="ID_User" Mode="In" Type="Int32" />
+            <Parameter Name="ID_Group" Mode="In" Type="Int32" />
+            <Parameter Name="StatementType" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="DataAbsences" EntityType="CGPSI_AbsenceDBModel.DataAbsence" />
+          <EntitySet Name="EmployeeOnSchedules" EntityType="CGPSI_AbsenceDBModel.EmployeeOnSchedule" />
+          <EntitySet Name="ShiftHistories" EntityType="CGPSI_AbsenceDBModel.ShiftHistory" />
+          <EntitySet Name="DayOfWorks" EntityType="CGPSI_AbsenceDBModel.DayOfWork" />
+          <AssociationSet Name="FK_EmployeeOnSchedule_Employees" Association="CGPSI_AbsenceDBModel.FK_EmployeeOnSchedule_Employees">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="EmployeeOnSchedule" EntitySet="EmployeeOnSchedules" />
+          </AssociationSet>
+          <FunctionImport Name="SP_USER_EMPLOYEE" ReturnType="Collection(Int32)">
+            <Parameter Name="ID_UserEmployee" Mode="In" Type="Int32" />
+            <Parameter Name="ID_User" Mode="In" Type="Int32" />
+            <Parameter Name="ID_Employee" Mode="In" Type="Int32" />
+            <Parameter Name="StatementType" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_USER_IN_ROLES" ReturnType="Collection(Int32)">
+            <Parameter Name="ID_UserInRoles" Mode="In" Type="Int32" />
+            <Parameter Name="ID_User" Mode="In" Type="Int32" />
+            <Parameter Name="ID_Role" Mode="In" Type="Int32" />
+            <Parameter Name="CreatedDate" Mode="In" Type="DateTime" />
+            <Parameter Name="CreatedBy" Mode="In" Type="Int32" />
+            <Parameter Name="ModifiedDate" Mode="In" Type="DateTime" />
+            <Parameter Name="ModifiedBy" Mode="In" Type="Int32" />
+            <Parameter Name="StatementType" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_USER_IN_ROLES_PagingAndView">
+            <Parameter Name="param_paging" Mode="In" Type="String" />
+            <Parameter Name="param_where" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_USER_ROLE_PagingAndView">
+            <Parameter Name="param_paging" Mode="In" Type="String" />
+            <Parameter Name="param_where" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_USER_ROLES" ReturnType="Collection(Int32)">
+            <Parameter Name="ID_Role" Mode="In" Type="Int32" />
+            <Parameter Name="Role" Mode="In" Type="String" />
+            <Parameter Name="StatementType" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_UserInGroups_PagingAndView">
+            <Parameter Name="param_paging" Mode="In" Type="String" />
+            <Parameter Name="param_where" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="ShiftDetails" EntityType="CGPSI_AbsenceDBModel.ShiftDetail" />
+          <EntitySet Name="ViewAbsenceSummaries" EntityType="CGPSI_AbsenceDBModel.ViewAbsenceSummary" />
+          <EntitySet Name="Shifts" EntityType="CGPSI_AbsenceDBModel.Shift" />
+          <AssociationSet Name="FK_EmployeeOnSchedule_Shift" Association="CGPSI_AbsenceDBModel.FK_EmployeeOnSchedule_Shift">
+            <End Role="Shift" EntitySet="Shifts" />
+            <End Role="EmployeeOnSchedule" EntitySet="EmployeeOnSchedules" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ShiftDetails_Shift" Association="CGPSI_AbsenceDBModel.FK_ShiftDetails_Shift">
+            <End Role="Shift" EntitySet="Shifts" />
+            <End Role="ShiftDetail" EntitySet="ShiftDetails" />
+          </AssociationSet>
+          <FunctionImport Name="GenerateCalendar" IsComposable="true" ReturnType="Collection(CGPSI_AbsenceDBModel.GenerateCalendar_Result)">
+            <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+            <Parameter Name="EndDate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
+          <FunctionImport Name="SP_GetDataAbsenceByDate" ReturnType="Collection(CGPSI_AbsenceDBModel.SP_GetDataAbsenceByDate_Result)" />
+          <EntitySet Name="ViewEmployees" EntityType="CGPSI_AbsenceDBModel.ViewEmployee" />
+          <FunctionImport Name="SP_ViewEMPLOYEES" EntitySet="ViewEmployees" ReturnType="Collection(CGPSI_AbsenceDBModel.ViewEmployee)">
+            <Parameter Name="param_paging" Mode="In" Type="String" />
+            <Parameter Name="param_where" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="LeaveRequests" EntityType="CGPSI_AbsenceDBModel.LeaveRequest" />
+          <AssociationSet Name="FK_LeaveRequest_Employees" Association="CGPSI_AbsenceDBModel.FK_LeaveRequest_Employees">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="LeaveRequest" EntitySet="LeaveRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LeaveRequest_Employees1" Association="CGPSI_AbsenceDBModel.FK_LeaveRequest_Employees1">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="LeaveRequest" EntitySet="LeaveRequests" />
+          </AssociationSet>
+          <EntitySet Name="LeaveCategories1" EntityType="CGPSI_AbsenceDBModel.LeaveCategories" />
+          <AssociationSet Name="FK_LeaveRequest_LeaveCategory" Association="CGPSI_AbsenceDBModel.FK_LeaveRequest_LeaveCategory">
+            <End Role="LeaveCategory" EntitySet="LeaveCategories1" />
+            <End Role="LeaveRequest" EntitySet="LeaveRequests" />
+          </AssociationSet>
+          <FunctionImport Name="SP_ViewLeaveRequest">
+            <Parameter Name="param_paging" Mode="In" Type="String" />
+            <Parameter Name="param_where" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="ViewLeaveRequests" EntityType="CGPSI_AbsenceDBModel.ViewLeaveRequest" />
+          </EntityContainer>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="ID_Department" />
+          </Key>
+          <Property Name="ID_Department" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DepartmentName" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedBy" Type="Int32" />
+          <NavigationProperty Name="Employees" Relationship="CGPSI_AbsenceDBModel.FK_Employees_Departments" FromRole="Department" ToRole="Employee" />
+        </EntityType>
+        <Association Name="FK_Employees_Departments">
+          <End Type="CGPSI_AbsenceDBModel.Department" Role="Department" Multiplicity="0..1" />
+          <End Type="CGPSI_AbsenceDBModel.Employee" Role="Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="ID_Department" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="CurrentDepartment" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="DataAbsence">
+          <Key>
+            <PropertyRef Name="ID_DataAbsence" />
+          </Key>
+          <Property Name="ID_DataAbsence" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NIK" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AbsenceDate" Type="DateTime" Precision="0" />
+          <Property Name="AbsenceTime" Type="Time" Precision="7" />
+          <Property Name="Flag" Type="Int32" />
+          <Property Name="ImportSession" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="EmployeeOnSchedule">
+          <Key>
+            <PropertyRef Name="ID_EmployeeOnShift" />
+          </Key>
+          <Property Name="ID_EmployeeOnShift" Type="Int32" Nullable="false" />
+          <Property Name="ID_Employee" Type="Int32" />
+          <Property Name="ID_Shift" Type="Int32" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedBy" Type="Int32" />
+          <Property Name="ModifiedDate" Type="Int32" />
+          <NavigationProperty Name="Employee" Relationship="CGPSI_AbsenceDBModel.FK_EmployeeOnSchedule_Employees" FromRole="EmployeeOnSchedule" ToRole="Employee" />
+          <NavigationProperty Name="Shift" Relationship="CGPSI_AbsenceDBModel.FK_EmployeeOnSchedule_Shift" FromRole="EmployeeOnSchedule" ToRole="Shift" />
+          <Property Name="Date" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ShiftHistory">
+          <Key>
+            <PropertyRef Name="ID_ShiftHistory" />
+          </Key>
+          <Property Name="ID_ShiftHistory" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_Employee" Type="Int32" />
+          <Property Name="ID_Shift" Type="Int32" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="DayOfWork">
+          <Key>
+            <PropertyRef Name="ID_DayOfWork" />
+          </Key>
+          <Property Name="ID_DayOfWork" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DayName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="FK_EmployeeOnSchedule_Employees">
+          <End Type="CGPSI_AbsenceDBModel.Employee" Role="Employee" Multiplicity="0..1" />
+          <End Type="CGPSI_AbsenceDBModel.EmployeeOnSchedule" Role="EmployeeOnSchedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="ID_Employee" />
+            </Principal>
+            <Dependent Role="EmployeeOnSchedule">
+              <PropertyRef Name="ID_Employee" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ShiftDetail">
+          <Key>
+            <PropertyRef Name="ID_ShiftDetail" />
+          </Key>
+          <Property Name="ID_ShiftDetail" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_Shift" Type="Int32" />
+          <Property Name="DayName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="StartTime" Type="Time" Precision="7" />
+          <Property Name="EndTime" Type="Time" Precision="7" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedBy" Type="Int32" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Shift" Relationship="CGPSI_AbsenceDBModel.FK_ShiftDetails_Shift" FromRole="ShiftDetail" ToRole="Shift" />
+        </EntityType>
+        <EntityType Name="ViewAbsenceSummary">
+          <Key>
+            <PropertyRef Name="NIK" />
+          </Key>
+          <Property Name="NIK" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DisplayName" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="AbsenceDate" Type="DateTime" Precision="0" />
+          <Property Name="TimeIn" Type="Time" Precision="7" />
+          <Property Name="TimeOut" Type="Time" Precision="7" />
+          <Property Name="actualDayname" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="ShiftName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StartTime" Type="Time" Precision="7" />
+          <Property Name="EndTime" Type="Time" Precision="7" />
+          <Property Name="AbsenceStatus" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="ImportSession" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Shift">
+          <Key>
+            <PropertyRef Name="ID_Shift" />
+          </Key>
+          <Property Name="ID_Shift" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ShiftName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="IsNormalDay" Type="Boolean" />
+          <Property Name="BaseStartTime" Type="Time" Precision="7" />
+          <Property Name="BaseEndTime" Type="Time" Precision="7" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedBy" Type="Int32" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="EmployeeOnSchedules" Relationship="CGPSI_AbsenceDBModel.FK_EmployeeOnSchedule_Shift" FromRole="Shift" ToRole="EmployeeOnSchedule" />
+          <NavigationProperty Name="ShiftDetails" Relationship="CGPSI_AbsenceDBModel.FK_ShiftDetails_Shift" FromRole="Shift" ToRole="ShiftDetail" />
+        </EntityType>
+        <Association Name="FK_EmployeeOnSchedule_Shift">
+          <End Type="CGPSI_AbsenceDBModel.Shift" Role="Shift" Multiplicity="0..1" />
+          <End Type="CGPSI_AbsenceDBModel.EmployeeOnSchedule" Role="EmployeeOnSchedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Shift">
+              <PropertyRef Name="ID_Shift" />
+            </Principal>
+            <Dependent Role="EmployeeOnSchedule">
+              <PropertyRef Name="ID_Shift" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ShiftDetails_Shift">
+          <End Type="CGPSI_AbsenceDBModel.Shift" Role="Shift" Multiplicity="0..1" />
+          <End Type="CGPSI_AbsenceDBModel.ShiftDetail" Role="ShiftDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Shift">
+              <PropertyRef Name="ID_Shift" />
+            </Principal>
+            <Dependent Role="ShiftDetail">
+              <PropertyRef Name="ID_Shift" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="GenerateCalendar_Result">
+          <Property Type="Int32" Name="numb" Nullable="true" />
+          <Property Type="DateTime" Name="dates" Nullable="true" Precision="10" />
+          <Property Type="Int32" Name="count_day" Nullable="true" />
+          <Property Type="String" Name="day_text" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="month_text" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="year_text" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="SP_GetDataAbsenceByDate_Result">
+          <Property Type="String" Name="NIK" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="FirstName" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="Department" Nullable="true" MaxLength="250" />
+          <Property Type="DateTime" Name="Dates" Nullable="true" />
+          <Property Type="String" Name="DayName" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="ShiftName" Nullable="true" MaxLength="250" />
+          <Property Type="Time" Name="StartTime" Nullable="true" />
+          <Property Type="Time" Name="EndTime" Nullable="true" />
+          <Property Type="Time" Name="TimeIN" Nullable="true" />
+          <Property Type="Time" Name="TimeOUT" Nullable="true" />
+          <Property Type="String" Name="AbsenceStatus" Nullable="false" MaxLength="8" />
+        </ComplexType>
+        <EntityType Name="ViewEmployee">
+          <Key>
+            <PropertyRef Name="ID_Employee" />
+            <PropertyRef Name="NIK" />
+            <PropertyRef Name="JoinDate" />
+            <PropertyRef Name="CurrentPosition" />
+            <PropertyRef Name="CurrentDepartment" />
+            <PropertyRef Name="SPVFirstName" />
+            <PropertyRef Name="SPVLastName" />
+            <PropertyRef Name="SPVDisplayName" />
+          </Key>
+          <Property Name="ID_Employee" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NIK" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FirstName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="LastName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="DisplayName" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="1024" FixedLength="false" Unicode="false" />
+          <Property Name="Telephone" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="BirthDate" Type="DateTime" Precision="0" />
+          <Property Name="BirthPlace" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="JoinDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ID_CurrentPosition" Type="Int32" />
+          <Property Name="CurrentPosition" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="ID_CurrentDepartment" Type="Int32" />
+          <Property Name="CurrentDepartment" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="ID_Supervisor" Type="Int32" />
+          <Property Name="SPVFirstName" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="SPVLastName" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="SPVDisplayName" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="LeaveRequest">
+          <Key>
+            <PropertyRef Name="ID_LeaveRequest" />
+          </Key>
+          <Property Name="ID_LeaveRequest" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_Requestor" Type="Int32" />
+          <Property Name="ID_Approver" Type="Int32" />
+          <Property Name="LeaveReason" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="LeaveCategory" Type="Int32" />
+          <Property Name="StartDate" Type="DateTime" Precision="3" />
+          <Property Name="EndDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedBy" Type="Int32" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Employee" Relationship="CGPSI_AbsenceDBModel.FK_LeaveRequest_Employees" FromRole="LeaveRequest" ToRole="Employee" />
+          <NavigationProperty Name="Employee1" Relationship="CGPSI_AbsenceDBModel.FK_LeaveRequest_Employees1" FromRole="LeaveRequest" ToRole="Employee" />
+          <NavigationProperty Name="LeaveCategory1" Relationship="CGPSI_AbsenceDBModel.FK_LeaveRequest_LeaveCategory" FromRole="LeaveRequest" ToRole="LeaveCategory" />
+        </EntityType>
+        <Association Name="FK_LeaveRequest_Employees">
+          <End Type="CGPSI_AbsenceDBModel.Employee" Role="Employee" Multiplicity="0..1" />
+          <End Type="CGPSI_AbsenceDBModel.LeaveRequest" Role="LeaveRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="ID_Employee" />
+            </Principal>
+            <Dependent Role="LeaveRequest">
+              <PropertyRef Name="ID_Requestor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LeaveRequest_Employees1">
+          <End Type="CGPSI_AbsenceDBModel.Employee" Role="Employee" Multiplicity="0..1" />
+          <End Type="CGPSI_AbsenceDBModel.LeaveRequest" Role="LeaveRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="ID_Employee" />
+            </Principal>
+            <Dependent Role="LeaveRequest">
+              <PropertyRef Name="ID_Approver" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="LeaveCategories">
+          <Key>
+            <PropertyRef Name="ID_LeaveCategory" />
+          </Key>
+          <Property Name="ID_LeaveCategory" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LeaveCategory" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="LeaveRequests" Relationship="CGPSI_AbsenceDBModel.FK_LeaveRequest_LeaveCategory" FromRole="LeaveCategory" ToRole="LeaveRequest" />
+        </EntityType>
+        <Association Name="FK_LeaveRequest_LeaveCategory">
+          <End Type="CGPSI_AbsenceDBModel.LeaveCategories" Role="LeaveCategory" Multiplicity="0..1" />
+          <End Type="CGPSI_AbsenceDBModel.LeaveRequest" Role="LeaveRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LeaveCategory">
+              <PropertyRef Name="ID_LeaveCategory" />
+            </Principal>
+            <Dependent Role="LeaveRequest">
+              <PropertyRef Name="LeaveCategory" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ViewLeaveRequest">
+          <Key>
+            <PropertyRef Name="ID_LeaveRequest" />
+          </Key>
+          <Property Name="ID_LeaveRequest" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_Requestor" Type="Int32" />
+          <Property Name="Requestor" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="ID_Approver" Type="Int32" />
+          <Property Name="Approver" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="ID_LeaveCategory" Type="Int32" />
+          <Property Name="LeaveCategory" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StartDate" Type="DateTime" Precision="3" />
+          <Property Name="EndDate" Type="DateTime" Precision="3" />
+          <Property Name="LeaveReason" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedBy" Type="Int32" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CGPSI_AbsenceDBModelStoreContainer" CdmEntityContainer="CGPSI_AbsenceDBEntities">
+          <EntitySetMapping Name="ActivityHistories">
+            <EntityTypeMapping TypeName="CGPSI_AbsenceDBModel.ActivityHistory">
+              <MappingFragment StoreEntitySet="ActivityHistory">
+                <ScalarProperty Name="ID_ActivityHistory" ColumnName="ID_ActivityHistory" />
+                <ScalarProperty Name="LoginSession" ColumnName="LoginSession" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="ActivityTime" ColumnName="ActivityTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ImportHistories">
+            <EntityTypeMapping TypeName="CGPSI_AbsenceDBModel.ImportHistory">
+              <MappingFragment StoreEntitySet="ImportHistory">
+                <ScalarProperty Name="FileSource" ColumnName="FileSource" />
+                <ScalarProperty Name="ID_Import" ColumnName="ID_Import" />
+                <ScalarProperty Name="ImportSession" ColumnName="ImportSession" />
+                <ScalarProperty Name="ImportStart" ColumnName="ImportStart" />
+                <ScalarProperty Name="ImportEnd" ColumnName="ImportEnd" />
+                <ScalarProperty Name="DataImported" ColumnName="DataImported" />
+                <ScalarProperty Name="DataError" ColumnName="DataError" />
+                <ScalarProperty Name="DataExsist" ColumnName="DataExsist" />
+                <ScalarProperty Name="DataUpdated" ColumnName="DataUpdated" />
+                <ScalarProperty Name="ImportDate" ColumnName="ImportDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LoginHistories">
+            <EntityTypeMapping TypeName="CGPSI_AbsenceDBModel.LoginHistory">
+              <MappingFragment StoreEntitySet="LoginHistory">
+                <ScalarProperty Name="ID_Log" ColumnName="ID_Log" />
+                <ScalarProperty Name="LoginSession" ColumnName="LoginSession" />
+                <ScalarProperty Name="UserLogin" ColumnName="UserLogin" />
+                <ScalarProperty Name="LoginTime" ColumnName="LoginTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employees">
+            <EntityTypeMapping TypeName="CGPSI_AbsenceDBModel.Employee">
+              <MappingFragment StoreEntitySet="Employees">
+                <ScalarProperty Name="ID_Employee" ColumnName="ID_Employee" />
+                <ScalarProperty Name="NIK" ColumnName="NIK" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+                <ScalarProperty Name="BirthPlace" ColumnName="BirthPlace" />
+                <ScalarProperty Name="JoinDate" ColumnName="JoinDate" />
+                <ScalarProperty Name="CurrentPosition" ColumnName="CurrentPosition" />
+                <ScalarProperty Name="CurrentDepartment" ColumnName="CurrentDepartment" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="LeaveDate" ColumnName="LeaveDate" />
+                <ScalarProperty Name="ID_Supervisor" ColumnName="ID_Supervisor" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="ModifedDate" ColumnName="ModifedDate" />
+                <ScalarProperty Name="ModifedBy" ColumnName="ModifedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Groups">
+            <EntityTypeMapping TypeName="CGPSI_AbsenceDBModel.Group">
+              <MappingFragment StoreEntitySet="Groups">
+                <ScalarProperty Name="ID_Group" ColumnName="ID_Group" />
+                <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JobTitles">
+            <EntityTypeMapping TypeName="CGPSI_AbsenceDBModel.JobTitle">
+              <MappingFragment StoreEntitySet="JobTitles">
+                <ScalarProperty Name="ID_JobTitle" ColumnName="ID_JobTitle" />
+                <ScalarProperty Name="JobTitleName" ColumnName="JobTitleName" />
+                <ScalarProperty Name="ParentJobTitle" ColumnName="ParentJobTitle" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="CGPSI_AbsenceDBModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="ID_User" ColumnName="ID_User" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserInGroups">
+            <EntityTypeMapping TypeName="CGPSI_AbsenceDBModel.UserInGroup">
+              <MappingFragment StoreEntitySet="UserInGroups">
+                <ScalarProperty Name="ID_UserInGroups" ColumnName="ID_UserInGroups" />
+                <ScalarProperty Name="ID_User" ColumnName="ID_User" />
+                <ScalarProperty Name="ID_Group" ColumnName="ID_Group" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserInRoles">
+            <EntityTypeMapping TypeName="CGPSI_AbsenceDBModel.UserInRole">
+              <MappingFragment StoreEntitySet="UserInRoles">
+                <ScalarProperty Name="ID_UserInRoles" ColumnName="ID_UserInRoles" />
+                <ScalarProperty Name="ID_User" ColumnName="ID_User" />
+                <ScalarProperty Name="ID_Role" ColumnName="ID_Role" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserRoles">
+            <EntityTypeMapping TypeName="CGPSI_AbsenceDBModel.UserRole">
+              <MappingFragment StoreEntitySet="UserRoles">
+                <ScalarProperty Name="ParentRole" ColumnName="ParentRole" />
+                <ScalarProperty Name="RoleDesc" ColumnName="RoleDesc" />
+                <ScalarProperty Name="ID_Role" ColumnName="ID_Role" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UsersEmployees">
+            <EntityTypeMapping TypeName="CGPSI_AbsenceDBModel.UsersEmployee">
+              <MappingFragment StoreEntitySet="UsersEmployees">
+                <ScalarProperty Name="ID_UserEmployee" ColumnName="ID_UserEmployee" />
+                <ScalarProperty Name="ID_User" ColumnName="ID_User" />
+                <ScalarProperty Name="ID_Employee" ColumnName="ID_Employee" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionName="CGPSI_AbsenceDBModel.Store.SplitString" FunctionImportName="SplitString">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CGPSI_AbsenceDBModel.SplitString_Result">
+                <ScalarProperty Name="rowNum" ColumnName="rowNum" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="CGPSI_AbsenceDBModel.Store.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="CGPSI_AbsenceDBModel.Store.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="CGPSI_AbsenceDBModel.Store.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="CGPSI_AbsenceDBModel.Store.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CGPSI_AbsenceDBModel.sp_helpdiagramdefinition_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="CGPSI_AbsenceDBModel.Store.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CGPSI_AbsenceDBModel.sp_helpdiagrams_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="CGPSI_AbsenceDBModel.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="SP_EMPLOYEES" FunctionName="CGPSI_AbsenceDBModel.Store.SP_EMPLOYEES" />
+          <FunctionImportMapping FunctionImportName="SP_EMPLOYEES_PagingAndView" FunctionName="CGPSI_AbsenceDBModel.Store.SP_EMPLOYEES_PagingAndView" />
+          <FunctionImportMapping FunctionImportName="SP_GROUPS" FunctionName="CGPSI_AbsenceDBModel.Store.SP_GROUPS" />
+          <FunctionImportMapping FunctionImportName="SP_GROUPS_PagingAndView" FunctionName="CGPSI_AbsenceDBModel.Store.SP_GROUPS_PagingAndView" />
+          <FunctionImportMapping FunctionImportName="SP_JOB_TITLES" FunctionName="CGPSI_AbsenceDBModel.Store.SP_JOB_TITLES" />
+          <FunctionImportMapping FunctionImportName="SP_JOB_TITLES_PagingAndView" FunctionName="CGPSI_AbsenceDBModel.Store.SP_JOB_TITLES_PagingAndView" />
+          <FunctionImportMapping FunctionImportName="SP_USER" FunctionName="CGPSI_AbsenceDBModel.Store.SP_USER" />
+          <FunctionImportMapping FunctionImportName="SP_USER_PagingAndView" FunctionName="CGPSI_AbsenceDBModel.Store.SP_USER_PagingAndView" />
+          <EntitySetMapping Name="Departments">
+            <EntityTypeMapping TypeName="CGPSI_AbsenceDBModel.Department">
+              <MappingFragment StoreEntitySet="Departments">
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="DepartmentName" ColumnName="DepartmentName" />
+                <ScalarProperty Name="ID_Department" ColumnName="ID_Department" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SP_DEPARTMENTS" FunctionName="CGPSI_AbsenceDBModel.Store.SP_DEPARTMENTS" />
+          <FunctionImportMapping FunctionImportName="SP_DEPARTMENTS_PagingAndView" FunctionName="CGPSI_AbsenceDBModel.Store.SP_DEPARTMENTS_PagingAndView" />
+          <FunctionImportMapping FunctionImportName="SP_UserInGroups" FunctionName="CGPSI_AbsenceDBModel.Store.SP_UserInGroups" />
+          <EntitySetMapping Name="DataAbsences">
+            <EntityTypeMapping TypeName="CGPSI_AbsenceDBModel.DataAbsence">
+              <MappingFragment StoreEntitySet="DataAbsence">
+                <ScalarProperty Name="ImportSession" ColumnName="ImportSession" />
+                <ScalarProperty Name="Flag" ColumnName="Flag" />
+                <ScalarProperty Name="AbsenceTime" ColumnName="AbsenceTime" />
+                <ScalarProperty Name="AbsenceDate" ColumnName="AbsenceDate" />
+                <ScalarProperty Name="NIK" ColumnName="NIK" />
+                <ScalarProperty Name="ID_DataAbsence" ColumnName="ID_DataAbsence" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EmployeeOnSchedules">
+            <EntityTypeMapping TypeName="CGPSI_AbsenceDBModel.EmployeeOnSchedule">
+              <MappingFragment StoreEntitySet="EmployeeOnSchedule">
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="ID_Shift" ColumnName="ID_Shift" />
+                <ScalarProperty Name="ID_Employee" ColumnName="ID_Employee" />
+                <ScalarProperty Name="ID_EmployeeOnShift" ColumnName="ID_EmployeeOnShift" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ShiftHistories">
+            <EntityTypeMapping TypeName="CGPSI_AbsenceDBModel.ShiftHistory">
+              <MappingFragment StoreEntitySet="ShiftHistory">
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="ID_Shift" ColumnName="ID_Shift" />
+                <ScalarProperty Name="ID_Employee" ColumnName="ID_Employee" />
+                <ScalarProperty Name="ID_ShiftHistory" ColumnName="ID_ShiftHistory" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DayOfWorks">
+            <EntityTypeMapping TypeName="CGPSI_AbsenceDBModel.DayOfWork">
+              <MappingFragment StoreEntitySet="DayOfWorks">
+                <ScalarProperty Name="DayName" ColumnName="DayName" />
+                <ScalarProperty Name="ID_DayOfWork" ColumnName="ID_DayOfWork" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SP_USER_EMPLOYEE" FunctionName="CGPSI_AbsenceDBModel.Store.SP_USER_EMPLOYEE" />
+          <FunctionImportMapping FunctionImportName="SP_USER_IN_ROLES" FunctionName="CGPSI_AbsenceDBModel.Store.SP_USER_IN_ROLES" />
+          <FunctionImportMapping FunctionImportName="SP_USER_IN_ROLES_PagingAndView" FunctionName="CGPSI_AbsenceDBModel.Store.SP_USER_IN_ROLES_PagingAndView" />
+          <FunctionImportMapping FunctionImportName="SP_USER_ROLE_PagingAndView" FunctionName="CGPSI_AbsenceDBModel.Store.SP_USER_ROLE_PagingAndView" />
+          <FunctionImportMapping FunctionImportName="SP_USER_ROLES" FunctionName="CGPSI_AbsenceDBModel.Store.SP_USER_ROLES" />
+          <FunctionImportMapping FunctionImportName="SP_UserInGroups_PagingAndView" FunctionName="CGPSI_AbsenceDBModel.Store.SP_UserInGroups_PagingAndView" />
+          <EntitySetMapping Name="ShiftDetails">
+            <EntityTypeMapping TypeName="CGPSI_AbsenceDBModel.ShiftDetail">
+              <MappingFragment StoreEntitySet="ShiftDetails">
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="DayName" ColumnName="DayName" />
+                <ScalarProperty Name="ID_Shift" ColumnName="ID_Shift" />
+                <ScalarProperty Name="ID_ShiftDetail" ColumnName="ID_ShiftDetail" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ViewAbsenceSummaries">
+            <EntityTypeMapping TypeName="CGPSI_AbsenceDBModel.ViewAbsenceSummary">
+              <MappingFragment StoreEntitySet="ViewAbsenceSummary">
+                <ScalarProperty Name="ImportSession" ColumnName="ImportSession" />
+                <ScalarProperty Name="AbsenceStatus" ColumnName="AbsenceStatus" />
+                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="ShiftName" ColumnName="ShiftName" />
+                <ScalarProperty Name="actualDayname" ColumnName="actualDayname" />
+                <ScalarProperty Name="TimeOut" ColumnName="TimeOut" />
+                <ScalarProperty Name="TimeIn" ColumnName="TimeIn" />
+                <ScalarProperty Name="AbsenceDate" ColumnName="AbsenceDate" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="NIK" ColumnName="NIK" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Shifts">
+            <EntityTypeMapping TypeName="CGPSI_AbsenceDBModel.Shift">
+              <MappingFragment StoreEntitySet="Shift">
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="BaseEndTime" ColumnName="BaseEndTime" />
+                <ScalarProperty Name="BaseStartTime" ColumnName="BaseStartTime" />
+                <ScalarProperty Name="IsNormalDay" ColumnName="IsNormalDay" />
+                <ScalarProperty Name="ShiftName" ColumnName="ShiftName" />
+                <ScalarProperty Name="ID_Shift" ColumnName="ID_Shift" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GenerateCalendar" FunctionName="CGPSI_AbsenceDBModel.Store.GenerateCalendar">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CGPSI_AbsenceDBModel.GenerateCalendar_Result">
+                <ScalarProperty Name="numb" ColumnName="numb" />
+                <ScalarProperty Name="dates" ColumnName="dates" />
+                <ScalarProperty Name="count_day" ColumnName="count_day" />
+                <ScalarProperty Name="day_text" ColumnName="day_text" />
+                <ScalarProperty Name="month_text" ColumnName="month_text" />
+                <ScalarProperty Name="year_text" ColumnName="year_text" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="CGPSI_AbsenceDBModel.Store.sp_upgraddiagrams" />
+          <FunctionImportMapping FunctionImportName="SP_GetDataAbsenceByDate" FunctionName="CGPSI_AbsenceDBModel.Store.SP_GetDataAbsenceByDate">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CGPSI_AbsenceDBModel.SP_GetDataAbsenceByDate_Result">
+                <ScalarProperty Name="NIK" ColumnName="NIK" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="Department" ColumnName="Department" />
+                <ScalarProperty Name="Dates" ColumnName="Dates" />
+                <ScalarProperty Name="DayName" ColumnName="DayName" />
+                <ScalarProperty Name="ShiftName" ColumnName="ShiftName" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+                <ScalarProperty Name="TimeIN" ColumnName="TimeIN" />
+                <ScalarProperty Name="TimeOUT" ColumnName="TimeOUT" />
+                <ScalarProperty Name="AbsenceStatus" ColumnName="AbsenceStatus" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="ViewEmployees">
+            <EntityTypeMapping TypeName="CGPSI_AbsenceDBModel.ViewEmployee">
+              <MappingFragment StoreEntitySet="ViewEmployees">
+                <ScalarProperty Name="SPVDisplayName" ColumnName="SPVDisplayName" />
+                <ScalarProperty Name="SPVLastName" ColumnName="SPVLastName" />
+                <ScalarProperty Name="SPVFirstName" ColumnName="SPVFirstName" />
+                <ScalarProperty Name="ID_Supervisor" ColumnName="ID_Supervisor" />
+                <ScalarProperty Name="CurrentDepartment" ColumnName="CurrentDepartment" />
+                <ScalarProperty Name="ID_CurrentDepartment" ColumnName="ID_CurrentDepartment" />
+                <ScalarProperty Name="CurrentPosition" ColumnName="CurrentPosition" />
+                <ScalarProperty Name="ID_CurrentPosition" ColumnName="ID_CurrentPosition" />
+                <ScalarProperty Name="JoinDate" ColumnName="JoinDate" />
+                <ScalarProperty Name="BirthPlace" ColumnName="BirthPlace" />
+                <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="NIK" ColumnName="NIK" />
+                <ScalarProperty Name="ID_Employee" ColumnName="ID_Employee" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SP_ViewEMPLOYEES" FunctionName="CGPSI_AbsenceDBModel.Store.SP_ViewEMPLOYEES" />
+          <EntitySetMapping Name="LeaveRequests">
+            <EntityTypeMapping TypeName="CGPSI_AbsenceDBModel.LeaveRequest">
+              <MappingFragment StoreEntitySet="LeaveRequest">
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="LeaveCategory" ColumnName="LeaveCategory" />
+                <ScalarProperty Name="LeaveReason" ColumnName="LeaveReason" />
+                <ScalarProperty Name="ID_Approver" ColumnName="ID_Approver" />
+                <ScalarProperty Name="ID_Requestor" ColumnName="ID_Requestor" />
+                <ScalarProperty Name="ID_LeaveRequest" ColumnName="ID_LeaveRequest" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LeaveCategories1">
+            <EntityTypeMapping TypeName="CGPSI_AbsenceDBModel.LeaveCategories">
+              <MappingFragment StoreEntitySet="LeaveCategories">
+                <ScalarProperty Name="LeaveCategory" ColumnName="LeaveCategory" />
+                <ScalarProperty Name="ID_LeaveCategory" ColumnName="ID_LeaveCategory" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SP_ViewLeaveRequest" FunctionName="CGPSI_AbsenceDBModel.Store.SP_ViewLeaveRequest" />
+          <EntitySetMapping Name="ViewLeaveRequests">
+            <EntityTypeMapping TypeName="CGPSI_AbsenceDBModel.ViewLeaveRequest">
+              <MappingFragment StoreEntitySet="ViewLeaveRequest">
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="LeaveReason" ColumnName="LeaveReason" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="LeaveCategory" ColumnName="LeaveCategory" />
+                <ScalarProperty Name="ID_LeaveCategory" ColumnName="ID_LeaveCategory" />
+                <ScalarProperty Name="Approver" ColumnName="Approver" />
+                <ScalarProperty Name="ID_Approver" ColumnName="ID_Approver" />
+                <ScalarProperty Name="Requestor" ColumnName="Requestor" />
+                <ScalarProperty Name="ID_Requestor" ColumnName="ID_Requestor" />
+                <ScalarProperty Name="ID_LeaveRequest" ColumnName="ID_LeaveRequest" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

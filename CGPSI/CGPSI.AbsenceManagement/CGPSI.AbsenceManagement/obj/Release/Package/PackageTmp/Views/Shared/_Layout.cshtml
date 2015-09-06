@@ -1,0 +1,23 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>CGPSI - Absence Management</title>
+
+    <link href="~/Scripts/KendoUI/styles/kendo.common.min.css" rel="stylesheet" />
+    <link href="~/Scripts/KendoUI/styles/kendo.materialblack.min.css" rel="stylesheet" />
+    <link href="~/Scripts/KendoUI/styles/kendo.dataviz.min.css" rel="stylesheet" />
+    <link href="~/Scripts/KendoUI/styles/kendo.dataviz.materialblack.min.css" rel="stylesheet" />
+    <link href="~/Scripts/KendoUI/styles/kendo.office365.min.css" rel="stylesheet" />
+    @RenderSection("pageHead", required: false)
+    <script src="~/Scripts/KendoUI/js/jquery.min.js"></script>
+    <script src="~/Scripts/KendoUI/js/kendo.dataviz.min.js"></script>
+    <script src="~/Scripts/KendoUI/js/kendo.all.min.js"></script>
+    <script src="~/Scripts/products.js"></script>
+    <link href="~/Content/Site.css" rel="stylesheet" />
+</head>
+<body style="height:100%;">
+    @RenderBody()
+    @RenderSection("scripts", required: false)
+</body>
+</html>
