@@ -6,7 +6,7 @@
     <edmx:Diagrams>
       <Diagram DiagramId="2b88b7cb8c774880945712c6efe0da02" Name="Diagram1">
         <EntityTypeShape EntityType="CGPSI_AbsenceDBModel.ActivityHistory" Width="1.5" PointX="8.75" PointY="6" IsExpanded="true" />
-        <EntityTypeShape EntityType="CGPSI_AbsenceDBModel.ImportHistory" Width="1.5" PointX="10.75" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="CGPSI_AbsenceDBModel.ImportHistory" Width="1.5" PointX="11.625" PointY="2.75" IsExpanded="true" />
         <EntityTypeShape EntityType="CGPSI_AbsenceDBModel.LoginHistory" Width="1.5" PointX="10.75" PointY="7" IsExpanded="true" />
         <EntityTypeShape EntityType="CGPSI_AbsenceDBModel.Employee" Width="1.5" PointX="3" PointY="3.25" IsExpanded="true" />
         <EntityTypeShape EntityType="CGPSI_AbsenceDBModel.Group" Width="1.5" PointX="3" PointY="15.375" IsExpanded="true" />
@@ -38,7 +38,7 @@
         <AssociationConnector Association="CGPSI_AbsenceDBModel.FK_EmployeeOnSchedule_Shift" />
         <AssociationConnector Association="CGPSI_AbsenceDBModel.FK_ShiftDetails_Shift" />
         <EntityTypeShape EntityType="CGPSI_AbsenceDBModel.ViewEmployee" Width="1.5" PointX="13.375" PointY="0.75" />
-        <EntityTypeShape EntityType="CGPSI_AbsenceDBModel.LeaveRequest" Width="1.5" PointX="9" PointY="1" />
+        <EntityTypeShape EntityType="CGPSI_AbsenceDBModel.LeaveRequest" Width="1.5" PointX="9.25" PointY="1" />
         <AssociationConnector Association="CGPSI_AbsenceDBModel.FK_LeaveRequest_Employees" />
         <AssociationConnector Association="CGPSI_AbsenceDBModel.FK_LeaveRequest_Employees1" />
         <EntityTypeShape EntityType="CGPSI_AbsenceDBModel.LeaveCategories" Width="1.5" PointX="12.375" PointY="12.875" />
