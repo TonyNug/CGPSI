@@ -38,7 +38,7 @@
         <AssociationConnector Association="CGPSI_AbsenceDBModel.FK_EmployeeOnSchedule_Shift" />
         <AssociationConnector Association="CGPSI_AbsenceDBModel.FK_ShiftDetails_Shift" />
         <EntityTypeShape EntityType="CGPSI_AbsenceDBModel.ViewEmployee" Width="1.5" PointX="13.375" PointY="0.75" />
-        <EntityTypeShape EntityType="CGPSI_AbsenceDBModel.LeaveRequest" Width="1.5" PointX="10.25" PointY="0.75" />
+        <EntityTypeShape EntityType="CGPSI_AbsenceDBModel.LeaveRequest" Width="1.5" PointX="9" PointY="1" />
         <AssociationConnector Association="CGPSI_AbsenceDBModel.FK_LeaveRequest_Employees" />
         <AssociationConnector Association="CGPSI_AbsenceDBModel.FK_LeaveRequest_Employees1" />
         <EntityTypeShape EntityType="CGPSI_AbsenceDBModel.LeaveCategories" Width="1.5" PointX="12.375" PointY="12.875" />
