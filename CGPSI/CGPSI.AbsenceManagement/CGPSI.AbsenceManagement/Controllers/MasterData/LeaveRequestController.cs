@@ -16,7 +16,6 @@ namespace CGPSI.AbsenceManagement.Controllers.MasterData
             return PartialView();
         }
 
-
         /// <summary>
         /// Get Data for View
         /// </summary>
@@ -68,10 +67,26 @@ namespace CGPSI.AbsenceManagement.Controllers.MasterData
         /// <summary>
         /// Delete Data
         /// </summary>
-        public ActionResult Delete(Employee data)
+        public ActionResult Delete(ViewLeaveRequest data)
         {
-            return Json(new CGPSI_AbsenceDBEntities().SP_EMPLOYEES(data.ID_Employee, data.NIK, data.FirstName, data.LastName, data.DisplayName, data.Address, data.Telephone,
-                data.Email, data.BirthDate, data.BirthPlace, data.JoinDate, data.CurrentPosition, data.CurrentDepartment, data.IsActive, data.LeaveDate, data.ID_Supervisor, DateTime.Now, 1, DateTime.Now, 1, "Delete"));
+            LeaveRequest lr = new LeaveRequest()
+            {
+                ID_LeaveRequest = data.ID_LeaveRequest,
+                ID_Requestor = data.ID_Requestor,
+                ID_Approver = data.ID_Approver,
+                LeaveCategory = data.ID_LeaveCategory,
+                LeaveReason = data.LeaveReason,
+                StartDate = data.StartDate,
+                EndDate = data.EndDate,
+                CreatedBy = 0,
+                ModifiedBy = 0,
+                ModifiedDate = DateTime.Now,
+                CreatedDate = DateTime.Now
+            };
+            CGPSI_AbsenceDBEntities temp = new CGPSI_AbsenceDBEntities();
+            temp.LeaveRequests.Remove(temp.LeaveRequests.Where(t=>t.ID_LeaveRequest==data.ID_LeaveRequest).FirstOrDefault());            
+            return Json(temp.SaveChanges());          
+
         }
 	}
 }
