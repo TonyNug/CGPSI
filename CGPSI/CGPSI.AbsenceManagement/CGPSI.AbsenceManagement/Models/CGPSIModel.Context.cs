@@ -51,6 +51,7 @@ namespace CGPSI.AbsenceManagement.Models
         public virtual DbSet<LeaveCategories> LeaveCategories1 { get; set; }
         public virtual DbSet<ViewLeaveRequest> ViewLeaveRequests { get; set; }
         public virtual DbSet<Attachment> Attachments { get; set; }
+        public virtual DbSet<AbsenceHistory> AbsenceHistories { get; set; }
     
         [DbFunction("CGPSI_AbsenceDBEntities", "SplitString")]
         public virtual IQueryable<SplitString_Result> SplitString(string splitChar, string stringToSplit)
@@ -725,6 +726,11 @@ namespace CGPSI.AbsenceManagement.Models
         public virtual ObjectResult<SP_GetDataAbsenceOfCurrentMonth_Result> SP_GetDataAbsenceOfCurrentMonth()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_GetDataAbsenceOfCurrentMonth_Result>("SP_GetDataAbsenceOfCurrentMonth");
+        }
+    
+        public virtual int SP_SaveAbsenceHistory()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_SaveAbsenceHistory");
         }
     }
 }

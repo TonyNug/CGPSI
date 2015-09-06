@@ -512,11 +512,13 @@
       <End Role="LeaveCategory" EntitySet="LeaveCategories1" />
       <End Role="LeaveRequest" EntitySet="LeaveRequests" />
     </AssociationSet>
-    <FunctionImport Name="SP_ViewLeaveRequest">
+    <FunctionImport Name="SP_ViewLeaveRequest" EntitySet="ViewLeaveRequests" ReturnType="Collection(CGPSI_AbsenceDBModel.ViewLeaveRequest)">
       <Parameter Name="param_paging" Mode="In" Type="String" />
       <Parameter Name="param_where" Mode="In" Type="String" />
     </FunctionImport>
     <EntitySet Name="ViewLeaveRequests" EntityType="CGPSI_AbsenceDBModel.ViewLeaveRequest" />
+    <EntitySet Name="Attachments" EntityType="CGPSI_AbsenceDBModel.Attachment" />
+    <FunctionImport Name="SP_GetDataAbsenceOfCurrentMonth" ReturnType="Collection(CGPSI_AbsenceDBModel.SP_GetDataAbsenceOfCurrentMonth_Result)" />
   </EntityContainer>
   <ComplexType Name="sp_helpdiagramdefinition_Result">
     <Property Type="Int32" Name="version" Nullable="true" />
@@ -813,4 +815,29 @@
     <Property Name="ModifiedBy" Type="Int32" />
     <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
   </EntityType>
+  <EntityType Name="Attachment">
+    <Key>
+      <PropertyRef Name="ID_Attachment" />
+    </Key>
+    <Property Name="ID_Attachment" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FileName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="MimeType" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="Extension" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="FileSize" Type="Int32" />
+    <Property Name="MD5FileIdentity" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="FileValue" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <ComplexType Name="SP_GetDataAbsenceOfCurrentMonth_Result">
+    <Property Type="String" Name="NIK" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="FirstName" Nullable="true" MaxLength="250" />
+    <Property Type="String" Name="Department" Nullable="true" MaxLength="250" />
+    <Property Type="DateTime" Name="Dates" Nullable="true" />
+    <Property Type="String" Name="DayName" Nullable="true" MaxLength="30" />
+    <Property Type="String" Name="ShiftName" Nullable="true" MaxLength="250" />
+    <Property Type="Time" Name="StartTime" Nullable="true" />
+    <Property Type="Time" Name="EndTime" Nullable="true" />
+    <Property Type="Time" Name="TimeIN" Nullable="true" />
+    <Property Type="Time" Name="TimeOUT" Nullable="true" />
+    <Property Type="String" Name="AbsenceStatus" Nullable="false" MaxLength="8" />
+  </ComplexType>
 </Schema>

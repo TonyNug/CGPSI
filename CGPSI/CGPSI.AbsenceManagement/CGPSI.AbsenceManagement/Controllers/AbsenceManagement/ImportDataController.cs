@@ -86,65 +86,71 @@ namespace CGPSI.AbsenceManagement.Controllers.AbsenceManagement
             object output = null;
             try
             {
-                CGPSI_AbsenceDBEntities cgpsi= new CGPSI_AbsenceDBEntities();
-                DateTime importStart=DateTime.Now;
-                string fileSource=string.Empty,
-                    ImportSession=Guid.NewGuid().ToString()+DateTime.Now.ToString("ddMMyy_hhmmss");
-                int dataCount = 0,dataError=0;
-                var listFile = System.IO.Directory.GetFiles(Server.MapPath("~/App_Data/DataImportAbsence"));
-                foreach (var file in listFile)
+                using (CGPSI_AbsenceDBEntities cgpsi = new CGPSI_AbsenceDBEntities())
                 {
-                    if (!System.IO.File.Exists(file))
-                        throw new System.IO.FileNotFoundException(file + " Is not Found...");                    
-                    if(file.Split('.')[file.Split('.').Count()-1].ToString().ToLower()=="bak")
+                    DateTime importStart = DateTime.Now;
+                    string fileSource = string.Empty,
+                        ImportSession = Guid.NewGuid().ToString() + DateTime.Now.ToString("ddMMyy_hhmmss");
+                    int dataCount = 0, dataError = 0;
+                    var listFile = System.IO.Directory.GetFiles(Server.MapPath("~/App_Data/DataImportAbsence"));
+                    foreach (var file in listFile)
                     {
-                        var items = System.IO.File.ReadAllLines(file);
-                        foreach (string item in items)
+                        if (!System.IO.File.Exists(file))
+                            throw new System.IO.FileNotFoundException(file + " Is not Found...");
+                        if (file.Split('.')[file.Split('.').Count() - 1].ToString().ToLower() == "bak")
                         {
-                            
-                            try{
-                                 cgpsi.DataAbsences.Add(new DataAbsence(){
-                                    NIK = item.Substring(5, 4),
-                                    AbsenceDate = DateTime.ParseExact(item.Substring(9, 6), "ddMMyy", CultureInfo.InvariantCulture),
-                                    AbsenceTime = TimeSpan.ParseExact(item.Substring(15, 6), "hhmmss", CultureInfo.InvariantCulture),
-                                    Flag = int.Parse(item.Substring(24, 2)),
-                                    ImportSession = ImportSession
-                                });
-                                cgpsi.SaveChanges();
-                            }
-                            catch { dataError++; }
-                            dataCount++;
-                        }                        
-                    }
-                    else
-                    {
-                        System.IO.File.Delete(file);
-                    }
-                    //Move File to Archive
-                    System.IO.File.Move(file, file.Replace("DataImportAbsence", "ImportedData"));
-                }
+                            var items = System.IO.File.ReadAllLines(file);
+                            foreach (string item in items)
+                            {
 
-                var history = new ImportHistory()
-                {
-                    ImportSession = ImportSession,
-                    DataError = dataError,
-                    DataExsist = 0,
-                    DataImported = dataCount,
-                    DataUpdated = 0,
-                    ImportDate = DateTime.Now,
-                    ImportStart = importStart,
-                    ImportEnd = DateTime.Now,
-                    FileSource = string.Join(", ", listFile.ToList().Select(s => s.Split('\\').Last()))
-                };
-                //add History
-                cgpsi.ImportHistories.Add(history);
-                cgpsi.SaveChanges();
-                
-                output = new
-                {
-                    ImportSummary=history,                    
-                    status=true
-                };
+                                try
+                                {
+                                    cgpsi.DataAbsences.Add(new DataAbsence()
+                                    {
+                                        NIK = item.Substring(5, 4),
+                                        AbsenceDate = DateTime.ParseExact(item.Substring(9, 6), "ddMMyy", CultureInfo.InvariantCulture),
+                                        AbsenceTime = TimeSpan.ParseExact(item.Substring(15, 6), "hhmmss", CultureInfo.InvariantCulture),
+                                        Flag = int.Parse(item.Substring(24, 2)),
+                                        ImportSession = ImportSession
+                                    });
+                                    cgpsi.SaveChanges();
+                                }
+                                catch { dataError++; }
+                                dataCount++;
+                            }
+                        }
+                        else
+                        {
+                            System.IO.File.Delete(file);
+                        }
+                        //Move File to Archive
+                        System.IO.File.Move(file, file.Replace("DataImportAbsence", "ImportedData"));
+                    }
+
+                    var history = new ImportHistory()
+                    {
+                        ImportSession = ImportSession,
+                        DataError = dataError,
+                        DataExsist = 0,
+                        DataImported = dataCount,
+                        DataUpdated = 0,
+                        ImportDate = DateTime.Now,
+                        ImportStart = importStart,
+                        ImportEnd = DateTime.Now,
+                        FileSource = string.Join(", ", listFile.ToList().Select(s => s.Split('\\').Last()))
+                    };
+                    //add History
+                    cgpsi.ImportHistories.Add(history);
+                    cgpsi.SaveChanges();
+
+                    output = new
+                    {
+                        ImportSummary = history,
+                        status = true
+                    };
+
+                    cgpsi.SP_SaveAbsenceHistory();
+                }
             }
             catch (Exception ex)
             {

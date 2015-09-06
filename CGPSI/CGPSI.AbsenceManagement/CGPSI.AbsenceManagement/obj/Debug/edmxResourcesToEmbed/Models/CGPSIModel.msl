@@ -393,5 +393,35 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Attachments">
+      <EntityTypeMapping TypeName="CGPSI_AbsenceDBModel.Attachment">
+        <MappingFragment StoreEntitySet="Attachments">
+          <ScalarProperty Name="FileValue" ColumnName="FileValue" />
+          <ScalarProperty Name="MD5FileIdentity" ColumnName="MD5FileIdentity" />
+          <ScalarProperty Name="FileSize" ColumnName="FileSize" />
+          <ScalarProperty Name="Extension" ColumnName="Extension" />
+          <ScalarProperty Name="MimeType" ColumnName="MimeType" />
+          <ScalarProperty Name="FileName" ColumnName="FileName" />
+          <ScalarProperty Name="ID_Attachment" ColumnName="ID_Attachment" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="SP_GetDataAbsenceOfCurrentMonth" FunctionName="CGPSI_AbsenceDBModel.Store.SP_GetDataAbsenceOfCurrentMonth">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CGPSI_AbsenceDBModel.SP_GetDataAbsenceOfCurrentMonth_Result">
+          <ScalarProperty Name="NIK" ColumnName="NIK" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="Department" ColumnName="Department" />
+          <ScalarProperty Name="Dates" ColumnName="Dates" />
+          <ScalarProperty Name="DayName" ColumnName="DayName" />
+          <ScalarProperty Name="ShiftName" ColumnName="ShiftName" />
+          <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+          <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+          <ScalarProperty Name="TimeIN" ColumnName="TimeIN" />
+          <ScalarProperty Name="TimeOUT" ColumnName="TimeOUT" />
+          <ScalarProperty Name="AbsenceStatus" ColumnName="AbsenceStatus" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
   </EntityContainerMapping>
 </Mapping>

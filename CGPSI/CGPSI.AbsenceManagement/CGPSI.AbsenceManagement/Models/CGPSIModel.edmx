@@ -5,6 +5,25 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="CGPSI_AbsenceDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AbsenceHistory">
+          <Key>
+            <PropertyRef Name="ID_AbsenceHistory" />
+          </Key>
+          <Property Name="ID_AbsenceHistory" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="AbsenceMonth" Type="nvarchar" MaxLength="30" StoreGeneratedPattern="Computed" />
+          <Property Name="AbsenceYear" Type="int" StoreGeneratedPattern="Computed" />
+          <Property Name="NIK" Type="varchar" MaxLength="50" />
+          <Property Name="FirstName" Type="varchar" MaxLength="250" />
+          <Property Name="Department" Type="varchar" MaxLength="250" />
+          <Property Name="Dates" Type="date" />
+          <Property Name="DayName" Type="varchar" MaxLength="50" />
+          <Property Name="ShiftName" Type="varchar" MaxLength="50" />
+          <Property Name="StartTime" Type="time" Precision="7" />
+          <Property Name="EndTime" Type="time" Precision="7" />
+          <Property Name="TimeIN" Type="time" Precision="7" />
+          <Property Name="TimeOUT" Type="time" Precision="7" />
+          <Property Name="AbsenceStatus" Type="varchar" MaxLength="250" />
+        </EntityType>
         <EntityType Name="DataAbsence">
           <Key>
             <PropertyRef Name="ID_DataAbsence" />
@@ -525,6 +544,7 @@ warning 6002: The table/view 'CGPSI_AbsenceDB.mst.ViewEmployees' does not have a
         </Association>
         <Function Name="SP_GetDataAbsenceByDate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="abs" />
         <Function Name="SP_GetDataAbsenceOfCurrentMonth" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="abs" />
+        <Function Name="SP_SaveAbsenceHistory" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="abs" />
         <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
         <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
@@ -710,6 +730,7 @@ warning 6002: The table/view 'CGPSI_AbsenceDB.mst.ViewEmployees' does not have a
           </ReturnType>
         </Function>
         <EntityContainer Name="CGPSI_AbsenceDBModelStoreContainer">
+          <EntitySet Name="AbsenceHistory" EntityType="Self.AbsenceHistory" Schema="abs" store:Type="Tables" />
           <EntitySet Name="DataAbsence" EntityType="Self.DataAbsence" Schema="abs" store:Type="Tables" />
           <EntitySet Name="EmployeeOnSchedule" EntityType="Self.EmployeeOnSchedule" Schema="abs" store:Type="Tables" />
           <EntitySet Name="LeaveCategories" EntityType="Self.LeaveCategories" Schema="abs" store:Type="Tables" />
@@ -1376,6 +1397,8 @@ warning 6002: The table/view 'CGPSI_AbsenceDB.mst.ViewEmployees' does not have a
           <EntitySet Name="ViewLeaveRequests" EntityType="CGPSI_AbsenceDBModel.ViewLeaveRequest" />
           <EntitySet Name="Attachments" EntityType="CGPSI_AbsenceDBModel.Attachment" />
           <FunctionImport Name="SP_GetDataAbsenceOfCurrentMonth" ReturnType="Collection(CGPSI_AbsenceDBModel.SP_GetDataAbsenceOfCurrentMonth_Result)" />
+          <EntitySet Name="AbsenceHistories" EntityType="CGPSI_AbsenceDBModel.AbsenceHistory" />
+          <FunctionImport Name="SP_SaveAbsenceHistory" />
           </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -1697,6 +1720,25 @@ warning 6002: The table/view 'CGPSI_AbsenceDB.mst.ViewEmployees' does not have a
           <Property Type="Time" Name="TimeOUT" Nullable="true" />
           <Property Type="String" Name="AbsenceStatus" Nullable="false" MaxLength="8" />
         </ComplexType>
+        <EntityType Name="AbsenceHistory">
+          <Key>
+            <PropertyRef Name="ID_AbsenceHistory" />
+          </Key>
+          <Property Name="ID_AbsenceHistory" Type="Guid" Nullable="false" />
+          <Property Name="AbsenceMonth" Type="String" MaxLength="30" FixedLength="false" Unicode="true" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="AbsenceYear" Type="Int32" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="NIK" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FirstName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Department" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Dates" Type="DateTime" Precision="0" />
+          <Property Name="DayName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ShiftName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="StartTime" Type="Time" Precision="7" />
+          <Property Name="EndTime" Type="Time" Precision="7" />
+          <Property Name="TimeIN" Type="Time" Precision="7" />
+          <Property Name="TimeOUT" Type="Time" Precision="7" />
+          <Property Name="AbsenceStatus" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2125,6 +2167,27 @@ warning 6002: The table/view 'CGPSI_AbsenceDB.mst.ViewEmployees' does not have a
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="AbsenceHistories">
+            <EntityTypeMapping TypeName="CGPSI_AbsenceDBModel.AbsenceHistory">
+              <MappingFragment StoreEntitySet="AbsenceHistory">
+                <ScalarProperty Name="AbsenceStatus" ColumnName="AbsenceStatus" />
+                <ScalarProperty Name="TimeOUT" ColumnName="TimeOUT" />
+                <ScalarProperty Name="TimeIN" ColumnName="TimeIN" />
+                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="ShiftName" ColumnName="ShiftName" />
+                <ScalarProperty Name="DayName" ColumnName="DayName" />
+                <ScalarProperty Name="Dates" ColumnName="Dates" />
+                <ScalarProperty Name="Department" ColumnName="Department" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="NIK" ColumnName="NIK" />
+                <ScalarProperty Name="AbsenceYear" ColumnName="AbsenceYear" />
+                <ScalarProperty Name="AbsenceMonth" ColumnName="AbsenceMonth" />
+                <ScalarProperty Name="ID_AbsenceHistory" ColumnName="ID_AbsenceHistory" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SP_SaveAbsenceHistory" FunctionName="CGPSI_AbsenceDBModel.Store.SP_SaveAbsenceHistory" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
