@@ -12,7 +12,7 @@
         <EntityTypeShape EntityType="CGPSI_AbsenceDBModel.Group" Width="1.5" PointX="3" PointY="15.375" IsExpanded="true" />
         <EntityTypeShape EntityType="CGPSI_AbsenceDBModel.JobTitle" Width="1.5" PointX="0.75" PointY="0.875" IsExpanded="true" />
         <EntityTypeShape EntityType="CGPSI_AbsenceDBModel.User" Width="1.5" PointX="3" PointY="10.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="CGPSI_AbsenceDBModel.UserInGroup" Width="1.5" PointX="5.25" PointY="11.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CGPSI_AbsenceDBModel.UserInGroup" Width="1.5" PointX="5.75" PointY="11" IsExpanded="true" />
         <EntityTypeShape EntityType="CGPSI_AbsenceDBModel.UserInRole" Width="1.5" PointX="8.25" PointY="10.875" IsExpanded="true" />
         <EntityTypeShape EntityType="CGPSI_AbsenceDBModel.UserRole" Width="1.5" PointX="6" PointY="8.375" IsExpanded="true" />
         <EntityTypeShape EntityType="CGPSI_AbsenceDBModel.UsersEmployee" Width="1.5" PointX="5.25" PointY="5.25" IsExpanded="true" />
