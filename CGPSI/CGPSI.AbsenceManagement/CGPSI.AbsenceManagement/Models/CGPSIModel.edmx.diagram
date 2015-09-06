@@ -44,6 +44,7 @@
         <EntityTypeShape EntityType="CGPSI_AbsenceDBModel.LeaveCategories" Width="1.5" PointX="12.375" PointY="12.875" />
         <AssociationConnector Association="CGPSI_AbsenceDBModel.FK_LeaveRequest_LeaveCategory" />
         <EntityTypeShape EntityType="CGPSI_AbsenceDBModel.ViewLeaveRequest" Width="1.5" PointX="5.375" PointY="14.75" />
+        <EntityTypeShape EntityType="CGPSI_AbsenceDBModel.Attachment" Width="1.5" PointX="14.375" PointY="6.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -50,6 +50,7 @@ namespace CGPSI.AbsenceManagement.Models
         public virtual DbSet<LeaveRequest> LeaveRequests { get; set; }
         public virtual DbSet<LeaveCategories> LeaveCategories1 { get; set; }
         public virtual DbSet<ViewLeaveRequest> ViewLeaveRequests { get; set; }
+        public virtual DbSet<Attachment> Attachments { get; set; }
     
         [DbFunction("CGPSI_AbsenceDBEntities", "SplitString")]
         public virtual IQueryable<SplitString_Result> SplitString(string splitChar, string stringToSplit)
@@ -695,7 +696,7 @@ namespace CGPSI.AbsenceManagement.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ViewEmployee>("SP_ViewEMPLOYEES", mergeOption, param_pagingParameter, param_whereParameter);
         }
     
-        public virtual int SP_ViewLeaveRequest(string param_paging, string param_where)
+        public virtual ObjectResult<ViewLeaveRequest> SP_ViewLeaveRequest(string param_paging, string param_where)
         {
             var param_pagingParameter = param_paging != null ?
                 new ObjectParameter("param_paging", param_paging) :
@@ -705,7 +706,25 @@ namespace CGPSI.AbsenceManagement.Models
                 new ObjectParameter("param_where", param_where) :
                 new ObjectParameter("param_where", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_ViewLeaveRequest", param_pagingParameter, param_whereParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ViewLeaveRequest>("SP_ViewLeaveRequest", param_pagingParameter, param_whereParameter);
+        }
+    
+        public virtual ObjectResult<ViewLeaveRequest> SP_ViewLeaveRequest(string param_paging, string param_where, MergeOption mergeOption)
+        {
+            var param_pagingParameter = param_paging != null ?
+                new ObjectParameter("param_paging", param_paging) :
+                new ObjectParameter("param_paging", typeof(string));
+    
+            var param_whereParameter = param_where != null ?
+                new ObjectParameter("param_where", param_where) :
+                new ObjectParameter("param_where", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ViewLeaveRequest>("SP_ViewLeaveRequest", mergeOption, param_pagingParameter, param_whereParameter);
+        }
+    
+        public virtual ObjectResult<SP_GetDataAbsenceOfCurrentMonth_Result> SP_GetDataAbsenceOfCurrentMonth()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_GetDataAbsenceOfCurrentMonth_Result>("SP_GetDataAbsenceOfCurrentMonth");
         }
     }
 }
