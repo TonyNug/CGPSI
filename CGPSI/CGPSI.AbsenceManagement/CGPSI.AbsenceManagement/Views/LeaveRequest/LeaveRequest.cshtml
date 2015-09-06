@@ -1,56 +1,69 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "LeaveRequest";
 }
 <style>
-            .main-container{
-                width : 800px;
-                margin: 50px;
-                border: 1px black;
-                border-style: solid;
-                border-width: 1px;
-                padding: 25px;
-            }
-            .body-form{
-                width: 90%;
-            }
-            .width-30{
-                width: 28%;
-            }
-            .width-70{
-                width: 65%;
-            }
-            .width-90{
-                width: 90%;
-            }
-            .float-left{
-                float: left;
-            }
-            .float-right{
-                float: right;
-            }
-            table{
-                width: 700px;
-            }
-            td{
-                height: 50px;
-                font-family: sans-serif;
-            }
-            table, td, th {
-                border: 0px solid green;
-            }
-            .button-area{
-                margin-left: 60%;
-            }
-        </style>
+    .main-container {
+        width: 800px;
+        margin: 50px;
+        border: 1px black;
+        border-style: solid;
+        border-width: 0px;
+        padding: 25px;
+    }
+
+    .body-form {
+        width: 90%;
+    }
+
+    .width-30 {
+        width: 28%;
+    }
+
+    .width-70 {
+        width: 65%;
+    }
+
+    .width-90 {
+        width: 90%;
+    }
+
+    .float-left {
+        float: left;
+    }
+
+    .float-right {
+        float: right;
+    }
+
+    table {
+        width: 700px;
+    }
+
+    td {
+        height: 60px;
+        font-family: sans-serif;
+        vertical-align: top;
+        padding: 2px;
+    }
+
+    table, td, th {
+        border: 0px solid green;
+    }
+
+    .button-area {
+        margin-left: 60%;
+    }
+</style>
+
+
 
 <script>
-    $(document).ready(function() {
-       $("#fr-type").kendoDropDownList();
-       $("#fr-date").kendoDatePicker();
-       $("#fr-timeFrom").kendoTimePicker();
-       $(".k-Button").kendoButton();
-       $("#files").kendoUpload();
+    $(document).ready(function () {
+        $("#fr-type").kendoDropDownList();
+        $(".k-datePicker").kendoDatePicker();
+        $(".k-timePick").kendoTimePicker();
+        $(".k-Button").kendoButton();
+        $("#files").kendoUpload();
 
     });
 </script>
@@ -58,59 +71,70 @@
 <h2>LeaveRequest</h2>
 
 <div class="main-container">
-    <div class="header">
-    </div>
+    <div class="header"></div>
 
-    <div class="body-form">
-        <table>
-            <tr>
-                <td class="width-30"> Name </td>
-                <td> : </td>
-                <td class="width-70"> <input id="fr-name" type="text" class="k-textbox width-90"/> </td>
-            </tr>
-            <tr>
-                <td> Department </td>
-                <td> : </td>
-                <td><input id="fr-dept" type="text" class="k-textbox width-90"/></td>
-            </tr>
-            <tr>
-                <td> Type </td>
-                <td> : </td>
-                <td>
-                    <select name="type" id="fr-type" class="width-90" required data-required-msg="Select start time">
-                        <option>1. Own Choice</option>
-                        <option>2. Negative Leave for Compensation</option>
-                        <option>3. Maternity</option>
-                        <option>4. Long Leave After 12 Years Working</option>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <td>From</td>
-                <td> : </td>
-                <td><input id="fr-timeFrom" class="width-90" /></td>
-            </tr>
-            <tr>
-                <td>Reason</td>
-                <td> : </td>
-                <td><textarea id="fr-reason" class="k-textbox width-90"></textarea></td>
-            </tr>
-            <tr>
-                <td>Date</td>
-                <td> : </td>
-                <td><input id="fr-date" class="width-90" /></td>
-            </tr>
-            <tr>
-                <td>Evidence</td>
-                <td>:</td>
-                <td><input name="files" id="files" type="file" /></td>
-            </tr>
-        </table>
+    <div class="main-container">
+        <div class="header">
+        </div>
 
-        <div class="button-area">
-            <div id="btnSubmit" class="k-button ">Submit</div>
-            <div id="btnSubmit" class="k-button ">Cancel</div>
+        <div class="body-form">
+            <table>
+                <tr>
+                    <td class="width-30"> Name </td>
+                    <td> : </td>
+                    <td class="width-70"> <input id="fr-name" type="text" class="k-textbox width-90"> </td>
+                </tr>
+                <tr>
+                    <td> Department </td>
+                    <td> : </td>
+                    <td><input id="fr-dept" type="text" class="k-textbox width-90"></td>
+                </tr>
+                <tr>
+                    <td> Type </td>
+                    <td> : </td>
+                    <td>
+                        <select name="type" id="fr-type" class="width-90" required data-required-msg="Select start time">
+                            <option>== Select One ==</option>
+                            <option>1. Own Choice</option>
+                            <option>2. Negative Leave for Compensation</option>
+                            <option>3. Maternity</option>
+                            <option>4. Long Leave After 12 Years Working</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>From</td>
+                    <td> : </td>
+                    <td>
+                        Time : <input id="fr-timeFrom" class="width-30 k-timePick" />
+                        &nbsp;/&nbsp;
+                        <input id="fr-timeTo" class="width-30 k-timePick" />
+                        <br /><br /> Date : <input id="fr-dateFrom" class="k-datePicker width-70" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>Reason</td>
+                    <td> : </td>
+                    <td><textarea id="fr-reason" class="k-textbox width-90"></textarea></td>
+                </tr>
+                <tr>
+                    <td>Date</td>
+                    <td> : </td>
+                    <td><input id="fr-date" class="k-datePicker width-30" /></td>
+                </tr>
+                <tr>
+                    <td>Evidence</td>
+                    <td>:</td>
+                    <td><input name="files" id="files" type="file" /></td>
+                </tr>
+            </table>
+
+            <div class="button-area">
+                <div id="btnSubmit" class="k-button ">Submit</div>
+                <div id="btnSubmit" class="k-button ">Cancel</div>
+            </div>
+
         </div>
 
     </div>
-
+</div>
