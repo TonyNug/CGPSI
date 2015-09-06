@@ -177,6 +177,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MainController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\MasterData\AttachmentsController.cs" />
     <Compile Include="Controllers\MasterData\DepartmentsController.cs" />
     <Compile Include="Controllers\MasterData\EmployeesController.cs" />
     <Compile Include="Controllers\MasterData\GroupsController.cs" />
@@ -188,6 +189,9 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ActivityHistory.cs">
+      <DependentUpon>CGPSIModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Attachment.cs">
       <DependentUpon>CGPSIModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CGPSIModel.Context.cs">
@@ -257,6 +261,9 @@
       <DependentUpon>CGPSIModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SP_GetDataAbsenceByDate_Result.cs">
+      <DependentUpon>CGPSIModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SP_GetDataAbsenceOfCurrentMonth_Result.cs">
       <DependentUpon>CGPSIModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
@@ -1388,6 +1395,7 @@
     <Folder Include="App_Data\DataImportAbsence\" />
     <Folder Include="App_Data\ImportedData\" />
     <Folder Include="Views\AbsenceData\" />
+    <Folder Include="Views\Attachments\" />
     <Folder Include="Views\LeaveCategory\" />
     <Folder Include="Views\LeaveRequest\" />
   </ItemGroup>

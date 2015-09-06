@@ -123,6 +123,18 @@
           <Property Name="CreatedBy" Type="int" />
           <Property Name="CreatedDate" Type="datetime" />
         </EntityType>
+        <EntityType Name="Attachments">
+          <Key>
+            <PropertyRef Name="ID_Attachment" />
+          </Key>
+          <Property Name="ID_Attachment" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FileName" Type="varchar(max)" />
+          <Property Name="MimeType" Type="varchar" MaxLength="250" />
+          <Property Name="Extension" Type="varchar" MaxLength="50" />
+          <Property Name="FileSize" Type="int" />
+          <Property Name="MD5FileIdentity" Type="varchar(max)" />
+          <Property Name="FileValue" Type="varbinary(max)" />
+        </EntityType>
         <EntityType Name="DayOfWorks">
           <Key>
             <PropertyRef Name="ID_DayOfWork" />
@@ -512,6 +524,7 @@ warning 6002: The table/view 'CGPSI_AbsenceDB.mst.ViewEmployees' does not have a
           </ReferentialConstraint>
         </Association>
         <Function Name="SP_GetDataAbsenceByDate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="abs" />
+        <Function Name="SP_GetDataAbsenceOfCurrentMonth" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="abs" />
         <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
         <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
@@ -707,6 +720,7 @@ warning 6002: The table/view 'CGPSI_AbsenceDB.mst.ViewEmployees' does not have a
           <EntitySet Name="ImportHistory" EntityType="Self.ImportHistory" Schema="log" store:Type="Tables" />
           <EntitySet Name="LoginHistory" EntityType="Self.LoginHistory" Schema="log" store:Type="Tables" />
           <EntitySet Name="ShiftHistory" EntityType="Self.ShiftHistory" Schema="log" store:Type="Tables" />
+          <EntitySet Name="Attachments" EntityType="Self.Attachments" Schema="mst" store:Type="Tables" />
           <EntitySet Name="DayOfWorks" EntityType="Self.DayOfWorks" Schema="mst" store:Type="Tables" />
           <EntitySet Name="Departments" EntityType="Self.Departments" Schema="mst" store:Type="Tables" />
           <EntitySet Name="Employees" EntityType="Self.Employees" Schema="mst" store:Type="Tables" />
@@ -1355,11 +1369,13 @@ warning 6002: The table/view 'CGPSI_AbsenceDB.mst.ViewEmployees' does not have a
             <End Role="LeaveCategory" EntitySet="LeaveCategories1" />
             <End Role="LeaveRequest" EntitySet="LeaveRequests" />
           </AssociationSet>
-          <FunctionImport Name="SP_ViewLeaveRequest">
+          <FunctionImport Name="SP_ViewLeaveRequest" EntitySet="ViewLeaveRequests" ReturnType="Collection(CGPSI_AbsenceDBModel.ViewLeaveRequest)">
             <Parameter Name="param_paging" Mode="In" Type="String" />
             <Parameter Name="param_where" Mode="In" Type="String" />
           </FunctionImport>
           <EntitySet Name="ViewLeaveRequests" EntityType="CGPSI_AbsenceDBModel.ViewLeaveRequest" />
+          <EntitySet Name="Attachments" EntityType="CGPSI_AbsenceDBModel.Attachment" />
+          <FunctionImport Name="SP_GetDataAbsenceOfCurrentMonth" ReturnType="Collection(CGPSI_AbsenceDBModel.SP_GetDataAbsenceOfCurrentMonth_Result)" />
           </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -1656,6 +1672,31 @@ warning 6002: The table/view 'CGPSI_AbsenceDB.mst.ViewEmployees' does not have a
           <Property Name="ModifiedBy" Type="Int32" />
           <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
         </EntityType>
+        <EntityType Name="Attachment">
+          <Key>
+            <PropertyRef Name="ID_Attachment" />
+          </Key>
+          <Property Name="ID_Attachment" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FileName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="MimeType" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Extension" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FileSize" Type="Int32" />
+          <Property Name="MD5FileIdentity" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="FileValue" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <ComplexType Name="SP_GetDataAbsenceOfCurrentMonth_Result">
+          <Property Type="String" Name="NIK" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="FirstName" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="Department" Nullable="true" MaxLength="250" />
+          <Property Type="DateTime" Name="Dates" Nullable="true" />
+          <Property Type="String" Name="DayName" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="ShiftName" Nullable="true" MaxLength="250" />
+          <Property Type="Time" Name="StartTime" Nullable="true" />
+          <Property Type="Time" Name="EndTime" Nullable="true" />
+          <Property Type="Time" Name="TimeIN" Nullable="true" />
+          <Property Type="Time" Name="TimeOUT" Nullable="true" />
+          <Property Type="String" Name="AbsenceStatus" Nullable="false" MaxLength="8" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2054,6 +2095,36 @@ warning 6002: The table/view 'CGPSI_AbsenceDB.mst.ViewEmployees' does not have a
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Attachments">
+            <EntityTypeMapping TypeName="CGPSI_AbsenceDBModel.Attachment">
+              <MappingFragment StoreEntitySet="Attachments">
+                <ScalarProperty Name="FileValue" ColumnName="FileValue" />
+                <ScalarProperty Name="MD5FileIdentity" ColumnName="MD5FileIdentity" />
+                <ScalarProperty Name="FileSize" ColumnName="FileSize" />
+                <ScalarProperty Name="Extension" ColumnName="Extension" />
+                <ScalarProperty Name="MimeType" ColumnName="MimeType" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="ID_Attachment" ColumnName="ID_Attachment" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SP_GetDataAbsenceOfCurrentMonth" FunctionName="CGPSI_AbsenceDBModel.Store.SP_GetDataAbsenceOfCurrentMonth">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CGPSI_AbsenceDBModel.SP_GetDataAbsenceOfCurrentMonth_Result">
+                <ScalarProperty Name="NIK" ColumnName="NIK" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="Department" ColumnName="Department" />
+                <ScalarProperty Name="Dates" ColumnName="Dates" />
+                <ScalarProperty Name="DayName" ColumnName="DayName" />
+                <ScalarProperty Name="ShiftName" ColumnName="ShiftName" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+                <ScalarProperty Name="TimeIN" ColumnName="TimeIN" />
+                <ScalarProperty Name="TimeOUT" ColumnName="TimeOUT" />
+                <ScalarProperty Name="AbsenceStatus" ColumnName="AbsenceStatus" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
