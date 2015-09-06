@@ -21,7 +21,7 @@ namespace CGPSI.AbsenceManagement.Controllers.MasterData
         /// </summary>
         public ActionResult GetRefLeaveCategory()
         {
-            return Json(new CGPSI_AbsenceDBEntities().LeaveCategories.ToList());
+            return Json(new CGPSI_AbsenceDBEntities().LeaveCategories1.ToList());
         }
 	}
 }
