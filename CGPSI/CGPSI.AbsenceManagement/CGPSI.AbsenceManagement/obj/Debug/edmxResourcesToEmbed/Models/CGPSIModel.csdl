@@ -4,16 +4,6 @@
     <Property Name="rowNum" Type="Int32" />
     <Property Name="Name" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
   </ComplexType>
-  <EntityType Name="sysdiagram">
-    <Key>
-      <PropertyRef Name="diagram_id" />
-    </Key>
-    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="principal_id" Type="Int32" Nullable="false" />
-    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="version" Type="Int32" />
-    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
-  </EntityType>
   <EntityType Name="ActivityHistory">
     <Key>
       <PropertyRef Name="ID_ActivityHistory" />
@@ -77,6 +67,8 @@
     <NavigationProperty Name="UsersEmployees" Relationship="Self.FK_UsersEmployees_Employees" FromRole="Employees" ToRole="UsersEmployees" />
     <NavigationProperty Name="Department" Relationship="CGPSI_AbsenceDBModel.FK_Employees_Departments" FromRole="Employee" ToRole="Department" />
     <NavigationProperty Name="EmployeeOnSchedules" Relationship="CGPSI_AbsenceDBModel.FK_EmployeeOnSchedule_Employees" FromRole="Employee" ToRole="EmployeeOnSchedule" />
+    <NavigationProperty Name="LeaveRequests" Relationship="CGPSI_AbsenceDBModel.FK_LeaveRequest_Employees" FromRole="Employee" ToRole="LeaveRequest" />
+    <NavigationProperty Name="LeaveRequests1" Relationship="CGPSI_AbsenceDBModel.FK_LeaveRequest_Employees1" FromRole="Employee" ToRole="LeaveRequest" />
   </EntityType>
   <EntityType Name="Group">
     <Key>
@@ -270,7 +262,6 @@
     </ReferentialConstraint>
   </Association>
   <EntityContainer Name="CGPSI_AbsenceDBEntities" annotation:LazyLoadingEnabled="true">
-    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
     <EntitySet Name="ActivityHistories" EntityType="Self.ActivityHistory" />
     <EntitySet Name="ImportHistories" EntityType="Self.ImportHistory" />
     <EntitySet Name="LoginHistories" EntityType="Self.LoginHistory" />
@@ -502,6 +493,30 @@
     </FunctionImport>
     <FunctionImport Name="sp_upgraddiagrams" />
     <FunctionImport Name="SP_GetDataAbsenceByDate" ReturnType="Collection(CGPSI_AbsenceDBModel.SP_GetDataAbsenceByDate_Result)" />
+    <EntitySet Name="ViewEmployees" EntityType="CGPSI_AbsenceDBModel.ViewEmployee" />
+    <FunctionImport Name="SP_ViewEMPLOYEES" EntitySet="ViewEmployees" ReturnType="Collection(CGPSI_AbsenceDBModel.ViewEmployee)">
+      <Parameter Name="param_paging" Mode="In" Type="String" />
+      <Parameter Name="param_where" Mode="In" Type="String" />
+    </FunctionImport>
+    <EntitySet Name="LeaveRequests" EntityType="CGPSI_AbsenceDBModel.LeaveRequest" />
+    <AssociationSet Name="FK_LeaveRequest_Employees" Association="CGPSI_AbsenceDBModel.FK_LeaveRequest_Employees">
+      <End Role="Employee" EntitySet="Employees" />
+      <End Role="LeaveRequest" EntitySet="LeaveRequests" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LeaveRequest_Employees1" Association="CGPSI_AbsenceDBModel.FK_LeaveRequest_Employees1">
+      <End Role="Employee" EntitySet="Employees" />
+      <End Role="LeaveRequest" EntitySet="LeaveRequests" />
+    </AssociationSet>
+    <EntitySet Name="LeaveCategories1" EntityType="CGPSI_AbsenceDBModel.LeaveCategories" />
+    <AssociationSet Name="FK_LeaveRequest_LeaveCategory" Association="CGPSI_AbsenceDBModel.FK_LeaveRequest_LeaveCategory">
+      <End Role="LeaveCategory" EntitySet="LeaveCategories1" />
+      <End Role="LeaveRequest" EntitySet="LeaveRequests" />
+    </AssociationSet>
+    <FunctionImport Name="SP_ViewLeaveRequest">
+      <Parameter Name="param_paging" Mode="In" Type="String" />
+      <Parameter Name="param_where" Mode="In" Type="String" />
+    </FunctionImport>
+    <EntitySet Name="ViewLeaveRequests" EntityType="CGPSI_AbsenceDBModel.ViewLeaveRequest" />
   </EntityContainer>
   <ComplexType Name="sp_helpdiagramdefinition_Result">
     <Property Type="Int32" Name="version" Nullable="true" />
@@ -562,6 +577,7 @@
     <Property Name="ModifiedDate" Type="Int32" />
     <NavigationProperty Name="Employee" Relationship="CGPSI_AbsenceDBModel.FK_EmployeeOnSchedule_Employees" FromRole="EmployeeOnSchedule" ToRole="Employee" />
     <NavigationProperty Name="Shift" Relationship="CGPSI_AbsenceDBModel.FK_EmployeeOnSchedule_Shift" FromRole="EmployeeOnSchedule" ToRole="Shift" />
+    <Property Name="Date" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
   </EntityType>
   <EntityType Name="ShiftHistory">
     <Key>
@@ -684,4 +700,117 @@
     <Property Type="Time" Name="TimeOUT" Nullable="true" />
     <Property Type="String" Name="AbsenceStatus" Nullable="false" MaxLength="8" />
   </ComplexType>
+  <EntityType Name="ViewEmployee">
+    <Key>
+      <PropertyRef Name="ID_Employee" />
+      <PropertyRef Name="NIK" />
+      <PropertyRef Name="JoinDate" />
+      <PropertyRef Name="CurrentPosition" />
+      <PropertyRef Name="CurrentDepartment" />
+      <PropertyRef Name="SPVFirstName" />
+      <PropertyRef Name="SPVLastName" />
+      <PropertyRef Name="SPVDisplayName" />
+    </Key>
+    <Property Name="ID_Employee" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NIK" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="FirstName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="LastName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="DisplayName" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="Address" Type="String" MaxLength="1024" FixedLength="false" Unicode="false" />
+    <Property Name="Telephone" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="BirthDate" Type="DateTime" Precision="0" />
+    <Property Name="BirthPlace" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="JoinDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="ID_CurrentPosition" Type="Int32" />
+    <Property Name="CurrentPosition" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="ID_CurrentDepartment" Type="Int32" />
+    <Property Name="CurrentDepartment" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="ID_Supervisor" Type="Int32" />
+    <Property Name="SPVFirstName" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="SPVLastName" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="SPVDisplayName" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="LeaveRequest">
+    <Key>
+      <PropertyRef Name="ID_LeaveRequest" />
+    </Key>
+    <Property Name="ID_LeaveRequest" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ID_Requestor" Type="Int32" />
+    <Property Name="ID_Approver" Type="Int32" />
+    <Property Name="LeaveReason" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="LeaveCategory" Type="Int32" />
+    <Property Name="StartDate" Type="DateTime" Precision="3" />
+    <Property Name="EndDate" Type="DateTime" Precision="3" />
+    <Property Name="CreatedBy" Type="Int32" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="ModifiedBy" Type="Int32" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Employee" Relationship="CGPSI_AbsenceDBModel.FK_LeaveRequest_Employees" FromRole="LeaveRequest" ToRole="Employee" />
+    <NavigationProperty Name="Employee1" Relationship="CGPSI_AbsenceDBModel.FK_LeaveRequest_Employees1" FromRole="LeaveRequest" ToRole="Employee" />
+    <NavigationProperty Name="LeaveCategory1" Relationship="CGPSI_AbsenceDBModel.FK_LeaveRequest_LeaveCategory" FromRole="LeaveRequest" ToRole="LeaveCategory" />
+  </EntityType>
+  <Association Name="FK_LeaveRequest_Employees">
+    <End Type="CGPSI_AbsenceDBModel.Employee" Role="Employee" Multiplicity="0..1" />
+    <End Type="CGPSI_AbsenceDBModel.LeaveRequest" Role="LeaveRequest" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="ID_Employee" />
+      </Principal>
+      <Dependent Role="LeaveRequest">
+        <PropertyRef Name="ID_Requestor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LeaveRequest_Employees1">
+    <End Type="CGPSI_AbsenceDBModel.Employee" Role="Employee" Multiplicity="0..1" />
+    <End Type="CGPSI_AbsenceDBModel.LeaveRequest" Role="LeaveRequest" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="ID_Employee" />
+      </Principal>
+      <Dependent Role="LeaveRequest">
+        <PropertyRef Name="ID_Approver" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="LeaveCategories">
+    <Key>
+      <PropertyRef Name="ID_LeaveCategory" />
+    </Key>
+    <Property Name="ID_LeaveCategory" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="LeaveCategory" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="LeaveRequests" Relationship="CGPSI_AbsenceDBModel.FK_LeaveRequest_LeaveCategory" FromRole="LeaveCategory" ToRole="LeaveRequest" />
+  </EntityType>
+  <Association Name="FK_LeaveRequest_LeaveCategory">
+    <End Type="CGPSI_AbsenceDBModel.LeaveCategories" Role="LeaveCategory" Multiplicity="0..1" />
+    <End Type="CGPSI_AbsenceDBModel.LeaveRequest" Role="LeaveRequest" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LeaveCategory">
+        <PropertyRef Name="ID_LeaveCategory" />
+      </Principal>
+      <Dependent Role="LeaveRequest">
+        <PropertyRef Name="LeaveCategory" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="ViewLeaveRequest">
+    <Key>
+      <PropertyRef Name="ID_LeaveRequest" />
+    </Key>
+    <Property Name="ID_LeaveRequest" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ID_Requestor" Type="Int32" />
+    <Property Name="Requestor" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="ID_Approver" Type="Int32" />
+    <Property Name="Approver" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="ID_LeaveCategory" Type="Int32" />
+    <Property Name="LeaveCategory" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StartDate" Type="DateTime" Precision="3" />
+    <Property Name="EndDate" Type="DateTime" Precision="3" />
+    <Property Name="LeaveReason" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="CreatedBy" Type="Int32" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="ModifiedBy" Type="Int32" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+  </EntityType>
 </Schema>
