@@ -1,0 +1,201 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="grid-container">
+    <div id="GridMaster"></div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        var result = "";
+
+        var AsModel = new kendo.data.Model.define({
+            id: "ASSIGN_SET_ROWID",
+            fields: {
+                ASSIGN_SET_ROWID: { type: "string", defaultValue: "" },
+                ASSIGN_SET_ID: { type: "string", defaultValue: "" },
+                ASSIGN_SET_EMPLOYEE_ID: { type: "string", defaultValue: "" },
+                ASSIGN_SET_EMPLOYEE_NAME: { type: "string", defaultValue: "" },
+                ASSIGN_SET_ASSIGNMENT_TYPE: { type: "string", defaultValue: "" },
+                ASSIGN_SET_SUPERVISOR_ID: { type: "string", defaultValue: "" },
+                ASSIGN_SET_SUPERVISOR_NAME: { type: "string", defaultValue: "" },
+                ASSIGN_SET_MANAGER_ID: { type: "string", defaultValue: "" },
+                ASSIGN_SET_MANAGER_NAME: { type: "string", defaultValue: "" },
+                ASSIGN_SET_DESCR4: { type: "string", defaultValue: "" },
+                ASSIGN_SET_DESCR5: { type: "string", defaultValue: "" },
+                ASSIGN_SET_DESCR6: { type: "string", defaultValue: "" },
+                ASSIGN_SET_ISACTIVE: { type: "string", defaultValue: "" },
+                ASSIGN_SET_START_DATE: { type: "date", defaultValue: new Date() },
+                ASSIGN_SET_END_DATE: { type: "date", defaultValue: new Date() },
+                ASSIGN_SET_JOBTITLE: {type:"string",defaultValue: ""}
+            }
+
+        });
+
+        function buildMainForm(e) {
+            var temp_Empl_RowID = "";
+            if (e !== null) {
+                e.preventDefault();
+                var dataItem = this.dataItem($(e.currentTarget).closest("tr"));                
+                $("#passing_value_out").val(JSON.stringify(dataItem));
+            }
+            else {
+                var tempData = new AsModel();
+                console.log(JSON.stringify(tempData));
+                $("#passing_value_out").val(JSON.stringify(tempData));
+            }
+            createMainWindow();
+        }//Ends Of buildListDetail Grid Data
+
+
+        function createMainWindow() {
+            $("#window_container").append("<div id='mainwindow'></div>");
+            var Delegation_mainWindow = $("#mainwindow");
+            Delegation_mainWindow.kendoWindow({
+                modal: true,
+                title: "Edit",
+                minWidth: 300,
+                minHeight: 300,
+                resizable: false,
+                visible: false,
+                content: '@Url.Content("~/LeaveRequest/LeaveRequest")',                                      
+                deactivate: function () {
+                    this.destroy();
+                },
+            close: function () {
+                $('#dg_assignment').data('kendoGrid').dataSource.read();
+                $('#dg_assignment').data('kendoGrid').refresh();
+                this.destroy();
+            }
+        });
+        Delegation_mainWindow.data("kendoWindow").center().open();
+    };
+
+        function buildKendo()
+        {
+            var dataSource = new kendo.data.DataSource({
+                type: "json", serverPaging: true, serverSorting: true, serverFiltering: true,
+                pageSize: 20,
+                transport: {
+                    read: {
+                        dataType: "json",
+                        type: "post",
+                        url: '@Url.Content("~/LeaveRequest/Get")',
+                        contentType: "application/json; charset=utf-8",
+                        data: {}
+
+                    },
+                    update: {
+                        url: '@Url.Content("~/LeaveRequest/Post")',
+                        dataType: "json",
+                        type: "post",
+                        contentType: "application/json; charset=utf-8",
+                        data: {},
+                        complete: function (e) {
+                            grid.dataSource.read();
+                        }
+                    },
+                    destroy: {
+                        url: '@Url.Content("~/LeaveRequest/Delete")',
+                        dataType: "json",
+                        type: "post",
+                        contentType: "application/json; charset=utf-8",
+                        data: {},
+                        complete: function (e) {
+                            grid.dataSource.read();
+                        }
+                    },
+                    create: {
+                        url: '@Url.Content("~/LeaveRequest/Post")',
+                        dataType: "json",
+                        type: "post",
+                        contentType: "application/json; charset=utf-8",
+                        data: {},
+                        complete: function (e) {
+                            grid.dataSource.read();
+                        }
+                    },
+                    parameterMap: function (options, operation) {
+                        if (operation !== "read" && options.models) {
+                            return { models: kendo.stringify(options.models) };
+                        }
+                        else {
+                            return JSON.stringify(options);
+                        }
+                        //else {
+
+                        // }
+                    },
+                    //parameterMap: function (options) { }
+                },//ends of transport
+                schema: {
+                    data: function (data) {
+                        result = data.Result;
+                        return result;
+                    },
+                    total: function (data) {
+                        return (data.CResult);
+                    },
+                    model: {
+                        id: "ID_LeaveRequest",
+                        fields: {
+                            ID_LeaveRequest: { type: "string" },
+                            Name: { type: "string" },
+                            Supervisor: { type: "string" },
+                            Department: { type: "string"}
+                        }
+                    }
+                }//ends of schema
+            });//ends of dataSource
+
+
+            var grid = $('#GridMaster').kendoGrid({ //begin of DataGrid area
+                dataSource: dataSource,
+                height: $("#GridMaster").parent().innerHeight() - 10,
+                //dataBound: onDataBound,
+                //selectable: "multiple",
+                resizable: true,
+                //filterable: true,
+                filterable: {
+                    extra: false,
+                    operators: {
+                        string: {
+                            contains: "Contains", s_eq: "Equal to", s_neq: "Not Equal", doesnotcontain: "Does Not Contain", startswith: "Starts with", endswith: "Ends With"
+                        },
+                        number: {
+                            n_eq: "Equal to", n_gt: "Greater Than", n_gte: "Greater Than Equal", n_lt: "Less Than", n_lte: "Less Than Equal", n_neq: "Not Equal"
+                        },
+                        date: {
+                            d_eq: "Equal to", d_gt: "Greater Than", d_gte: "Greater Than Equal", d_lt: "Less Than", d_lte: "Less Than Equal", d_neq: "Not Equal"
+                        }
+                    }
+                },
+                sortable: true,
+                pageable: {
+                    refresh: true,
+                    pageSizes: true
+                },
+                toolbar: [{
+                    text: "Add new Request",
+                    className: "btnAdd-request"
+                }],//to generate  button add new record
+                columns:
+                        [
+                         { field: "Name", title: "Job Title", width: 125, type: "string", filterable: true },
+                         { field: "Supervisor", title: "Job Title", width: 125, type: "string", filterable: true },
+                         { field: "Department", title: "Job Title", width: 125, type: "string", filterable: true },
+                         { command: ["edit", "destroy"], title: "&nbsp;", width: "160px" }//to generate edit and delete button in each row
+                        ],
+                editable: "popup"
+            }).data("kendoGrid");
+            // grid.table.on("click", ".checkbox", selectRow);
+            $("a.btnAdd-request").click(function () {
+                buildMainForm(null);
+            });
+        }
+    });
+
+</script>
+

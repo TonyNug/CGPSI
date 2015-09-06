@@ -1,1 +1,2 @@
 C:\Users\hnugroho\Documents\Visual Studio 2013\Projects\CGPSI.AbsenceManagement\CGPSI.ImportService\bin\Debug\CGPSI.ImportService.exe.config
+C:\Users\INSPIRO-PC\Documents\Adi\Project\Source\Repos\CGPSI\CGPSI\CGPSI.AbsenceManagement\CGPSI.ImportService\bin\Debug\CGPSI.ImportService.exe.config

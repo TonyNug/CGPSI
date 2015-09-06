@@ -1390,6 +1390,8 @@
     <Content Include="Views\DashboardAbsence\Index.cshtml" />
     <Content Include="Views\DashboardAbsence\DepartmentReport.cshtml" />
     <Content Include="Views\DashboardAbsence\DataAbsence.cshtml" />
+    <Content Include="Views\LeaveRequest\LeaveRequest.cshtml" />
+    <Content Include="Views\LeaveRequest\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\DataImportAbsence\" />
@@ -1397,7 +1399,6 @@
     <Folder Include="Views\AbsenceData\" />
     <Folder Include="Views\Attachments\" />
     <Folder Include="Views\LeaveCategory\" />
-    <Folder Include="Views\LeaveRequest\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
