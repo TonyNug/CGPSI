@@ -27,7 +27,7 @@ namespace CGPSI.AbsenceManagement.Controllers.MasterData
             return Json(data);
             //return Json(null);
         }
-
+         
         public ActionResult Put(Group data)
         {
             return Json(new CGPSI_AbsenceDBEntities().SP_GROUPS(data.ID_Group, data.GroupName, "Insert"));
