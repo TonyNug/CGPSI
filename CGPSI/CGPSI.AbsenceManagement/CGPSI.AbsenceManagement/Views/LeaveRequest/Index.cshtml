@@ -14,24 +14,25 @@
         var AsModel = new kendo.data.Model.define({
             id: "ASSIGN_SET_ROWID",
             fields: {
-                ASSIGN_SET_ROWID: { type: "string", defaultValue: "" },
-                ASSIGN_SET_ID: { type: "string", defaultValue: "" },
-                ASSIGN_SET_EMPLOYEE_ID: { type: "string", defaultValue: "" },
-                ASSIGN_SET_EMPLOYEE_NAME: { type: "string", defaultValue: "" },
-                ASSIGN_SET_ASSIGNMENT_TYPE: { type: "string", defaultValue: "" },
-                ASSIGN_SET_SUPERVISOR_ID: { type: "string", defaultValue: "" },
-                ASSIGN_SET_SUPERVISOR_NAME: { type: "string", defaultValue: "" },
-                ASSIGN_SET_MANAGER_ID: { type: "string", defaultValue: "" },
-                ASSIGN_SET_MANAGER_NAME: { type: "string", defaultValue: "" },
-                ASSIGN_SET_DESCR4: { type: "string", defaultValue: "" },
-                ASSIGN_SET_DESCR5: { type: "string", defaultValue: "" },
-                ASSIGN_SET_DESCR6: { type: "string", defaultValue: "" },
-                ASSIGN_SET_ISACTIVE: { type: "string", defaultValue: "" },
-                ASSIGN_SET_START_DATE: { type: "date", defaultValue: new Date() },
-                ASSIGN_SET_END_DATE: { type: "date", defaultValue: new Date() },
-                ASSIGN_SET_JOBTITLE: {type:"string",defaultValue: ""}
+                ID_Employee: { type: "string", defaultValue: "" },
+                NIK: { type: "string", defaultValue: "" },
+                FirstName: { type: "string", defaultValue: "" },
+                LastName: { type: "string", defaultValue: "" },
+                DisplayName: { type: "string", defaultValue: "" },
+                Address: { type: "string", defaultValue: "" },
+                Telephone: { type: "string", defaultValue: "" },
+                Email: { type: "string", defaultValue: "" },
+                BirthDate: { type: "date", defaultValue: new Date() },
+                BirthPlace: { type: "string", defaultValue: "" },
+                ID_CurrentPosition: { type: "number" },
+                CurrentPosition: { type: "string", defaultValue: "" },
+                ID_CurrentDepartment: { type: "number" },
+                CurrentDepartment: { type: "string", defaultValue: "" },
+                ID_Supervisor: { type: "number" },
+                SPVFirstName: { type: "string", defaultValue: "" },
+                SPVLastName: { type: "string", defaultValue: "" },
+                SPVDisplayName: { type: "string", defaultValue: "" }
             }
-
         });
 
         function buildMainForm(e) {
