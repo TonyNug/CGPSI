@@ -6,13 +6,15 @@
 <div class="grid-container">
     <div id="GridMaster"></div>
 </div>
+<div id="window_container"></div>
+<input type="hidden" value="" id="passing_value_out" />
 
 <script>
     $(document).ready(function () {
         var result = "";
 
         var AsModel = new kendo.data.Model.define({
-            id: "ASSIGN_SET_ROWID",
+            id: "ID_Employee",
             fields: {
                 ID_Employee: { type: "string", defaultValue: "" },
                 NIK: { type: "string", defaultValue: "" },
@@ -32,6 +34,18 @@
                 SPVFirstName: { type: "string", defaultValue: "" },
                 SPVLastName: { type: "string", defaultValue: "" },
                 SPVDisplayName: { type: "string", defaultValue: "" }
+
+                //public int ID_LeaveRequest { get; set; }
+                //public Nullable<int> ID_Requestor { get; set; }
+                //public Nullable<int> ID_Approver { get; set; }
+                //public string LeaveReason { get; set; }
+                //public Nullable<int> LeaveCategory { get; set; }
+                //public Nullable<System.DateTime> StartDate { get; set; }
+                //public Nullable<System.DateTime> EndDate { get; set; }
+                //public Nullable<int> CreatedBy { get; set; }
+                //public Nullable<System.DateTime> CreatedDate { get; set; }
+                //public Nullable<int> ModifiedBy { get; set; }
+                //public Nullable<System.DateTime> ModifiedDate { get; set; }
             }
         });
 
@@ -66,8 +80,8 @@
                     this.destroy();
                 },
             close: function () {
-                $('#dg_assignment').data('kendoGrid').dataSource.read();
-                $('#dg_assignment').data('kendoGrid').refresh();
+                $('#GridMaster').data('kendoGrid').dataSource.read();
+                $('#GridMaster').data('kendoGrid').refresh();
                 this.destroy();
             }
         });
@@ -143,9 +157,11 @@
                         id: "ID_LeaveRequest",
                         fields: {
                             ID_LeaveRequest: { type: "string" },
-                            Name: { type: "string" },
-                            Supervisor: { type: "string" },
-                            Department: { type: "string"}
+                            DisplayName: { type: "string" },
+                            ID_Supervisor: { type: "number" },
+                            SPVDisplayName: { type: "string" },
+                            CurrentDepartment: { type: "string" },
+                            ID_CurrentDepartment: {type: "number"}
                         }
                     }
                 }//ends of schema
@@ -184,9 +200,9 @@
                 }],//to generate  button add new record
                 columns:
                         [
-                         { field: "Name", title: "Job Title", width: 125, type: "string", filterable: true },
-                         { field: "Supervisor", title: "Job Title", width: 125, type: "string", filterable: true },
-                         { field: "Department", title: "Job Title", width: 125, type: "string", filterable: true },
+                         { field: "Name", title: "Name", width: 125, type: "string", filterable: true },
+                         { field: "Supervisor", title: "Supervisor", width: 125, type: "string", filterable: true },
+                         { field: "Department", title: "Department", width: 125, type: "string", filterable: true },
                          { command: ["edit", "destroy"], title: "&nbsp;", width: "160px" }//to generate edit and delete button in each row
                         ],
                 editable: "popup"
